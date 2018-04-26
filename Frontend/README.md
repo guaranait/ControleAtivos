@@ -12,10 +12,10 @@ Um projeto (esqueleto) simples usando AngularJS, Webpack e UI-Router.
 
 ```bash
 # clonar o repositorio
-$ git clone https://github.com/yasserveleda/ui-router-webpack.git meu-projeto
+$ git clone https://github.com/guaranait/ControleAtivos.git meu-projeto
 
-# entrar na raiz do projeto
-$ cd meu-projeto
+# entrar na raiz do front-end do projeto
+$ cd meu-projeto/Frontend
 
 # instalar as dependencias com npm
 $ npm install
