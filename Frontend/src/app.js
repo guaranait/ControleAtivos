@@ -1,4 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import './public/assets/css/demo.css';
+import './public/assets/css/paper-dashboard.css';
+import './public/assets/css/animate.min.css';
 
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
