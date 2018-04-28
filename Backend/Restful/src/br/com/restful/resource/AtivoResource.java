@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -13,9 +12,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-
 import br.com.restful.controller.AtivoController;
 import br.com.restful.model.Ativo;
+import com.google.gson.Gson;
 
 @Path("/ativo")
 public class AtivoResource {
@@ -27,8 +26,9 @@ public class AtivoResource {
 		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
 		AtivoController ativoController = new AtivoController();
 		ativos = ativoController.listarAtivos();
+		String json = new Gson().toJson(ativos);
 		
-		return Response.status(200).entity(ativos).build();
+		return Response.status(200).entity(json).build();
 	}
 	
 	@GET
