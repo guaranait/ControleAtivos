@@ -1,10 +1,11 @@
 class HomeController {
-  constructor() {
+  constructor($http) {
     this.descricao;
 	this.fabricante;
 	this.dataCompra;
 	this.valorCompra;
 	this.valorDepreciado;
+	this.$http = $http;
 
   }
 
@@ -23,13 +24,14 @@ class HomeController {
 		
 		console.log(objetoAtivo);
 		
-		/*$http({
-			url: '',
-			method: "POST",
+		/*this.$http({
+			url: 'http://localhost:8080/Restful/ativo/listarAtivos',
+			method: "GET",
 			data: objetoAtivo
 		})
 		.then(function(response) {
 			//sucesso
+			console.log(response.data);
 		}, error => console.log(error));*/
     }
 }
