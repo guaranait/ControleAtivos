@@ -15,11 +15,11 @@ public class AtivoController {
 		return AtivoDAO.getInstance().listarAtivo(id);
 	}
 	
-	public Ativo cadastrarAtivo(Ativo ativo){
+	public Boolean cadastrarAtivo(Ativo ativo){
 		return AtivoDAO.getInstance().cadastrarAtivo(ativo);
 	}
 	
-	public Ativo alterarAtivo(Ativo ativo){
+	public Boolean alterarAtivo(Ativo ativo){
 		return AtivoDAO.getInstance().alterarAtivo(ativo);
 	}
 	

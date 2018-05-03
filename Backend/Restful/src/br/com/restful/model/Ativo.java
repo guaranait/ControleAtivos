@@ -4,20 +4,21 @@ import java.util.Date;
 
 public class Ativo {
 
-	private long id = 0;
-	private String descricao = "";
-	private String fabricante = "";
-	private Date dtCompra = new Date();
-	private double vlCompra = 0.0;
-	private double vlDepreciado = 0.0;
-	private long idStatus = 0;
-	private long criadoPor = 0;
-	private long modificadoPor = 0;
-	private Date dtCriacao = new Date();
-	private Date dtModificacao = new Date();
+	private long id;
+	private String descricao;
+	private String fabricante;
+	private Date dtCompra;
+	private double vlCompra;
+	private double vlDepreciado;
+	private long idStatus;
+	private String observacao;
+	private long criadoPor;
+	private long modificadoPor;
+	private Date dtCriacao;
+	private Date dtModificacao;
 
 	public Ativo(long id, String descricao, String fabricante, Date dtCompra, double vlCompra, double vlDepreciado,
-			long idStatus, long criadoPor, long modificadoPor, Date dtCriacao, Date dtModificacao) {
+			long idStatus, String observacao, long criadoPor, long modificadoPor, Date dtCriacao, Date dtModificacao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -26,6 +27,7 @@ public class Ativo {
 		this.vlCompra = vlCompra;
 		this.vlDepreciado = vlDepreciado;
 		this.idStatus = idStatus;
+		this.observacao = observacao;
 		this.criadoPor = criadoPor;
 		this.modificadoPor = modificadoPor;
 		this.dtCriacao = dtCriacao;
@@ -90,6 +92,14 @@ public class Ativo {
 
 	public void setIdStatus(long idStatus) {
 		this.idStatus = idStatus;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	public long getCriadoPor() {
