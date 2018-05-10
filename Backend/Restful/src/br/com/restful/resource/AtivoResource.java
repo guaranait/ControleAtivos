@@ -55,7 +55,7 @@ public class AtivoResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response cadastrarAtivo(String ativoJson) throws ParseException{
 		
-		Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm:ss").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Ativo ativo = gson.fromJson(ativoJson, Ativo.class);
 		
 		AtivoController ativoController = new AtivoController();
@@ -73,7 +73,7 @@ public class AtivoResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response alterarAtivo(String ativoJson) throws ParseException{
 		
-		Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm:ss").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Ativo ativo = gson.fromJson(ativoJson, Ativo.class);
 		
 		AtivoController ativoController = new AtivoController();

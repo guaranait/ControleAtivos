@@ -150,8 +150,8 @@ public class AtivoDAO {
 	}
 
 	public Boolean cadastrarAtivo(Ativo ativo) {
-		String sql = "INSERT INTO lu2cas01.ATIVO(descricao,fabricante,dt_compra,vl_compra,vl_depreciado,id_status,observacao,criado_por,modificado_por,dt_criacao,dt_modificacao)"
-				+ " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO lu2cas01.ATIVO(descricao,fabricante,dt_compra,vl_compra,vl_depreciado,id_status,observacao,criado_por,dt_criacao)"//,dt_modificacao)"
+				+ " VALUES(?,?,?,?,?,?,?,?,?)";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -162,18 +162,18 @@ public class AtivoDAO {
 
 			pstm.setString(1, ativo.getDescricao());
 			pstm.setString(2, ativo.getFabricante());
-			pstm.setDate(3, new Date(ativo.getDtCompra().getTime()));
+			pstm.setDate(3, new java.sql.Date(ativo.getDtCompra().getTime()));
 			pstm.setDouble(4, ativo.getVlCompra());
 			pstm.setDouble(5, ativo.getVlDepreciado());
 			pstm.setLong(6, ativo.getIdStatus());
 			pstm.setString(7, ativo.getObservacao());
 			pstm.setLong(8, ativo.getCriadoPor());
-			pstm.setLong(9, ativo.getModificadoPor());
-			pstm.setDate(10, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setDate(11, new java.sql.Date(System.currentTimeMillis()));
+			//pstm.setLong(9, ativo.getModificadoPor());
+			pstm.setDate(9, new java.sql.Date(System.currentTimeMillis()));
+			//pstm.setDate(11, new java.sql.Date(ativo.getDtModificacao().getTime()));
 			
 			// Executa a sql para inserção dos dados
-			if(pstm.execute()){
+			if(pstm.executeUpdate() > 0){
 				cadastrou = true;
 			}
 		} catch (Exception e) {
@@ -212,7 +212,7 @@ public class AtivoDAO {
 			pstm.setLong(6, ativo.getIdStatus());
 			pstm.setString(7, ativo.getObservacao());
 			pstm.setLong(8, ativo.getModificadoPor());
-			pstm.setDate(9, new Date(ativo.getDtModificacao().getTime()));
+			pstm.setDate(9, new java.sql.Date(System.currentTimeMillis()));
 			pstm.setLong(10, ativo.getId());
 
 			// Executa a sql para inserção dos dados

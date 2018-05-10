@@ -18,7 +18,7 @@ class HomeService {
 		console.log(url);
 
 		return this.$http({
-			url: 'http://localhost:8080/Restful/ativo/cadastrarAtivo?descricao=Mouse&dtCompra=01-01-2018&fabricante=Dell&vlDepreciado=45&vlCompra=50&idStatus=0',
+			url:'http://localhost:8080/Restful/ativo/cadastrarAtivo',
 			method: "POST",
 			data: objetoAtivo
 		})

@@ -15,9 +15,11 @@ class HomeController {
 
 		objetoAtivo.descricao = this.descricao;
 		objetoAtivo.fabricante = this.fabricante;
-		objetoAtivo.dtCompra = moment(this.dataCompra).format("DD-MM-YYYY");
+		objetoAtivo.dtCompra = moment(this.dataCompra).format("YYYY-MM-DD HH:mm:ss");
 		objetoAtivo.vlCompra = this.valorCompra;
 		objetoAtivo.vlDepreciado = this.valorDepreciado;
+		objetoAtivo.criadoPor = 1122;
+		objetoAtivo.idStatus = 1;
 
 		//Fazer o POST
 		this.HomeService.criarAtivo(objetoAtivo).then( response => console.log(response) ).catch( error => console.log(error) );
