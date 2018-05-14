@@ -10,6 +10,7 @@ import routing from './app.config';
 import home from './features/home';
 import dashboard from './features/dashboard';
 import usuarios from './features/dashboard';
+import angularmask from 'angular-input-masks/br';
 
-angular.module('app', [uirouter, home, dashboard, usuarios])
+angular.module('app', [uirouter, angularmask, home, dashboard, usuarios])
     .config(routing);

@@ -15,6 +15,7 @@ class HomeController {
 		this.ativos.push({descricao: 'Macbook 4', fabricante: 'Apple', valorCompra: 4000, valorDepreciado: 0, criadoPor: 1212, idStatus: 1});
 		this.objetoModal;
 		//this.getAtivos();
+		this.money;
 	}
 
 	view(obj) {
