@@ -8,9 +8,9 @@ export default function routes($stateProvider) {
       controller: 'HomeController',
       controllerAs: 'home'
     })
-    .state('teste', {
-      url: '/teste',
-      template: require('./teste.html'),
+    .state('ativos', {
+      url: '/ativos',
+      template: require('./ativos.html'),
       controller: 'HomeController',
       controllerAs: 'home'
     })

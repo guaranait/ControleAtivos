@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en" ng-app="AtivosModulo">
+<head>
+	<meta charset="utf-8" />
+	<!--link rel="apple-touch-icon" sizes="76x76" href="assets/img/logo.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/logo.png"-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>ATIVOS</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!--  Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/themify-icons.css" rel="stylesheet">
+
+</head>
+<body ng-controller="AtivosController">
+
+<div class="wrapper">
+	<div class="sidebar" data-background-color="white" data-active-color="danger">
+
+    <!--
+		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
+		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+	-->
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    KOBE
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="ti-panel"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="user.html">
+                        <i class="ti-user"></i>
+                        <p>Usuários</p>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="table.html">
+                        <i class="ti-view-list-alt"></i>
+                        <p>Ativos</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="typography.html">
+                        <i class="ti-text"></i>
+                        <p>Menu A</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="icons.html">
+                        <i class="ti-pencil-alt2"></i>
+                        <p>Menu B</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="maps.html">
+                        <i class="ti-map"></i>
+                        <p>Menu C</p>
+                    </a>
+                </li>
+            </ul>
+    	</div>
+    </div>
+
+    <div class="main-panel">
+		<nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Ativos</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="ti-panel"></i>
+								<p>Stats</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-bell"></i>
+                                    <p class="notification">5</p>
+									<p>Notifications</p>
+									<b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                                <li><a href="#">Notification 3</a></li>
+                                <li><a href="#">Notification 4</a></li>
+                                <li><a href="#">Another notification</a></li>
+                              </ul>
+                        </li>
+						<li>
+                            <a href="#">
+								<i class="ti-settings"></i>
+								<p>Settings</p>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    
+                    <div class="col-lg-8 col-md-7">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Ativos</h4>
+                            </div>
+                            <div class="content">
+                               
+                               <table class="table">
+								  <thead>
+								    <tr>
+								      <th scope="col">ID Status</th>
+								      <th scope="col">Descrição</th>
+								      <th scope="col">Fabricante</th>
+								      <th scope="col">Valor Compra</th>
+								      <th scope="col">Valor Depreciado</th>
+								      <th scope="col"> Editar </th>
+								      <th scope="col"> Remover </th>
+								    </tr>
+								  </thead>
+								  <tbody>
+								    <tr ng-repeat="obj in home.ativos">
+								      <th scope="row"> {{ obj.idStatus }} </th>
+								      <td>{{ obj.descricao }}</td>
+								      <td>{{ obj.fabricante }}</td>
+								      <td>{{ obj.valorCompra }}</td>
+								      <td>{{ obj.valorDepreciado }}</td>
+								      <td>
+								      	<button class="btn btn-info btn-fill btn-sm" ng-click="home.view(obj)" data-toggle="modal" data-target="#myModal">Editar</button>
+								      </td>
+								      <td>
+								      	<button class="btn btn-danger btn-fill btn-sm" ng-click="">Remover</button>
+								      </td>
+								    </tr>
+								  </tbody>
+								</table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">{{home.objetoModal.descricao}}</h4>
+		      </div>
+		      <div class="modal-body">
+		       <span> ID Status: {{ home.objetoModal.idStatus }} </span> <br>
+		       <span> Fabricante: {{ home.objetoModal.fabricante }} </span> <br>
+		       <span> Valor Compra: {{ home.objetoModal.valorCompra }} </span> <br>
+		       <span> Valor Depreciado: {{ home.objetoModal.valorDepreciado }} </span> <br>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		        <button type="button" class="btn btn-primary">Salvar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                GuaranIT
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                               Github
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Termos
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+				<div class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="#">GuaranaIT</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+
+</body>
+
+</html>

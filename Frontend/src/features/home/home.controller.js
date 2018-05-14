@@ -8,10 +8,21 @@ class HomeController {
 		this.valorCompra;
 		this.valorDepreciado;
 		this.HomeService = HomeService;
+		this.ativos = [];
+		this.ativos.push({descricao: 'Macbook', fabricante: 'Apple', valorCompra: 4000, valorDepreciado: 0, criadoPor: 1212, idStatus: 1});
+		this.ativos.push({descricao: 'Macbook 2', fabricante: 'Apple', valorCompra: 4000, valorDepreciado: 0, criadoPor: 1212, idStatus: 1});
+		this.ativos.push({descricao: 'Macbook 3', fabricante: 'Apple', valorCompra: 4000, valorDepreciado: 0, criadoPor: 1212, idStatus: 1});
+		this.ativos.push({descricao: 'Macbook 4', fabricante: 'Apple', valorCompra: 4000, valorDepreciado: 0, criadoPor: 1212, idStatus: 1});
+		this.objetoModal;
+		//this.getAtivos();
+	}
+
+	view(obj) {
+		this.objetoModal = obj;
 	}
 
 	criarAtivo() {
-		var objetoAtivo = {};
+		let objetoAtivo = {};
 
 		objetoAtivo.descricao = this.descricao;
 		objetoAtivo.fabricante = this.fabricante;
