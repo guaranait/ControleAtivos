@@ -14,5 +14,11 @@ export default function routes($stateProvider) {
       controller: 'HomeController',
       controllerAs: 'home'
     })
+    .state('edit', {
+      url: '/editar-ativo',
+      template: require('./edit.html'),
+      controller: 'HomeController',
+      controllerAs: 'home'
+    })
     ;
 }

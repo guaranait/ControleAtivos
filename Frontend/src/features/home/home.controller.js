@@ -16,6 +16,9 @@ class HomeController {
 		this.objetoModal;
 		//this.getAtivos();
 		this.money;
+
+		this.objetoEdit = {};
+		this.editarAtivo();
 	}
 
 	view(obj) {
@@ -38,6 +41,19 @@ class HomeController {
 		
 		//Testar o GET
 		//this.getAtivos();
+    }
+
+    editarAtivo() {
+    	this.objetoEdit.descricao = 'Macbook Pro 16';
+		this.objetoEdit.fabricante = 'Apple';
+		this.objetoEdit.dtCompra = '14/05/2018';
+		this.objetoEdit.vlCompra = 4000;
+		this.objetoEdit.vlDepreciado = 0;
+		this.objetoEdit.criadoPor = 1122;
+		this.objetoEdit.idStatus = 1;
+		this.objetoEdit.obs = ' HEUEHUEH EHUEHUEHE EHHEUEHHEHHE EHEHUEHEH ';
+
+		console.log(this.objetoEdit);
     }
 
     getAtivos() {

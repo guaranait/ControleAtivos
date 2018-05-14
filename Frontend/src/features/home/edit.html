@@ -6,7 +6,7 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/logo.png"-->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Adicionar Ativo</title>
+	<title>Editar Ativo</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -130,7 +130,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Adicionar Ativo</h4>
+                                <h4 class="title">Editar Ativo</h4>
                             </div>
                             <div class="content">
                                 <form>
@@ -138,7 +138,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Descrição</label>
-                                                <input ng-model="home.descricao" type="text" class="form-control border-input" placeholder="Macbook Pro 16">
+                                                <input ng-model="home.objetoEdit.descricao" type="text" class="form-control border-input" placeholder="Macbook Pro 16">
                                             </div>
                                         </div>
                                     </div>
@@ -147,13 +147,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Fabricante</label>
-                                                <input ng-model="home.fabricante" type="text" class="form-control border-input" placeholder="Apple">
+                                                <input ng-model="home.objetoEdit.fabricante" type="text" class="form-control border-input" placeholder="Apple">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Data da Compra</label>
-                                                <input ng-model="home.dataCompra" type="date" class="form-control border-input">
+                                                <input ng-model="home.objetoEdit.dtCompra" type="text" class="form-control border-input" ui-date-mask="DD/MM/YYYY">
                                             </div>
                                         </div>
                                     </div>
@@ -162,13 +162,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Valor da Compra</label>
-                                                <input ng-model="home.valorCompra" type="text" class="form-control border-input" placeholder="0" ui-money-mask currency-symbol="R$">
+                                                <input ng-model="home.objetoEdit.vlCompra" type="text" class="form-control border-input" placeholder="0" ui-money-mask currency-symbol="R$">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Valor Depreciado</label>
-                                                <input ng-model="home.valorDepreciado" type="text" class="form-control border-input" placeholder="0" ui-money-mask currency-symbol="R$">
+                                                <input ng-model="home.objetoEdit.vlDepreciado" type="text" class="form-control border-input" placeholder="0" ui-money-mask currency-symbol="R$">
                                             </div>
                                         </div>
                                     </div>
@@ -177,20 +177,19 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Observação</label>
-                                                <textarea rows="5" class="form-control border-input" placeholder="Observação..."></textarea>
+                                                <textarea rows="5" ng-model="home.objetoEdit.obs" class="form-control border-input" placeholder="Observação..."></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button ng-click="home.criarAtivo()" class="btn btn-info btn-fill btn-wd">Criar Ativo</button>
+                                        <button ng-click="home.cancelarEdicao()" class="btn btn-danger btn-fill btn-wd">Cancelar</button>
+                                        <button ng-click="home.salvarAtivo()" class="btn btn-info btn-fill btn-wd">Salvar</button>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
