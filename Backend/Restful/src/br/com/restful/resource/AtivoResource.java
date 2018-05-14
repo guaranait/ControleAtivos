@@ -37,7 +37,7 @@ public class AtivoResource {
 		return Response.status(200).entity(jsonAtivos).build();
 	}
 	
-	@GET
+	/*@GET
 	@Path("/listarAtivo")
 	@Produces("application/json")
 	public Response listarAtivo(@QueryParam("id") long id){
@@ -46,6 +46,22 @@ public class AtivoResource {
 		ativo = ativoController.listarAtivo(id);
 		
 		String jsonAtivo = new Gson().toJson(ativo);
+		return Response.status(200).entity(jsonAtivo).build();
+	}*/
+	
+	@GET
+	@Path("/listarAtivo")
+	@Produces("application/json")
+	public Response listarAtivo(String ativoJson){
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		Ativo ativo = gson.fromJson(ativoJson, Ativo.class);
+		
+		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
+		AtivoController ativoController = new AtivoController();
+		
+		ativos = ativoController.listarAtivo(ativo);
+		
+		String jsonAtivo = new Gson().toJson(ativos);
 		return Response.status(200).entity(jsonAtivo).build();
 	}
 	
@@ -59,10 +75,14 @@ public class AtivoResource {
 		Ativo ativo = gson.fromJson(ativoJson, Ativo.class);
 		
 		AtivoController ativoController = new AtivoController();
-		if(ativoController.cadastrarAtivo(ativo)){
-			return Response.ok().build();
-		}else{
-			return Response.serverError().build();
+		if(ativoController.validador(ativo)) {
+			if(ativoController.cadastrarAtivo(ativo)){
+				return Response.ok().build();
+			}else{
+				return Response.serverError().build();
+			}
+		}else {
+			return Response.status(400).build();
 		}
 		
 	}
@@ -77,10 +97,14 @@ public class AtivoResource {
 		Ativo ativo = gson.fromJson(ativoJson, Ativo.class);
 		
 		AtivoController ativoController = new AtivoController();
-		if(ativoController.alterarAtivo(ativo)){
-			return Response.ok().build();
-		}else{
-			return Response.serverError().build();
+		if(ativoController.validador(ativo)) {
+			if(ativoController.alterarAtivo(ativo)){
+				return Response.ok().build();
+			}else{
+				return Response.serverError().build();
+			}
+		}else {
+			return Response.status(400).build();
 		}
 	}
 	
@@ -88,10 +112,14 @@ public class AtivoResource {
 	@Path("/excluirAtivo")
 	@Consumes("application/json")
 	public Response excluirAtivo(@QueryParam("id") long id){
-		if(new AtivoController().excluirAtivo(id)){
-			return Response.ok().build();
-		}else{
-			return Response.serverError().build();
+		if(id > 0) {
+			if(new AtivoController().excluirAtivo(id)){
+				return Response.ok().build();
+			}else{
+				return Response.serverError().build();
+			}
+		}else {
+			return Response.status(400).build();
 		}
 	}
 }

@@ -15,7 +15,8 @@ public class UsuarioResource {
 	@GET
 	@Path("/listarUsuarios")
 	@Produces("application/json")
-	public ArrayList<Usuario> listarUsuarios(){
-		return new UsuarioController().listarUsuarios();
+	public Usuario listarUsuarios(long id){
+		//long id = Long.parseLong(idString);
+		return new UsuarioController().getUsuario(id);
 	}
 }

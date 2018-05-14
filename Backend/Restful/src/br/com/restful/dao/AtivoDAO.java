@@ -83,38 +83,59 @@ public class AtivoDAO {
 		return ativos;
 	}
 
-	public Ativo listarAtivo(long id) {
-		/*
-		 * Connection conexao = null; PreparedStatement pstmt = null; ResultSet
-		 * rs = null;
-		 */
-
-		// teste
-		/*Ativo ativo = new Ativo();
-		ativo.setId(01);
-		ativo.setDescricao("MacBook Air 13'");
-		ativo.setDtCompra(new Date());
-		ativo.setFabrincante("Apple");
-		ativo.setVlCompra(3900.00);
-		ativo.setVlDepreciado(800.00);*/
+	public ArrayList<Ativo> listarAtivo(Ativo ativo) {
+		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
+		int i = 0;
 		
-		Ativo ativo = null;
-		
-		String sql = "SELECT * FROM lu2cas01.ATIVO WHERE id = ?";
-		 
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		 
+		
+		
 		try {
+			String sql = "SELECT * FROM lu2cas01.ATIVO WHERE 1=1 ";
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
 			
-			pstm.setLong(1, id);
+			if(ativo.getId() > 0) {
+				sql += " and id = ? ";
+				i++;
+				pstm.setLong(i, ativo.getId());
+			}else if(!ativo.getDescricao().isEmpty()) {
+				sql += " and descricao = ? ";
+				i++;
+				pstm.setString(i, ativo.getDescricao());
+			}else if(ativo.getDtCompra() != null && !ativo.getDtCompra().equals("")) {
+				sql += " and dt_compra = ? ";
+				i++;
+				pstm.setDate(i, new java.sql.Date(ativo.getDtCompra().getTime()));
+			}else if(!ativo.getFabricante().isEmpty()) {
+				sql += " and fabricante = ? ";
+				i++;
+				pstm.setString(i, ativo.getFabricante());
+			}else if(ativo.getVlCompra() > 0) {
+				sql += " and vl_compra = ? ";
+				i++;
+				pstm.setDouble(i, ativo.getVlCompra());
+			}else if(ativo.getVlDepreciado() > 0) {
+				sql += " and vl_depreciado = ? ";
+				i++;
+				pstm.setDouble(i, ativo.getVlDepreciado());
+			}else if(ativo.getIdStatus() > 0) {
+				sql += " and id_status = ? ";
+				i++;
+				pstm.setLong(i, ativo.getIdStatus());
+			}else if(!ativo.getObservacao().isEmpty()) {
+				sql += " and observacao = ? ";
+				i++;
+				pstm.setString(i, ativo.getObservacao()                                                                                                              );
+			}
 			
 			rs = pstm.executeQuery();
 		 
-			if(rs.next()){
+			
+			while(rs.next()){
+				Ativo ati = new Ativo();
 				 
 				ativo.setId(rs.getLong("id"));
 				ativo.setDescricao(rs.getString("descricao")); 
@@ -127,6 +148,8 @@ public class AtivoDAO {
 				ativo.setIdStatus(rs.getLong("id_status"));
 				ativo.setModificadoPor(rs.getLong("modificado_por"));
 				ativo.setDtModificacao(rs.getDate("dt_modificacao"));
+				 
+				ativos.add(ati);
 			}
 		 } catch (Exception e) {
 			 e.printStackTrace();
@@ -146,7 +169,7 @@ public class AtivoDAO {
 			 }
 		 }
 
-		return ativo;
+		return ativos;
 	}
 
 	public Boolean cadastrarAtivo(Ativo ativo) {

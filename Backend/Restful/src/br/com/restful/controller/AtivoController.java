@@ -11,8 +11,8 @@ public class AtivoController {
 		return AtivoDAO.getInstance().listarAtivos();
 	}
 	
-	public Ativo listarAtivo(long id){
-		return AtivoDAO.getInstance().listarAtivo(id);
+	public ArrayList<Ativo> listarAtivo(Ativo ativo){
+		return AtivoDAO.getInstance().listarAtivo(ativo);
 	}
 	
 	public Boolean cadastrarAtivo(Ativo ativo){
@@ -28,6 +28,22 @@ public class AtivoController {
 		AtivoDAO ativoDAO = new AtivoDAO();
 		sucesso = ativoDAO.excluirAtivo(id);
 		return sucesso;
+	}
+	
+	
+	public boolean validador(Ativo ativo) {
+		boolean valido = false;
+		if(ativo.getDescricao().isEmpty() ||
+				(ativo.getDtCompra() == null ||ativo.getDtCompra().equals("")) ||
+				ativo.getFabricante().isEmpty() ||
+				ativo.getIdStatus() <= 0 ||
+				ativo.getVlCompra() <= 0 ||
+				ativo.getVlDepreciado() <= 0) {
+			return valido;
+		}else {
+			valido = true;
+			return valido;
+		}
 	}
 	
 }

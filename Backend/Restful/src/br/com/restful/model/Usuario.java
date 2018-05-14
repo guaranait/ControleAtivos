@@ -2,27 +2,32 @@ package br.com.restful.model;
 
 import java.util.Date;
 
+import sun.security.util.Password;
+
 public class Usuario {
 
-	private long id = 0;
-	private String nome = "";
-	private String cpf = "";
-	private long idade = 0;
-	private Date dt_nascimento = new Date();
-	private String cargo = "";
+	private long id;
+	private long idPerfil;
+	private Password senha;
+	private long criadoPor;
+	private long modificadoPor;
+	private Date dtCriacao;
+	private Date dtModificacao;
 	
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(long id, String nome, String cpf, long idade, Date dt_nascimento, String cargo) {
+	public Usuario(long id, long idPerfil, Password senha, long criadoPor, long modificadoPor, Date dtCriacao,
+			Date dtModificacao) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.idade = idade;
-		this.dt_nascimento = dt_nascimento;
-		this.cargo = cargo;
+		this.idPerfil = idPerfil;
+		this.senha = senha;
+		this.criadoPor = criadoPor;
+		this.modificadoPor = modificadoPor;
+		this.dtCriacao = dtCriacao;
+		this.dtModificacao = dtModificacao;
 	}
 
 	public long getId() {
@@ -33,50 +38,60 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public long getIdPerfil() {
+		return idPerfil;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setIdPerfil(long idPerfil) {
+		this.idPerfil = idPerfil;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public Password getSenha() {
+		return senha;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setSenha(Password senha) {
+		this.senha = senha;
 	}
 
-	public long getIdade() {
-		return idade;
+	public long getCriadoPor() {
+		return criadoPor;
 	}
 
-	public void setIdade(long idade) {
-		this.idade = idade;
+	public void setCriadoPor(long criadoPor) {
+		this.criadoPor = criadoPor;
 	}
 
-	public Date getDt_nascimento() {
-		return dt_nascimento;
+	public long getModificadoPor() {
+		return modificadoPor;
 	}
 
-	public void setDt_nascimento(Date dt_nascimento) {
-		this.dt_nascimento = dt_nascimento;
+	public void setModificadoPor(long modificadoPor) {
+		this.modificadoPor = modificadoPor;
 	}
 
-	public String getCargo() {
-		return cargo;
+	public Date getDtCriacao() {
+		return dtCriacao;
 	}
 
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
+	public void setDtCriacao(Date dtCriacao) {
+		this.dtCriacao = dtCriacao;
+	}
+
+	public Date getDtModificacao() {
+		return dtModificacao;
+	}
+
+	public void setDtModificacao(Date dtModificacao) {
+		this.dtModificacao = dtModificacao;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", idade=" + idade + ", dt_nascimento="
-				+ dt_nascimento + ", cargo=" + cargo + "]";
+		return "Usuario [id=" + id + ", idPerfil=" + idPerfil + ", senha=" + senha + ", criadoPor=" + criadoPor
+				+ ", modificadoPor=" + modificadoPor + ", dtCriacao=" + dtCriacao + ", dtModificacao=" + dtModificacao
+				+ "]";
 	}
-	
+
+
 }

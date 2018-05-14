@@ -6,8 +6,8 @@ import br.com.restful.dao.UsuarioDAO;
 import br.com.restful.model.Usuario;
 
 public class UsuarioController {
-	public ArrayList<Usuario> listarUsuarios(){
-		return UsuarioDAO.getInstance().listarUsuarios();
+	public Usuario getUsuario(long id){
+		return UsuarioDAO.getInstance().getUsuario(id);
 	}
 	
 }
