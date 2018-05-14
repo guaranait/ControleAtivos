@@ -9,7 +9,7 @@ import uirouter from 'angular-ui-router';
 import routing from './app.config';
 import home from './features/home';
 import dashboard from './features/dashboard';
-import usuarios from './features/usuarios';
+import usuarios from './features/dashboard';
 
-angular.module('app', [uirouter, home, dashboard])
+angular.module('app', [uirouter, home, dashboard, usuarios])
     .config(routing);
