@@ -4,10 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream;
+
 import java.sql.Date;
 
 import br.com.restful.factory.ConnectionFactory;
 import br.com.restful.model.Ativo;
+import br.com.restful.model.Manutencao;
 
 public class AtivoDAO {
 
@@ -195,14 +199,14 @@ public class AtivoDAO {
 			pstm.setDate(9, new java.sql.Date(System.currentTimeMillis()));
 			//pstm.setDate(11, new java.sql.Date(ativo.getDtModificacao().getTime()));
 			
-			// Executa a sql para inserção dos dados
+			// Executa a sql para inserï¿½ï¿½o dos dados
 			if(pstm.executeUpdate() > 0){
 				cadastrou = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			// Fecha as conexões
+			// Fecha as conexï¿½es
 			try {
 				if (pstm != null) {
 					pstm.close();
@@ -238,14 +242,14 @@ public class AtivoDAO {
 			pstm.setDate(9, new java.sql.Date(System.currentTimeMillis()));
 			pstm.setLong(10, ativo.getId());
 
-			// Executa a sql para inserção dos dados
+			// Executa a sql para inserï¿½ï¿½o dos dados
 			if(pstm.execute()){
 				alterou = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			// Fecha as conexões
+			// Fecha as conexï¿½es
 			try {
 				if (pstm != null) {
 					pstm.close();
@@ -273,14 +277,14 @@ public class AtivoDAO {
 
 			pstm.setLong(1, id);
 
-			// Executa a sql para inserção dos dados
+			// Executa a sql para inserï¿½ï¿½o dos dados
 			if (pstm.execute()) {
 				sucesso = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			// Fecha as conexões
+			// Fecha as conexï¿½es
 			try {
 				if (pstm != null) {
 					pstm.close();
@@ -294,5 +298,40 @@ public class AtivoDAO {
 		}
 		return sucesso;
 	}
+	
+	public Boolean setManutencao(Manutencao manutencao) {
+		String sql = "UPDATE lu2cas01.ATIVO SET id_status = 2, modificado_por = ?, dt_modificacao = ? WHERE id = ?";
 
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		boolean alterou = false;
+		try {
+			conn = ConnectionFactory.criarConexao();
+			pstm = conn.prepareStatement(sql);
+
+			pstm.setLong(1, manutencao.getCriadoPor());
+			pstm.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setLong(3, manutencao.getAtivo().getId());
+
+			// Executa a sql para inserï¿½ï¿½o dos dados
+			if(pstm.execute()){
+				alterou = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// Fecha as conexï¿½es
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return alterou;
+	}
 }

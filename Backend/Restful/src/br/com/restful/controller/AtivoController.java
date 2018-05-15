@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import br.com.restful.dao.AtivoDAO;
 import br.com.restful.model.Ativo;
+import br.com.restful.model.Manutencao;
 
 public class AtivoController {
 	
@@ -28,6 +29,10 @@ public class AtivoController {
 		AtivoDAO ativoDAO = new AtivoDAO();
 		sucesso = ativoDAO.excluirAtivo(id);
 		return sucesso;
+	}
+	
+	public boolean setManutencao(Manutencao manutencao) {
+		return AtivoDAO.getInstance().setManutencao(manutencao);
 	}
 	
 	
