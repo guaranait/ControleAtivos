@@ -5,13 +5,10 @@ class UsuariosService {
 
     criarUsuario(objetoUsuario) {
         console.log(objetoUsuario);
-        var url = "http://localhost:8080/Restful/usuarios/cadastrarUsuario?descricao="
-            +objetoUsuario.descricao
-            +"&dtCompra="+objetoUsuario.dtCompra
-            +"&fabricante="+objetoUsuario.fabricante
-            +"&vlDepreciado="+objetoUsuario.vlDepreciado
-            +"&vlCompra="+objetoUsuario.vlCompra
-            +"&idStatus=0";
+        var url = "http://localhost:8080/Restful/usuarios/cadastrarUsuario?username="
+            +objetoUsuario.username
+            +"&idPerfil="+objetoUsuario.idPerfil
+            +"&senha="+objetoUsuario.senha;
 
         console.log(url);
 

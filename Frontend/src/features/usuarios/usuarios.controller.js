@@ -4,10 +4,19 @@ class UsuariosController {
         this.username;
         this.senha;
         this.UsuariosService = UsuariosService;
+
+        this.objetoModal;
+
+        this.objetoEdit = {};
+        this.editarUsuario();
+    }
+
+    view(obj) {
+        this.objetoModal = obj;
     }
 
     criarUsuario() {
-        var objetoUsuario = {};
+        let objetoUsuario = {};
 
         objetoUsuario.idPerfil = this.idPerfil;
         objetoUsuario.username = this.username;
@@ -15,6 +24,15 @@ class UsuariosController {
         objetoUsuario.criadoPor = 1010;
 
         this.UsuariosService.criarUsuario(objetoUsuario).then(response => console.log(response)).catch(error => console.log(error));
+    }
+
+    editarAtivo() {
+        this.objetoEdit.idPerfil = '1';
+        this.objetoEdit.username = 'username123';
+        this.objetoEdit.senha = 'senha123';
+        this.objetoEdit.criadoPor = 1010;
+
+        console.log(this.objetoEdit);
     }
 
     getUsuarios() {
