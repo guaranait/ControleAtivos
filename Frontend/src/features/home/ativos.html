@@ -164,10 +164,10 @@
 								      	<button class="btn btn-info btn-fill btn-sm" ng-click="home.view(obj)">Editar</button>
 								      </td>
 								      <td>
-								      	<button class="btn btn-danger btn-fill btn-sm" ng-click="home.viewRemove(obj)" data-toggle="modal" data-target="#modalRemove" >Remover</button>
+								      	<button class="btn btn-danger btn-fill btn-sm" ng-click="home.viewRemove(obj)" data-toggle="modal" data-target="#modalRemove">Remover</button>
 								      </td>
                                       <td>
-                                        <button class="btn btn-info btn-fill btn-sm" ng-click="">Manutenção</button>
+                                        <button class="btn btn-info btn-fill btn-sm" ng-click="home.viewManutencao(obj)" data-toggle="modal" data-target="#modalMAnutencao">Manutenção</button>
                                       </td>
 								    </tr>
 								  </tbody>
@@ -182,7 +182,7 @@
         </div>
 
         <!-- Modal Remover -->
-        <div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="modalRemove">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -200,23 +200,32 @@
           </div>
         </div>
 
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<!-- Modal Manutenção -->
+		<div class="modal fade" id="modalMAnutencao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">{{home.objetoModal.descricao}}</h4>
+		        <h4 class="modal-title" id="myModalLabel">Manutenção Ativo</h4>
 		      </div>
 		      <div class="modal-body">
-		       <span> ID Status: {{ home.objetoModal.idStatus }} </span> <br>
-		       <span> Fabricante: {{ home.objetoModal.fabricante }} </span> <br>
-		       <span> Valor Compra: {{ home.objetoModal.valorCompra }} </span> <br>
-		       <span> Valor Depreciado: {{ home.objetoModal.valorDepreciado }} </span> <br>
+                <p ng-if=" home.objetoModal.idStatus != 2 "> Você deseja Adicionar esse ativo em Manutenção? </p>
+                <p ng-if=" home.objetoModal.idStatus == 2 "> Você deseja Concluir a Manutenção deste ativo? </p>
+
+                <span> Descrição do Ativo: {{home.objetoModal.descricao}} </span> <br>            
+                <span> ID Status: {{ home.objetoModal.idStatus }} </span> <br>
+                <span> Fabricante: {{ home.objetoModal.fabricante }} </span> <br>
+                <span> Valor Compra: {{ home.objetoModal.vlCompra }} </span> <br>
+                <span> Valor Depreciado: {{ home.objetoModal.vlDepreciado }} </span> <br>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea ng-model="home.observacao" ng-readonly="home.objetoModal.idStatus == 2" rows="5" class="form-control border-input" placeholder="Escreva a Descrição da Manutenção..."></textarea>
+                </div>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		        <button type="button" class="btn btn-primary">Salvar</button>
+		        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-if=" home.objetoModal.idStatus != 2 ">Adicionar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-if=" home.objetoModal.idStatus == 2 ">Concluir</button>
 		      </div>
 		    </div>
 		  </div>

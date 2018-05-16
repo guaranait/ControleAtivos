@@ -1,6 +1,3 @@
-import moment from 'moment';
-import jQuery from 'jquery';
-
 class HomeController {
 	constructor(HomeService, $state, $stateParams) {
 		this.descricao;
@@ -10,6 +7,7 @@ class HomeController {
 		this.valorDepreciado;
 		this.observacao;
 		this.HomeService = HomeService;
+		//this.ativos = [{id: 2, idStatus: 1, descricao: 'Macbook Pro 13', fabricante: 'Apple', vlCompra: 3000, vlDepreciado: 300}];
 		this.ativos = [];
 		this.objetoModal;
 		this.money;
@@ -34,6 +32,11 @@ class HomeController {
 	}
 
 	viewRemove(obj) {
+		this.objetoModal = obj;
+	}
+
+	viewManutencao(obj) {
+		console.log(obj);
 		this.objetoModal = obj;
 	}
 
@@ -63,6 +66,10 @@ class HomeController {
 				this.$state.go('ativos');
 			}
 		} ).catch( error => console.log(error) );
+    }
+
+    cancelarEdicao() {
+    	this.$state.go('ativos');
     }
 
     excluirAtivo(obj) {
