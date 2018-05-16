@@ -24,19 +24,6 @@ public class AtivoDAO {
 	}
 
 	public ArrayList<Ativo> listarAtivos() {
-		//ArrayList<Ativo> ativos = null;
-
-		// teste
-		/*ativos = new ArrayList<Ativo>();
-		Ativo ativo = new Ativo();
-		ativo.setId(01);
-		ativo.setDescricao("MacBook Air 13'");
-		ativo.setDtCompra(new Date());
-		ativo.setFabrincante("Apple");
-		ativo.setVlCompra(3900.00);
-		ativo.setVlDepreciado(800.00);
-		ativos.add(ativo);*/
-
 		String sql = "SELECT * FROM lu2cas01.ATIVO";
 		 
 		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
