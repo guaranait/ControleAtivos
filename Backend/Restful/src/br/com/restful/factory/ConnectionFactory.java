@@ -5,37 +5,37 @@ import java.sql.DriverManager;
 
 public class ConnectionFactory {
  
-   //Nome do usuário do mysql
-   private static final String USERNAME = "";
+   //Nome do usuï¿½rio do mysql
+   private static final String USERNAME = "lu2cas01";
  
    //Senha do mysql
-   private static final String PASSWORD = "";
+   private static final String PASSWORD = "guaranait123";
  
-   //Dados de caminho, porta e nome da base de dados que irá ser feita a conexão
+   //Dados de caminho, porta e nome da base de dados que irï¿½ ser feita a conexï¿½o
    private static final String DATABASE_URL = "jdbc:mysql://mysql.lu2cas.com.br";
    /**
-   * Cria uma conexão com o banco de dados MySQL utilizando o nome de usuário e senha fornecidos
+   * Cria uma conexï¿½o com o banco de dados MySQL utilizando o nome de usuï¿½rio e senha fornecidos
    * @param username
    * @param senha
-   * @return uma conexão com o banco de dados
+   * @return uma conexï¿½o com o banco de dados
    * @throws Exception
    */
    public static Connection criarConexao() throws Exception{
       Class.forName("com.mysql.jdbc.Driver"); //Faz com que a classe seja carregada pela JVM
  
-      //Cria a conexão com o banco de dados
+      //Cria a conexï¿½o com o banco de dados
       Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
  
       return connection;
    }
    public static void main(String[] args) throws Exception{
  
-      //Recupera uma conexão com o banco de dados
+      //Recupera uma conexï¿½o com o banco de dados
       Connection con = criarConexao();
  
-      //Testa se a conexão é nula
+      //Testa se a conexï¿½o ï¿½ nula
       if(con != null){
-         System.out.println("Conexão obtida com sucesso!" + con);
+         System.out.println("Conexï¿½o obtida com sucesso!" + con);
          con.close();
       }
  

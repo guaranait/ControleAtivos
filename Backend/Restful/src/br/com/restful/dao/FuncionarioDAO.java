@@ -20,19 +20,6 @@ public class FuncionarioDAO {
 	}
 
 	public ArrayList<Funcionario> listarFuncionarios() {
-		//ArrayList<Funcionario> funcionarios = null;
-
-		// teste
-		/*funcionarios = new ArrayList<Funcionario>();
-		Funcionario funcionario = new Funcionario();
-		funcionario.setId(01);
-		funcionario.setDescricao("MacBook Air 13'");
-		funcionario.setDtCompra(new Date());
-		funcionario.setFabrincante("Apple");
-		funcionario.setVlCompra(3900.00);
-		funcionario.setVlDepreciado(800.00);
-		funcionarios.add(funcionario);*/
-
 		String sql = "SELECT * FROM lu2cas01.FUNCIONARIO";
 		 
 		ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
@@ -48,19 +35,17 @@ public class FuncionarioDAO {
 		 
 			while(rs.next()){
 				Funcionario funcionario = new Funcionario();
-				 
-				/*funcionario.setId(rs.getLong("id"));
-				funcionario.setDescricao(rs.getString("descricao")); 
-				funcionario.setDtCompra(rs.getDate("dt_compra"));
-				funcionario.setFabricante(rs.getString("fabricante"));
-				funcionario.setVlCompra(rs.getDouble("vl_compra"));
-				funcionario.setVlDepreciado(rs.getDouble("vl_depreciado"));
+
+				funcionario.setId(rs.getLong("id"));
+				funcionario.setNome(rs.getString("nome"));
+				funcionario.setCpf(rs.getString("cpf"));
+				funcionario.setCargo(rs.getString("cargo"));
+				funcionario.setCnpj(rs.getString("cnpj"));
 				funcionario.setCriadoPor(rs.getLong("criado_por"));
 				funcionario.setDtCriacao(rs.getDate("dt_criacao"));
-				funcionario.setIdStatus(rs.getLong("id_status"));
 				funcionario.setModificadoPor(rs.getLong("modificado_por"));
-				funcionario.setDtModificacao(rs.getDate("dt_modificacao"));*/
-				 
+				funcionario.setDtModificacao(rs.getDate("dt_modificacao"));
+				
 				funcionarios.add(funcionario);
 			}
 		 } catch (Exception e) {
@@ -84,21 +69,7 @@ public class FuncionarioDAO {
 	}
 
 	public Funcionario listarFuncionario(long id) {
-		/*
-		 * Connection conexao = null; PreparedStatement pstmt = null; ResultSet
-		 * rs = null;
-		 */
-
-		// teste
-		/*Funcionario funcionario = new Funcionario();
-		funcionario.setId(01);
-		funcionario.setDescricao("MacBook Air 13'");
-		funcionario.setDtCompra(new Date());
-		funcionario.setFabrincante("Apple");
-		funcionario.setVlCompra(3900.00);
-		funcionario.setVlDepreciado(800.00);*/
-		
-		Funcionario funcionario = null;
+		Funcionario funcionario = new Funcionario();
 		
 		String sql = "SELECT * FROM lu2cas01.ATIVO WHERE id = ?";
 		 
@@ -116,17 +87,16 @@ public class FuncionarioDAO {
 		 
 			if(rs.next()){
 				 
-				/*funcionario.setId(rs.getLong("id"));
-				funcionario.setDescricao(rs.getString("descricao")); 
-				funcionario.setDtCompra(rs.getDate("dt_compra"));
-				funcionario.setFabricante(rs.getString("fabricante"));
-				funcionario.setVlCompra(rs.getDouble("vl_compra"));
-				funcionario.setVlDepreciado(rs.getDouble("vl_depreciado"));
+				funcionario.setId(rs.getLong("id"));
+				funcionario.setNome(rs.getString("nome"));
+				funcionario.setCpf(rs.getString("cpf"));
+				funcionario.setCargo(rs.getString("cargo"));
+				funcionario.setCnpj(rs.getString("cnpj"));
 				funcionario.setCriadoPor(rs.getLong("criado_por"));
 				funcionario.setDtCriacao(rs.getDate("dt_criacao"));
-				funcionario.setIdStatus(rs.getLong("id_status"));
 				funcionario.setModificadoPor(rs.getLong("modificado_por"));
-				funcionario.setDtModificacao(rs.getDate("dt_modificacao"));*/
+				funcionario.setDtModificacao(rs.getDate("dt_modificacao"));
+				
 			}
 		 } catch (Exception e) {
 			 e.printStackTrace();
@@ -167,14 +137,14 @@ public class FuncionarioDAO {
 			pstm.setLong(5, funcionario.getCriadoPor());
 			pstm.setDate(6, new java.sql.Date(System.currentTimeMillis()));
 			
-			// Executa a sql para inserção dos dados
+			// Executa a sql para inserï¿½ï¿½o dos dados
 			if(pstm.execute()){
 				cadastrou = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			// Fecha as conexões
+			// Fecha as conexï¿½es
 			try {
 				if (pstm != null) {
 					pstm.close();
@@ -207,14 +177,14 @@ public class FuncionarioDAO {
 			pstm.setDate(6, new java.sql.Date(System.currentTimeMillis()));
 			pstm.setLong(7, funcionario.getId());
 
-			// Executa a sql para inserção dos dados
+			// Executa a sql para inserï¿½ï¿½o dos dados
 			if(pstm.execute()){
 				alterou = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			// Fecha as conexões
+			// Fecha as conexï¿½es
 			try {
 				if (pstm != null) {
 					pstm.close();
@@ -242,14 +212,14 @@ public class FuncionarioDAO {
 
 			pstm.setLong(1, id);
 
-			// Executa a sql para inserção dos dados
+			// Executa a sql para inserï¿½ï¿½o dos dados
 			if (pstm.execute()) {
 				sucesso = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			// Fecha as conexões
+			// Fecha as conexï¿½es
 			try {
 				if (pstm != null) {
 					pstm.close();
