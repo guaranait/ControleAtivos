@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" ng-app="UsuariosModulo">
+<html lang="en" ng-app="FuncionariosModulo">
     <head>
         <meta charset="utf-8" />
         <!--link rel="apple-touch-icon" sizes="76x76" href="assets/img/logo.png">
         <link rel="icon" type="image/png" sizes="96x96" href="assets/img/logo.png"-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>Editar Usuário</title>
+        <title>Editar Funcionário</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -16,7 +16,7 @@
         <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
         <link href="assets/css/themify-icons.css" rel="stylesheet">
     </head>
-    <body ng-controller="UsuariosController">
+    <body ng-controller="FuncionariosController">
         <div class="wrapper">
             <div class="sidebar" data-background-color="white" data-active-color="danger">
             <!--
@@ -79,7 +79,7 @@
                                 <span class="icon-bar bar2"></span>
                                 <span class="icon-bar bar3"></span>
                             </button>
-                            <a class="navbar-brand" href="#">Editar Usuário</a>
+                            <a class="navbar-brand" href="#">Editar Funcionário</a>
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
@@ -120,35 +120,35 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="card">
                                     <div class="header">
-                                        <h4 class="title">Editar Usuário</h4>
+                                        <h4 class="title">Editar Funcionário</h4>
                                     </div>
                                     <div class="content">
                                         <form>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>Perfil</label>
-                                                        <input ng-model="usuarios.idPerfil" type="text" class="form-control border-input" placeholder="10">
+                                                        <label>Nome</label>
+                                                        <input ng-model="funcionarios.nome" type="text" class="form-control border-input" placeholder="José da Silva">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Username</label>
-                                                        <input ng-model="usuarios.username" type="text" class="form-control border-input" placeholder="username123">
+                                                        <label>CPF/CNPJ</label>
+                                                        <input ng-model="funcionarios.cpfCnpj" type="text" class="form-control border-input" placeholder="111.111.111-11">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Senha</label>
-                                                        <input ng-model="usuarios.senha" type="text" class="form-control border-input" placeholder="senha123">
+                                                        <label>Cargo</label>
+                                                        <input ng-model="funcionarios.cargo" type="text" class="form-control border-input" placeholder="Desenvolvedor de software">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="text-center">
-                                                <button ng-click="usuarios.cancelarEdicao()" class="btn btn-danger btn-fill btn-wd">Cancelar</button>
-                                                <button ng-click="usuarios.alterarUsuario()" class="btn btn-info btn-fill btn-wd">Salvar</button>
+                                                <button ng-click="funcionarios.cancelarEdicao()" class="btn btn-danger btn-fill btn-wd">Cancelar</button>
+                                                <button ng-click="funcionarios.alterarFuncionario()" class="btn btn-info btn-fill btn-wd">Salvar</button>
                                             </div>
                                             <div class="clearfix"></div>
                                         </form>
@@ -195,8 +195,8 @@
     <!-- AngularJS -->
     <script src="http://code.angularjs.org/1.0.1/angular-1.0.1.min.js"></script>
 
-    <!-- usuarios.js -->
-    <script src="assets/js/usuarios.js"></script>
+    <!-- funcionarios.js -->
+    <script src="assets/js/funcionarios.js"></script>
 
     <!-- Checkbox, Radio & Switch Plugins -->
     <script src="assets/js/bootstrap-checkbox-radio.js"></script>
