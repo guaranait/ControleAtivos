@@ -16,6 +16,7 @@ import br.com.restful.controller.ManutencaoController;
 import br.com.restful.dao.AtivoDAO;
 import br.com.restful.model.Manutencao;
 
+@Path("/manutencao")
 public class ManutencaoResource {
 	
 	@POST

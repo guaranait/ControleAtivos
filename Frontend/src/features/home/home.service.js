@@ -4,8 +4,6 @@ class HomeService {
 	}
 
 	criarAtivo(objetoAtivo) {
-		console.log(objetoAtivo);
-		//URL para exemplo
 		//var url = "http://localhost:8080/Restful/ativo/cadastrarAtivo?descricao=Mouse&dtCompra=01-01-2018&fabricante=Dell&vlDepreciado=45&vlCompra=50&idStatus=0";
 		var url = "http://localhost:8080/Restful/ativo/cadastrarAtivo?descricao="
 			+objetoAtivo.descricao
@@ -14,8 +12,6 @@ class HomeService {
 			+"&vlDepreciado="+objetoAtivo.vlDepreciado
 			+"&vlCompra="+objetoAtivo.vlCompra
 			+"&idStatus=0";
-
-		console.log(url);
 
 		return this.$http({
 			url:'http://localhost:8080/Restful/ativo/cadastrarAtivo',
@@ -29,6 +25,23 @@ class HomeService {
 		return this.$http({
 			url: 'http://localhost:8080/Restful/ativo/listarAtivos',
 			method: "GET"
+		})
+		.then( response => response ).catch( error => error );
+	}
+
+	alterarAtivo(objetoAtivo) {
+		return this.$http({
+			url:'http://localhost:8080/Restful/ativo/alterarAtivo',
+			method: "POST",
+			data: objetoAtivo
+		})
+		.then( response => response ).catch( error => error );
+	}
+
+	excluirAtivo(objetoAtivo) {
+		return this.$http({
+			url: 'http://localhost:8080/Restful/ativo/excluirAtivo?id='+objetoAtivo.id,
+			method: "POST"
 		})
 		.then( response => response ).catch( error => error );
 	}

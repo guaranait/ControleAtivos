@@ -8,3 +8,8 @@
 .btn-add-ativo {
 	margin: 25px 0;
 }
+
+.modal-backdrop {
+	z-index: 0 !important;
+	opacity: 0 !important;
+}

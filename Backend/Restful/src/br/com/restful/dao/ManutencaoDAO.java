@@ -18,8 +18,8 @@ public class ManutencaoDAO {
 	}
 	
 	public Boolean cadastrarManutencao(Manutencao manutencao) {
-		String sql = "INSERT INTO lu2cas01.MANUTENCAO(descricao,id_ativo,dt_concerto,criado_por,dt_criacao)"
-				+ " VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO lu2cas01.MANUTENCAO(descricao,id_ativo,dt_conserto,dt_entrada,criado_por,dt_criacao)"
+				+ " VALUES(?,?,?,?,?,?)";
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -31,10 +31,11 @@ public class ManutencaoDAO {
 			pstm.setString(1, manutencao.getDescricao());
 			pstm.setLong(2, manutencao.getAtivo().getId());
 			pstm.setDate(3, new java.sql.Date(System.currentTimeMillis())); //dtConserto
-			pstm.setLong(4, manutencao.getCriadoPor());
-			pstm.setDate(5, new java.sql.Date(System.currentTimeMillis())); //dtCriacao
+			pstm.setDate(4, new java.sql.Date(System.currentTimeMillis())); //dtConserto
+			pstm.setLong(5, manutencao.getCriadoPor());
+			pstm.setDate(6, new java.sql.Date(System.currentTimeMillis())); //dtCriacao
 			// Executa a sql para inser��o dos dados
-			if(pstm.execute()){
+			if(pstm.executeUpdate() > 0){
 				cadastrou = true;
 			}
 		} catch (Exception e) {

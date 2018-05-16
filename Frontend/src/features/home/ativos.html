@@ -129,7 +129,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 text-right">
-                                <button class="btn-add-ativo btn btn-info btn-fill btn-wd"> Adicionar Novo Ativo </button>
+                                <button class="btn-add-ativo btn btn-info btn-fill btn-wd" ng-click="home.adicionarAtivo()"> Adicionar Novo Ativo </button>
                             </div>
                         </div>
                         <div class="card">
@@ -141,7 +141,8 @@
                                <table class="table">
 								  <thead>
 								    <tr>
-								      <th scope="col">ID Status</th>
+								      <th scope="col">ID</th>
+                                      <th scope="col">ID Status</th>
 								      <th scope="col">Descrição</th>
 								      <th scope="col">Fabricante</th>
 								      <th scope="col">Valor Compra</th>
@@ -153,16 +154,17 @@
 								  </thead>
 								  <tbody>
 								    <tr ng-repeat="obj in home.ativos">
-								      <th scope="row"> {{ obj.idStatus }} </th>
+								      <th scope="row"> {{ obj.id }} </th>
+                                      <th scope="row"> {{ obj.idStatus }} </th>
 								      <td>{{ obj.descricao }}</td>
 								      <td>{{ obj.fabricante }}</td>
-								      <td>{{ obj.valorCompra }}</td>
-								      <td>{{ obj.valorDepreciado }}</td>
+								      <td>{{ obj.vlCompra }}</td>
+								      <td>{{ obj.vlDepreciado }}</td>
 								      <td>
-								      	<button class="btn btn-info btn-fill btn-sm" ng-click="home.view(obj)" data-toggle="modal" data-target="#myModal">Editar</button>
+								      	<button class="btn btn-info btn-fill btn-sm" ng-click="home.view(obj)">Editar</button>
 								      </td>
 								      <td>
-								      	<button class="btn btn-danger btn-fill btn-sm" ng-click="">Remover</button>
+								      	<button class="btn btn-danger btn-fill btn-sm" ng-click="home.viewRemove(obj)" data-toggle="modal" data-target="#modalRemove" >Remover</button>
 								      </td>
                                       <td>
                                         <button class="btn btn-info btn-fill btn-sm" ng-click="">Manutenção</button>
@@ -177,6 +179,25 @@
 
                 </div>
             </div>
+        </div>
+
+        <!-- Modal Remover -->
+        <div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"> Remover Ativo </h4>
+              </div>
+              <div class="modal-body">
+                <p> Você deseja remover o ativo {{home.objetoModal.descricao}}? </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="home.excluirAtivo(home.objetoModal)" >Sim</button>
+              </div>
+            </div>
+          </div>
         </div>
 
 		<!-- Modal -->

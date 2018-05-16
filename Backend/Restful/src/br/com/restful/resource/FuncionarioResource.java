@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import br.com.restful.controller.AtivoController;
 import br.com.restful.controller.FuncionarioController;
 import br.com.restful.model.Funcionario;
 
@@ -84,10 +85,14 @@ public class FuncionarioResource {
 	@Path("/excluirFuncionario")
 	@Consumes("application/json")
 	public Response excluirFuncionario(@QueryParam("id") long id){
-		if(new FuncionarioController().excluirFuncionario(id)){
-			return Response.ok().build();
-		}else{
-			return Response.serverError().build();
+		if(id > 0) {
+			if(new FuncionarioController().excluirFuncionario(id)){
+				return Response.ok().build();
+			}else{
+				return Response.serverError().build();
+			}
+		}else {
+			return Response.status(400).build();
 		}
 	}
 }

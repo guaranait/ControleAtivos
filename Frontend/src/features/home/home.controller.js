@@ -1,27 +1,39 @@
 import moment from 'moment';
+import jQuery from 'jquery';
 
 class HomeController {
-	constructor(HomeService) {
+	constructor(HomeService, $state, $stateParams) {
 		this.descricao;
 		this.fabricante;
 		this.dataCompra;
 		this.valorCompra;
 		this.valorDepreciado;
+		this.observacao;
 		this.HomeService = HomeService;
 		this.ativos = [];
-		this.ativos.push({descricao: 'Macbook', fabricante: 'Apple', valorCompra: 4000, valorDepreciado: 0, criadoPor: 1212, idStatus: 1});
-		this.ativos.push({descricao: 'Macbook 2', fabricante: 'Apple', valorCompra: 4000, valorDepreciado: 0, criadoPor: 1212, idStatus: 1});
-		this.ativos.push({descricao: 'Macbook 3', fabricante: 'Apple', valorCompra: 4000, valorDepreciado: 0, criadoPor: 1212, idStatus: 1});
-		this.ativos.push({descricao: 'Macbook 4', fabricante: 'Apple', valorCompra: 4000, valorDepreciado: 0, criadoPor: 1212, idStatus: 1});
 		this.objetoModal;
-		//this.getAtivos();
 		this.money;
-
+		this.$state = $state;
 		this.objetoEdit = {};
-		this.editarAtivo();
+		if($stateParams.descricao) {
+			this.objetoEdit.descricao = $stateParams.descricao;
+			this.objetoEdit.fabricante = $stateParams.fabricante;
+			this.objetoEdit.dtCompra = moment($stateParams.dtCompra).format('DD/MM/YYYY');
+			this.objetoEdit.vlCompra = $stateParams.vlCompra;
+			this.objetoEdit.vlDepreciado = $stateParams.vlDepreciado;
+			this.objetoEdit.criadoPor = $stateParams.criadoPor;
+			this.objetoEdit.idStatus = $stateParams.idStatus;
+			this.objetoEdit.obs = $stateParams.obs;
+			this.objetoEdit.id = $stateParams.id;
+		}
+		this.getAtivos();
 	}
 
 	view(obj) {
+		this.$state.go('edit', obj);
+	}
+
+	viewRemove(obj) {
 		this.objetoModal = obj;
 	}
 
@@ -36,31 +48,49 @@ class HomeController {
 		objetoAtivo.criadoPor = 1122;
 		objetoAtivo.idStatus = 1;
 
-		//Fazer o POST
-		this.HomeService.criarAtivo(objetoAtivo).then( response => console.log(response) ).catch( error => console.log(error) );
-		
-		//Testar o GET
-		//this.getAtivos();
+		this.HomeService.criarAtivo(objetoAtivo).then( response => {
+			if(response.status == 200) {
+				this.limparFormulario();
+				this.$state.go('ativos');
+			}
+		} ).catch( error => console.log(error) );
     }
 
-    editarAtivo() {
-    	this.objetoEdit.descricao = 'Macbook Pro 16';
-		this.objetoEdit.fabricante = 'Apple';
-		this.objetoEdit.dtCompra = '14/05/2018';
-		this.objetoEdit.vlCompra = 4000;
-		this.objetoEdit.vlDepreciado = 0;
-		this.objetoEdit.criadoPor = 1122;
-		this.objetoEdit.idStatus = 1;
-		this.objetoEdit.obs = ' HEUEHUEH EHUEHUEHE EHHEUEHHEHHE EHEHUEHEH ';
+    alterarAtivo() {
+    	this.objetoEdit.dtCompra = moment(this.objetoEdit.dtCompra).format("YYYY-MM-DD HH:mm:ss");
+    	this.HomeService.alterarAtivo(this.objetoEdit).then( response => {
+			if(response.status == 200) {
+				this.$state.go('ativos');
+			}
+		} ).catch( error => console.log(error) );
+    }
 
-		console.log(this.objetoEdit);
+    excluirAtivo(obj) {
+    	this.HomeService.excluirAtivo(obj).then( response => {
+			if(response.status == 200) {
+				console.log(response);
+			}
+		} ).catch( error => console.log(error) );
     }
 
     getAtivos() {
-    	this.HomeService.getAtivos().then( response => console.log(response) ).catch( error => console.log(error) );
+    	this.HomeService.getAtivos().then( response => this.ativos = response.data).catch( error => console.log(error) );
     }
+
+    limparFormulario() {
+    	this.descricao = '';
+		this.fabricante = '';
+		this.dataCompra = '';
+		this.valorCompra = '';
+		this.valorDepreciado = '';
+		this.observacao = '';
+    }
+
+    adicionarAtivo() {
+		this.$state.go('home');
+	}
 }
 
-HomeController.$inject = ['HomeService'];
+HomeController.$inject = ['HomeService', '$state', '$stateParams'];
 
 export default HomeController;
