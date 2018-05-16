@@ -16,6 +16,19 @@ export default function routes($stateProvider) {
     })
     .state('edit', {
       url: '/editar-ativo',
+      params: {
+                id: null,
+                descricao: null,
+                fabricante: null,
+                dtCompra: null,
+                vlCompra: null,
+                vlDepreciado: null,
+                idStatus: null,
+                criadoPor: null,
+                modificadoPor: null,
+                dtCriacao: null,
+                dtModificacao: null
+              },
       template: require('./edit.html'),
       controller: 'HomeController',
       controllerAs: 'home'
