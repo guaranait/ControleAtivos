@@ -9,7 +9,7 @@ import uirouter from 'angular-ui-router';
 import routing from './app.config';
 import home from './features/home';
 import dashboard from './features/dashboard';
-import usuarios from './features/dashboard';
+import usuarios from './features/usuarios';
 import angularmask from 'angular-input-masks/br';
 
 angular.module('app', [uirouter, angularmask, home, dashboard, usuarios])

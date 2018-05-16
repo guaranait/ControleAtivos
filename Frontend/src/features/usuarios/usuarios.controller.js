@@ -26,7 +26,7 @@ class UsuariosController {
         this.UsuariosService.criarUsuario(objetoUsuario).then(response => console.log(response)).catch(error => console.log(error));
     }
 
-    editarAtivo() {
+    editarUsuario() {
         this.objetoEdit.idPerfil = '1';
         this.objetoEdit.username = 'username123';
         this.objetoEdit.senha = 'senha123';
