@@ -5,12 +5,10 @@ class UsuariosService {
 
     criarUsuario(objetoUsuario) {
         console.log(objetoUsuario);
-        var url = "http://localhost:8080/Restful/usuarios/cadastrarUsuario?username="
+        var url = "http://localhost:8080/Restful/usuario/cadastrarUsuario?username="
             +objetoUsuario.username
             +"&idPerfil="+objetoUsuario.idPerfil
             +"&senha="+objetoUsuario.senha;
-
-        console.log(url);
 
         return this.$http({
             url: url,
@@ -22,8 +20,25 @@ class UsuariosService {
 
     getUsuarios() {
         return this.$http({
-            url: 'http://localhost:8080/Restful/usuarios/listarUsuarios',
+            url: 'http://localhost:8080/Restful/usuario/listarUsuarios',
             method: "GET"
+        })
+        .then(response => response).catch(error => error);
+    }
+
+    alterarUsuario(objetoUsuario) {
+        return this.$http({
+            url:'http://localhost:8080/Restful/usuario/alterarUsuario',
+            method: "POST",
+            data: objetoUsuario
+        })
+        .then(response => response).catch(error => error);
+    }
+
+    excluirUsuario(objetoUsuario) {
+        return this.$http({
+            url: 'http://localhost:8080/Restful/usuario/excluirUsuario?id=' + objetoUsuario.id,
+            method: "POST"
         })
         .then(response => response).catch(error => error);
     }

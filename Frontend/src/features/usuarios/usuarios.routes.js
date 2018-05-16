@@ -16,6 +16,16 @@ export default function routes($stateProvider) {
         })
         .state('editarUsuario', {
             url: '/editar-usuario',
+            params: {
+                id: null,
+                idPerfil: null,
+                username: null,
+                senha: null,
+                criadoPor: null,
+                modificadoPor: null,
+                dtCriacao: null,
+                dtModificacao: null
+            },
             template: require('./edit.html'),
             controller: 'UsuariosController',
             controllerAs: 'usuarios'

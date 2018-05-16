@@ -120,12 +120,12 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 text-right">
-                                        <button class="btn-add-ativo btn btn-info btn-fill btn-wd">Adicionar Novo Usuário</button>
+                                        <button class="btn-add-usuario btn btn-info btn-fill btn-wd" ng-click="usuarios.adicionarUsuario()">Adicionar Novo Usuário</button>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="header">
-                                        <h4 class="title">Ativos</h4>
+                                        <h4 class="title">Usuários</h4>
                                     </div>
                                     <div class="content">
                                         <table class="table">
@@ -138,13 +138,13 @@
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="obj in usuarios.usuarios">
-                                                    <td>{{ obj.idPerfil }}</td>
-                                                    <td>{{ obj.username }}</td>
+                                                    <td>{{obj.idPerfil}}</td>
+                                                    <td>{{obj.username}}</td>
                                                     <td>
                                                         <button class="btn btn-info btn-fill btn-sm" ng-click="usuarios.view(obj)" data-toggle="modal" data-target="#myModal">Editar</button>
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-fill btn-sm" ng-click="">Remover</button>
+                                                        <button class="btn btn-danger btn-fill btn-sm" ng-click="usuarios.viewRemove(obj)" data-toggle="modal" data-target="#modalRemove">Remover</button>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -155,21 +155,20 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <!-- Modal Remover -->
+                <div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="modalRemove">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">{{usuarios.objetoModal.descricao}}</h4>
+                                <h4 class="modal-title" id="myModalLabel">Remover Usuário</h4>
                             </div>
                             <div class="modal-body">
-                                <span>ID Perfil: {{usuarios.objetoModal.idPerfil}}</span><br>
-                                <span>Fabricante: {{usuarios.objetoModal.username }} </span> <br>
+                                <p>Você deseja remover o usuário {{usuarios.objetoModal.username}}?</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary">Salvar</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="usuarios.excluirUsuario(usuarios.objetoModal)">Sim</button>
                             </div>
                         </div>
                     </div>

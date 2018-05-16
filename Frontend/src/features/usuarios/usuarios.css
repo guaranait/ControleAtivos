@@ -5,3 +5,11 @@
 	width: 100%;
     max-width: none;
 }
+.btn-add-usuario {
+	margin: 25px 0;
+}
+
+.modal-backdrop {
+	z-index: 0 !important;
+	opacity: 0 !important;
+}
