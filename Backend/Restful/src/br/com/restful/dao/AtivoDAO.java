@@ -230,7 +230,7 @@ public class AtivoDAO {
 			pstm.setLong(10, ativo.getId());
 
 			// Executa a sql para inser��o dos dados
-			if(pstm.execute()){
+			if(pstm.executeUpdate() > 0){
 				alterou = true;
 			}
 		} catch (Exception e) {
@@ -265,7 +265,7 @@ public class AtivoDAO {
 			pstm.setLong(1, id);
 
 			// Executa a sql para inser��o dos dados
-			if (pstm.execute()) {
+			if(pstm.executeUpdate() > 0){
 				sucesso = true;
 			}
 		} catch (Exception e) {
@@ -301,7 +301,7 @@ public class AtivoDAO {
 			pstm.setLong(3, manutencao.getAtivo().getId());
 
 			// Executa a sql para inser��o dos dados
-			if(pstm.execute()){
+			if(pstm.executeUpdate() > 0){
 				alterou = true;
 			}
 		} catch (Exception e) {

@@ -20,19 +20,6 @@ public class DashboardDAO {
 	}
 
 	public ArrayList<HashMap> contadorAtivos() {
-		//ArrayList<Ativo> ativos = null;
-
-		// teste
-		/*ativos = new ArrayList<Ativo>();
-		Ativo ativo = new Ativo();
-		ativo.setId(01);
-		ativo.setDescricao("MacBook Air 13'");
-		ativo.setDtCompra(new Date());
-		ativo.setFabrincante("Apple");
-		ativo.setVlCompra(3900.00);
-		ativo.setVlDepreciado(800.00);
-		ativos.add(ativo);*/
-
 		String sql = "SELECT s.descricao descricao, count(a.id) total FROM lu2cas01.ATIVO a, lu2cas01.STATUS s WHERE a.id_status = s.id GROUP BY s.descricao";
 		 
 		ArrayList<HashMap> contadorAtivos = new ArrayList<>();

@@ -138,7 +138,7 @@ public class FuncionarioDAO {
 			pstm.setDate(6, new java.sql.Date(System.currentTimeMillis()));
 			
 			// Executa a sql para inser��o dos dados
-			if(pstm.execute()){
+			if(pstm.executeUpdate() > 0){
 				cadastrou = true;
 			}
 		} catch (Exception e) {
@@ -178,7 +178,7 @@ public class FuncionarioDAO {
 			pstm.setLong(7, funcionario.getId());
 
 			// Executa a sql para inser��o dos dados
-			if(pstm.execute()){
+			if(pstm.executeUpdate() > 0){
 				alterou = true;
 			}
 		} catch (Exception e) {
@@ -213,7 +213,7 @@ public class FuncionarioDAO {
 			pstm.setLong(1, id);
 
 			// Executa a sql para inser��o dos dados
-			if (pstm.execute()) {
+			if(pstm.executeUpdate() > 0){
 				sucesso = true;
 			}
 		} catch (Exception e) {

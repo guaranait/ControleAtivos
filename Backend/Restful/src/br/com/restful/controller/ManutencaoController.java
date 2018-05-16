@@ -10,7 +10,7 @@ public class ManutencaoController {
 	}
 	
 	public boolean validador(Manutencao manutencao) {
-		boolean valido = false;
+		boolean valido = true;
 		return valido;
 	}
 }

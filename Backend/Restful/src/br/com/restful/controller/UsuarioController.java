@@ -2,14 +2,21 @@ package br.com.restful.controller;
 
 import java.util.ArrayList;
 
+import br.com.restful.dao.FuncionarioDAO;
 import br.com.restful.dao.UsuarioDAO;
 import br.com.restful.dao.UsuarioDAO;
+import br.com.restful.model.Funcionario;
 import br.com.restful.model.Usuario;
 import br.com.restful.model.Usuario;
 
 public class UsuarioController {
-	public Usuario getUsuario(long id){
-		return UsuarioDAO.getInstance().getUsuario(id);
+	
+	public ArrayList<Usuario> listarUsuarios(){
+		return UsuarioDAO.getInstance().listarUsuarios();
+	}
+	
+	public Usuario listarUsuario(long id){
+		return UsuarioDAO.getInstance().listarUsuario(id);
 	}
 	
 	public Boolean cadastrarUsuario(Usuario usuario){

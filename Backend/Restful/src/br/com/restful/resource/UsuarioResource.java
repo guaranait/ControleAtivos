@@ -1,6 +1,7 @@
 package br.com.restful.resource;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -14,8 +15,11 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import br.com.restful.controller.AtivoController;
 import br.com.restful.controller.UsuarioController;
 import br.com.restful.controller.UsuarioController;
+import br.com.restful.controller.UsuarioController;
+import br.com.restful.model.Usuario;
 import br.com.restful.model.Usuario;
 import br.com.restful.model.Usuario;
 
@@ -25,9 +29,25 @@ public class UsuarioResource {
 	@GET
 	@Path("/listarUsuarios")
 	@Produces("application/json")
-	public Usuario listarUsuarios(long id){
-		//long id = Long.parseLong(idString);
-		return new UsuarioController().getUsuario(id);
+	public Response listarUsuarios(){
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		UsuarioController usuarioController = new UsuarioController();
+		usuarios = usuarioController.listarUsuarios();
+		String jsonUsuarios = new Gson().toJson(usuarios);
+		
+		return Response.status(200).entity(jsonUsuarios).build();
+	}
+	
+	@GET
+	@Path("/listarUsuario")
+	@Produces("application/json")
+	public Response listarUsuario(@QueryParam("id") long id){
+		Usuario usuario = null;
+		UsuarioController usuarioController = new UsuarioController();
+		//usuario = usuarioController.listarUsuario(id);
+		
+		String jsonUsuario = new Gson().toJson(usuario);
+		return Response.status(200).entity(jsonUsuario).build();
 	}
 	
 	@POST
@@ -68,10 +88,14 @@ public class UsuarioResource {
 	@Path("/excluirUsuario")
 	@Consumes("application/json")
 	public Response excluirUsuario(@QueryParam("id") long id){
-		if(new UsuarioController().excluirUsuario(id)){
-			return Response.ok().build();
-		}else{
-			return Response.serverError().build();
+		if(id > 0) {
+			if(new UsuarioController().excluirUsuario(id)){
+				return Response.ok().build();
+			}else{
+				return Response.serverError().build();
+			}
+		}else {
+			return Response.status(400).build();
 		}
 	}
 	
