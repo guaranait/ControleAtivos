@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="AtivosModulo">
+<html lang="en">
 <head>
 	<meta charset="utf-8" />
 	<!--link rel="apple-touch-icon" sizes="76x76" href="assets/img/logo.png">
@@ -17,7 +17,7 @@
     <link href="assets/css/themify-icons.css" rel="stylesheet">
 
 </head>
-<body ng-controller="AtivosController">
+<body>
 
 <div class="wrapper">
 	<div class="sidebar" data-background-color="white" data-active-color="danger">
@@ -126,10 +126,14 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12">
-                       
-							
-                    </div>
+					<div class="col-lg-12 col-md-12">
+
+						<chartist class="ct-chart" chartist-data="dashboard.data" chartist-chart-type="Pie" chartist-chart-options="dashboard.options"></chartist>
+						<p><i class="fa fa-circle estoque"></i> Estoque: {{ dashboard.estoque }}</p>
+						<p><i class="fa fa-circle emprestado"></i> Emprestado: {{ dashboard.emprestado }}</p>
+						<p><i class="fa fa-circle manutencao"></i> Manutenção: {{ dashboard.manutencao }}</p>
+						<p><i class="fa fa-circle desativado"></i> Desativado: {{ dashboard.desativado }}</p>
+					</div>
 
                 </div>
             </div>
