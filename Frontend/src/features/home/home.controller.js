@@ -16,13 +16,15 @@ class HomeController {
 		if($stateParams.descricao) {
 			this.objetoEdit.descricao = $stateParams.descricao;
 			this.objetoEdit.fabricante = $stateParams.fabricante;
-			this.objetoEdit.dtCompra = moment($stateParams.dtCompra).format('DD/MM/YYYY');
+			//Alterar no Backend
+			this.objetoEdit.dtCompra = moment().format('DD/MM/YYYY');
 			this.objetoEdit.vlCompra = $stateParams.vlCompra;
 			this.objetoEdit.vlDepreciado = $stateParams.vlDepreciado;
 			this.objetoEdit.criadoPor = $stateParams.criadoPor;
 			this.objetoEdit.idStatus = $stateParams.idStatus;
 			this.objetoEdit.obs = $stateParams.obs;
 			this.objetoEdit.id = $stateParams.id;
+			this.objetoEdit.obs = 'heuheuheueh OBS';
 		}
 		this.getAtivos();
 	}
@@ -36,7 +38,6 @@ class HomeController {
 	}
 
 	viewManutencao(obj) {
-		console.log(obj);
 		this.objetoModal = obj;
 	}
 
@@ -95,6 +96,23 @@ class HomeController {
 
     adicionarAtivo() {
 		this.$state.go('home');
+	}
+
+	cadastrarManutencao() {
+		let obj = {};
+		obj.ativo = {id: this.objetoModal.id}
+		obj.descricao = this.objetoModal.descricao;
+		obj.dtConserto = moment().format("DD-MM-YYYY HH:mm:ss");
+		obj.criadoPor = '1';
+		obj.modificadoPor = '2';
+		obj.dtCriacao = moment().format("DD-MM-YYYY HH:mm:ss");
+		obj.dtModificacao = moment().format("DD-MM-YYYY HH:mm:ss");
+
+		this.HomeService.cadastrarManutencao(obj).then( response => {
+			if(response.status == 200) {
+				this.getAtivos();
+			}
+		}).catch( error => console.log(error) );
 	}
 }
 

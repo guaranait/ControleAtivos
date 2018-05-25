@@ -45,6 +45,16 @@ class HomeService {
 		})
 		.then( response => response ).catch( error => error );
 	}
+
+	cadastrarManutencao(objetoManutencao) {
+		console.log(objetoManutencao);
+		return this.$http({
+			url: 'http://localhost:8080/Restful/manutencao/cadastrarManutencao?',
+			method: "POST",
+			data: objetoManutencao
+		})
+		.then( response => response ).catch( error => error );
+	}
 }
 
 HomeService.$inject = ['$http'];
