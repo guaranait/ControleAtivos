@@ -61,7 +61,7 @@ class HomeController {
     }
 
     alterarAtivo() {
-    	this.objetoEdit.dtCompra = moment(this.objetoEdit.dtCompra).format("YYYY-MM-DD HH:mm:ss");
+    	this.objetoEdit.dtCompra = moment().format("YYYY-MM-DD HH:mm:ss");
     	this.HomeService.alterarAtivo(this.objetoEdit).then( response => {
 			if(response.status == 200) {
 				this.$state.go('ativos');

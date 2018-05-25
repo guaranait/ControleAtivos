@@ -158,8 +158,8 @@
                                       <th scope="row"> {{ obj.idStatus }} </th>
 								      <td>{{ obj.descricao }}</td>
 								      <td>{{ obj.fabricante }}</td>
-								      <td>{{ obj.vlCompra }}</td>
-								      <td>{{ obj.vlDepreciado }}</td>
+								      <td>{{ obj.vlCompra  | currency : "R$"}}</td>
+								      <td>{{ obj.vlDepreciado  | currency : "R$"}}</td>
 								      <td>
 								      	<button class="btn btn-info btn-fill btn-sm" ng-click="home.view(obj)">Editar</button>
 								      </td>
