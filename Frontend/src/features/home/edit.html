@@ -183,7 +183,7 @@
                                     </div>
                                     <div class="text-center">
                                         <button ng-click="home.cancelarEdicao()" class="btn btn-danger btn-fill btn-wd">Cancelar</button>
-                                        <button ng-click="home.alterarAtivo()" class="btn btn-info btn-fill btn-wd">Salvar</button>
+                                        <button ng-click="home.alterarAtivo()" class="btn btn-info btn-fill btn-wd" ng-disabled="!(home.objetoEdit.descricao && home.objetoEdit.fabricante && home.objetoEdit.dtCompra && home.objetoEdit.vlCompra && home.objetoEdit.vlDepreciado && home.objetoEdit.obs)">Salvar</button>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>

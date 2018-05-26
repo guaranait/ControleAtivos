@@ -13,3 +13,6 @@
 	z-index: 0 !important;
 	opacity: 0 !important;
 }
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+	background: #fffcf5;
+}
