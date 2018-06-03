@@ -3,13 +3,13 @@ routes.$inject = ['$stateProvider'];
 export default function routes($stateProvider) {
   $stateProvider
     .state('home', {
-      url: '/',
+      url: '/adicionar-ativo',
       template: require('./home.html'),
       controller: 'HomeController',
       controllerAs: 'home'
     })
     .state('ativos', {
-      url: '/ativos',
+      url: '/',
       template: require('./ativos.html'),
       controller: 'HomeController',
       controllerAs: 'home'
