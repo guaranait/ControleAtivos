@@ -55,4 +55,42 @@ public class ManutencaoDAO {
 		}
 		return cadastrou;
 	}
+	
+	public Boolean concluirManutencao(Manutencao manutencao) {
+		String sql = "UPDATE lu2cas01.MANUTENCAO set descricao ?, dt_conserto = ?, modificado_por = ?, dt_modificacao = ? WHERE id = ?)";
+		
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		boolean cadastrou = false;
+		try {
+			conn = ConnectionFactory.criarConexao();
+			pstm = conn.prepareStatement(sql);
+
+			pstm.setString(1, manutencao.getDescricao());
+			pstm.setDate(2, new java.sql.Date(System.currentTimeMillis())); //dtConserto
+			pstm.setLong(3, manutencao.getModificadoPor());
+			pstm.setDate(4, new java.sql.Date(System.currentTimeMillis())); //dtCriacao
+			pstm.setLong(5, manutencao.getId());
+			// Executa a sql para inser��o dos dados
+			if(pstm.executeUpdate() > 0){
+				cadastrou = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// Fecha as conex�es
+			try {
+				if (pstm != null) {
+					pstm.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return cadastrou;
+	}
+	
 }

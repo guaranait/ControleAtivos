@@ -46,6 +46,7 @@ public class UsuarioDAO {
 
 				usuario.setId(rs.getLong("id"));
 				usuario.setIdPerfil(rs.getLong("id_perfil"));
+				usuario.setUsername(rs.getString("username"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setCriadoPor(rs.getLong("criado_por"));
 				usuario.setDtCriacao(rs.getDate("dt_criacao"));
@@ -76,8 +77,8 @@ public class UsuarioDAO {
 	
 	
 	public Boolean cadastrarUsuario(Usuario usuario) {
-		String sql = "INSERT INTO lu2cas01.USUARIOS_SISTEMA(id_perfil,senha,criado_por,modificado_por,dt_criacao,dt_modificacao)"
-				+ " VALUES(?,?,?,?,?,?)";
+		String sql = "INSERT INTO lu2cas01.USUARIOS_SISTEMA(id_perfil,username,senha,criado_por,modificado_por,dt_criacao,dt_modificacao)"
+				+ " VALUES(?,?,?,?,?,?,?)";
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -87,11 +88,12 @@ public class UsuarioDAO {
 			pstm = conn.prepareStatement(sql);
 
 			pstm.setLong(1, usuario.getIdPerfil());
-			pstm.setString(2, usuario.getSenha());
-			pstm.setLong(3, usuario.getCriadoPor());
-			pstm.setLong(4, usuario.getModificadoPor());
-			pstm.setDate(5, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setDate(6, new java.sql.Date(usuario.getDtModificacao().getTime()));
+			pstm.setString(2, usuario.getUsername());
+			pstm.setString(3, usuario.getSenha());
+			pstm.setLong(4, usuario.getCriadoPor());
+			pstm.setLong(5, usuario.getModificadoPor());
+			pstm.setDate(6, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setDate(7, new java.sql.Date(usuario.getDtModificacao().getTime()));
 			
 			// Executa a sql para inser��o dos dados
 			if(pstm.executeUpdate() > 0){
@@ -116,7 +118,7 @@ public class UsuarioDAO {
 	}
 
 	public Boolean alterarUsuario(Usuario usuario) {
-		String sql = "UPDATE lu2cas01.USUARIOS_SISTEMA SET id_perfil = ?,senha = ?,criado_por = ?,modificado_por = ?,dt_criacao = ?,dt_modificacao = ? WHERE id = ?";
+		String sql = "UPDATE lu2cas01.USUARIOS_SISTEMA SET id_perfil = ?,username = ?,senha = ?,criado_por = ?,modificado_por = ?,dt_criacao = ?,dt_modificacao = ? WHERE id = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -126,12 +128,13 @@ public class UsuarioDAO {
 			pstm = conn.prepareStatement(sql);
 			
 			pstm.setLong(1, usuario.getIdPerfil());
-			pstm.setString(2, usuario.getSenha());
-			pstm.setLong(3, usuario.getCriadoPor());
-			pstm.setLong(4, usuario.getModificadoPor());
+			pstm.setString(2, usuario.getUsername());
+			pstm.setString(3, usuario.getSenha());
+			pstm.setLong(4, usuario.getCriadoPor());
+			pstm.setLong(5, usuario.getModificadoPor());
 			pstm.setDate(6, new java.sql.Date(usuario.getDtCriacao().getTime()));
-			pstm.setDate(5, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setLong(7, usuario.getId());
+			pstm.setDate(7, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setLong(8, usuario.getId());
 			
 			// Executa a sql para inser��o dos dados
 			if(pstm.executeUpdate() > 0){
