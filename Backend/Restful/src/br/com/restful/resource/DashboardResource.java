@@ -2,6 +2,7 @@ package br.com.restful.resource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,6 +26,17 @@ public class DashboardResource {
 		String jsonContadorAtivos = new Gson().toJson(contadorAtivos);
 		
 		return Response.status(200).entity(jsonContadorAtivos).build();
+	}
+	
+	@GET
+	@Path("/valorPatrimonio")
+	@Produces("application/json")
+	public Response patrimonio(){
+		ArrayList<Double> valorPatrimonio = new ArrayList<>();
+		DashboardController dashboardController = new DashboardController();
+		valorPatrimonio = dashboardController.valorPatrimonio();
+		String jsonValorPatrimonio = new Gson().toJson(valorPatrimonio);
+		return Response.status(200).entity(jsonValorPatrimonio).build();
 	}
 
 }

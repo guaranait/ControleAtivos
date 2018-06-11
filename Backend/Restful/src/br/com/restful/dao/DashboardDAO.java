@@ -47,12 +47,6 @@ public class DashboardDAO {
 				 if(rs != null){
 					 rs.close();
 				 }
-				 if(pstm != null){
-					 pstm.close();
-				 }
-				 if(conn != null){
-					 conn.close();
-				 }
 			 }catch(Exception e){
 				 e.printStackTrace();
 			 }
@@ -60,4 +54,38 @@ public class DashboardDAO {
 		return contadorAtivos;
 	}
 
+	public ArrayList<Double> valorPatrimonio() {
+		String sql = "SELECT SUM(vl_compra) - SUM(vl_depreciado) valorPatrimonio FROM lu2cas01.ATIVO WHERE ID_STATUS != 3";
+		
+		double valor = 0.0;
+		ArrayList<Double> valorPatrimonio = new ArrayList<>();
+		 
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		 
+		try {
+			conn = ConnectionFactory.criarConexao();
+			pstm = conn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+		 
+			if(rs.next()) {
+				valor = rs.getDouble("valorPatrimonio");
+				valorPatrimonio.add(valor);
+			}
+			
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }finally{
+			 try{
+				 if(rs != null){
+					 rs.close();
+				 }
+			 }catch(Exception e){
+				 e.printStackTrace();
+			 }
+		 }
+		return valorPatrimonio;
+	}
+	
 }

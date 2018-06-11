@@ -16,9 +16,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.com.restful.controller.AtivoController;
+import br.com.restful.controller.FuncionarioController;
 import br.com.restful.controller.UsuarioController;
 import br.com.restful.controller.UsuarioController;
 import br.com.restful.controller.UsuarioController;
+import br.com.restful.model.Funcionario;
 import br.com.restful.model.Usuario;
 import br.com.restful.model.Usuario;
 import br.com.restful.model.Usuario;
@@ -87,9 +89,12 @@ public class UsuarioResource {
 	@POST
 	@Path("/excluirUsuario")
 	@Consumes("application/json")
-	public Response excluirUsuario(@QueryParam("id") long id){
-		if(id > 0) {
-			if(new UsuarioController().excluirUsuario(id)){
+	public Response excluirUsuario(String usuarioJson) throws ParseException{
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		Usuario usuario = gson.fromJson(usuarioJson, Usuario.class);
+		
+		if(usuario.getId() > 0) {
+			if(new UsuarioController().excluirUsuario(usuario.getId())){
 				return Response.ok().build();
 			}else{
 				return Response.serverError().build();

@@ -111,9 +111,12 @@ public class AtivoResource {
 	@POST
 	@Path("/excluirAtivo")
 	@Consumes("application/json")
-	public Response excluirAtivo(@QueryParam("id") long id){
-		if(id > 0) {
-			if(new AtivoController().excluirAtivo(id)){
+	public Response excluirAtivo(String ativoJson) throws ParseException{
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		Ativo ativo = gson.fromJson(ativoJson, Ativo.class);
+		
+		if(ativo.getId() > 0) {
+			if(new AtivoController().excluirAtivo(ativo.getId())){
 				return Response.ok().build();
 			}else{
 				return Response.serverError().build();
