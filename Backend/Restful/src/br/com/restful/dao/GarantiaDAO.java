@@ -4,34 +4,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
 
 import br.com.restful.factory.ConnectionFactory;
-import br.com.restful.model.Funcionario;
-import br.com.restful.model.Usuario;
-import sun.security.util.Password;
-import br.com.restful.model.Usuario;
+import br.com.restful.model.Garantia;
 
-public class UsuarioDAO {
-	
-	private static UsuarioDAO instance;
+public class GarantiaDAO {
 
-	public static UsuarioDAO getInstance(){
-		if(instance == null)
-			instance = new UsuarioDAO();
+	private static GarantiaDAO instance;
+
+	public static GarantiaDAO getInstance() {
+		if (instance == null)
+			instance = new GarantiaDAO();
 		return instance;
 	}
-	
-	public Usuario listarUsuario(long id) {
-		Usuario usuario = new Usuario();
-		return usuario;
-	}
-	
-	
-	public ArrayList<Usuario> listarUsuarios() {
-		String sql = "SELECT * FROM lu2cas01.USUARIOS_SISTEMA";
+
+	public ArrayList<Garantia> listarGarantias() {
+		String sql = "SELECT * FROM lu2cas01.GARANTIA";
 		 
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		ArrayList<Garantia> garantias = new ArrayList<Garantia>();
 		 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -43,18 +33,18 @@ public class UsuarioDAO {
 			rs = pstm.executeQuery();
 		 
 			while(rs.next()){
-				Usuario usuario = new Usuario();
+				Garantia garantia = new Garantia();
 
-				usuario.setId(rs.getLong("id"));
-				usuario.setIdPerfil(rs.getLong("id_perfil"));
-				usuario.setUsername(rs.getString("username"));
-				usuario.setSenha(rs.getString("senha"));
-				usuario.setCriadoPor(rs.getLong("criado_por"));
-				usuario.setDtCriacao(rs.getDate("dt_criacao"));
-				usuario.setModificadoPor(rs.getLong("modificado_por"));
-				usuario.setDtModificacao(rs.getDate("dt_modificacao"));
+				garantia.setId(rs.getLong("id"));
+				garantia.getAtivo().setId(rs.getLong("id_ativo"));
+				garantia.setFornecedor(rs.getString("fornecedor"));
+				garantia.setContato(rs.getString("contato"));
+				garantia.setCriadoPor(rs.getLong("criado_por"));
+				garantia.setDtCriacao(rs.getDate("dt_criacao"));
+				garantia.setModificadoPor(rs.getLong("modificado_por"));
+				garantia.setDtModificacao(rs.getDate("dt_modificacao"));
 				
-				usuarios.add(usuario);
+				garantias.add(garantia);
 			}
 		 } catch (Exception e) {
 			 e.printStackTrace();
@@ -73,12 +63,12 @@ public class UsuarioDAO {
 				 e.printStackTrace();
 			 }
 		 }
-		return usuarios;
+		return garantias;
 	}
 	
 	
-	public Boolean cadastrarUsuario(Usuario usuario) {
-		String sql = "INSERT INTO lu2cas01.USUARIOS_SISTEMA(id_perfil,username,senha,criado_por,modificado_por,dt_criacao,dt_modificacao)"
+	public Boolean cadastrarGarantia(Garantia garantia) {
+		String sql = "INSERT INTO lu2cas01.GARANTIA(id_ativo,fornecedor,contato,criado_por,dt_criacao)"
 				+ " VALUES(?,?,?,?,?,?,?)";
 		
 		Connection conn = null;
@@ -88,13 +78,11 @@ public class UsuarioDAO {
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
 
-			pstm.setLong(1, usuario.getIdPerfil());
-			pstm.setString(2, usuario.getUsername());
-			pstm.setString(3, usuario.getSenha());
-			pstm.setLong(4, usuario.getCriadoPor());
-			pstm.setLong(5, usuario.getModificadoPor());
-			pstm.setDate(6, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setDate(7, new java.sql.Date(usuario.getDtModificacao().getTime()));
+			pstm.setLong(1, garantia.getAtivo().getId());
+			pstm.setString(2, garantia.getFornecedor());
+			pstm.setString(3, garantia.getContato());
+			pstm.setLong(4, garantia.getCriadoPor());
+			pstm.setDate(5, new java.sql.Date(System.currentTimeMillis()));
 			
 			// Executa a sql para inser��o dos dados
 			if(pstm.executeUpdate() > 0){
@@ -118,8 +106,8 @@ public class UsuarioDAO {
 		return cadastrou;
 	}
 
-	public Boolean alterarUsuario(Usuario usuario) {
-		String sql = "UPDATE lu2cas01.USUARIOS_SISTEMA SET id_perfil = ?,username = ?,senha = ?,criado_por = ?,modificado_por = ?,dt_criacao = ?,dt_modificacao = ? WHERE id = ?";
+	public Boolean alterarGarantia(Garantia garantia) {
+		String sql = "UPDATE lu2cas01.GARANTIA SET id_ativo = ?,fornecedor = ?,contato = ?,criado_por = ?,modificado_por = ?,dt_modificacao = ? WHERE id = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -128,14 +116,12 @@ public class UsuarioDAO {
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
 			
-			pstm.setLong(1, usuario.getIdPerfil());
-			pstm.setString(2, usuario.getUsername());
-			pstm.setString(3, usuario.getSenha());
-			pstm.setLong(4, usuario.getCriadoPor());
-			pstm.setLong(5, usuario.getModificadoPor());
-			pstm.setDate(6, new java.sql.Date(usuario.getDtCriacao().getTime()));
-			pstm.setDate(7, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setLong(8, usuario.getId());
+			pstm.setLong(1, garantia.getAtivo().getId());
+			pstm.setString(2, garantia.getFornecedor());
+			pstm.setString(3, garantia.getContato());
+			pstm.setLong(4, garantia.getModificadoPor());
+			pstm.setDate(5, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setLong(6, garantia.getId());
 			
 			// Executa a sql para inser��o dos dados
 			if(pstm.executeUpdate() > 0){
@@ -159,9 +145,9 @@ public class UsuarioDAO {
 		return alterou;
 	}
 
-	public boolean excluirUsuario(long id) {
+	public boolean excluirGarantia(long id) {
 		boolean sucesso = false;
-		String sql = "DELETE FROM lu2cas01.USUARIOS_SISTEMA WHERE id = ?";
+		String sql = "DELETE FROM lu2cas01.GARANTIA WHERE id = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
