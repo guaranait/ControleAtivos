@@ -39,9 +39,12 @@ class HomeService {
 	}
 
 	excluirAtivo(objetoAtivo) {
+		let obj = {};
+		obj.id = objetoAtivo.id;
 		return this.$http({
-			url: 'http://localhost:8080/Restful/ativo/excluirAtivo?id='+objetoAtivo.id,
-			method: "POST"
+			url: 'http://localhost:8080/Restful/ativo/excluirAtivo',
+			method: "POST",
+			data: obj
 		})
 		.then( response => response ).catch( error => error );
 	}
@@ -49,7 +52,17 @@ class HomeService {
 	cadastrarManutencao(objetoManutencao) {
 		console.log(objetoManutencao);
 		return this.$http({
-			url: 'http://localhost:8080/Restful/manutencao/cadastrarManutencao?',
+			url: 'http://localhost:8080/Restful/manutencao/cadastrarManutencao',
+			method: "POST",
+			data: objetoManutencao
+		})
+		.then( response => response ).catch( error => error );
+	}
+
+	removeManutencao() {
+		console.log(objetoManutencao);
+		return this.$http({
+			url: 'http://localhost:8080/Restful/manutencao/cadastrarManutencao',
 			method: "POST",
 			data: objetoManutencao
 		})

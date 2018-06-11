@@ -76,7 +76,7 @@ class HomeController {
     excluirAtivo(obj) {
     	this.HomeService.excluirAtivo(obj).then( response => {
 			if(response.status == 200) {
-				console.log(response);
+				this.getAtivos();
 			}
 		} ).catch( error => console.log(error) );
     }
