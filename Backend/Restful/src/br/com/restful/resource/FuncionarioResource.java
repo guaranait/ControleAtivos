@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 
 import br.com.restful.controller.AtivoController;
 import br.com.restful.controller.FuncionarioController;
+import br.com.restful.model.Ativo;
 import br.com.restful.model.Funcionario;
 
 @Path("/funcionario")
@@ -84,9 +85,12 @@ public class FuncionarioResource {
 	@POST
 	@Path("/excluirFuncionario")
 	@Consumes("application/json")
-	public Response excluirFuncionario(@QueryParam("id") long id){
-		if(id > 0) {
-			if(new FuncionarioController().excluirFuncionario(id)){
+	public Response excluirFuncionario(String funcionarioJson) throws ParseException{
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		Funcionario funcionario = gson.fromJson(funcionarioJson, Funcionario.class);
+		
+		if(funcionario.getId() > 0) {
+			if(new FuncionarioController().excluirFuncionario(funcionario.getId())){
 				return Response.ok().build();
 			}else{
 				return Response.serverError().build();

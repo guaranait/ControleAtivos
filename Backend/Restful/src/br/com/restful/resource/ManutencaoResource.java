@@ -45,4 +45,31 @@ public class ManutencaoResource {
 		}
 		
 	}
+	
+	@POST
+	@Path("/concluirManutencao")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response concluirManutencao(String manutencaoJson) throws ParseException{
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		Manutencao manutencao = gson.fromJson(manutencaoJson, Manutencao.class);
+		
+		ManutencaoController manutencaoController = new ManutencaoController();
+		if(manutencaoController.validador(manutencao)) {
+			if(manutencaoController.concluirManutencao(manutencao)){
+				AtivoDAO ativoDAO = new AtivoDAO();
+				if(ativoDAO.setManutencao(manutencao)) {
+					return Response.ok().build();
+				}else {
+					return Response.serverError().build();
+				}
+			}else{
+				return Response.serverError().build();
+			}
+		}else {
+			return Response.status(400).build();
+		}
+		
+	}
 }

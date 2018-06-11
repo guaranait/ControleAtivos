@@ -51,6 +51,7 @@ public class AtivoDAO {
 				ativo.setIdStatus(rs.getLong("id_status"));
 				ativo.setModificadoPor(rs.getLong("modificado_por"));
 				ativo.setDtModificacao(rs.getDate("dt_modificacao"));
+				ativo.setObservacao(rs.getString("observacao"));
 				 
 				ativos.add(ativo);
 			}
@@ -139,6 +140,7 @@ public class AtivoDAO {
 				ativo.setIdStatus(rs.getLong("id_status"));
 				ativo.setModificadoPor(rs.getLong("modificado_por"));
 				ativo.setDtModificacao(rs.getDate("dt_modificacao"));
+				ativo.setObservacao(rs.getString("observacao"));
 				 
 				ativos.add(ati);
 			}
@@ -287,7 +289,7 @@ public class AtivoDAO {
 	}
 	
 	public Boolean setManutencao(Manutencao manutencao) {
-		String sql = "UPDATE lu2cas01.ATIVO SET id_status = 2, modificado_por = ?, dt_modificacao = ? WHERE id = ?";
+		String sql = "UPDATE lu2cas01.ATIVO SET id_status = ?, modificado_por = ?, dt_modificacao = ? WHERE id = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -296,18 +298,19 @@ public class AtivoDAO {
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
 
-			pstm.setLong(1, manutencao.getCriadoPor());
-			pstm.setDate(2, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setLong(3, manutencao.getAtivo().getId());
+			pstm.setLong(1, manutencao.getAtivo().getIdStatus());
+			pstm.setLong(2, manutencao.getCriadoPor());
+			pstm.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setLong(4, manutencao.getAtivo().getId());
 
-			// Executa a sql para inserï¿½ï¿½o dos dados
+			// Executa o sql para inserção dos dados
 			if(pstm.executeUpdate() > 0){
 				alterou = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			// Fecha as conexï¿½es
+			// Fecha a conexão
 			try {
 				if (pstm != null) {
 					pstm.close();

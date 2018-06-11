@@ -8,6 +8,7 @@ public class Usuario {
 
 	private long id;
 	private long idPerfil;
+	private String username;
 	private String senha;
 	private long criadoPor;
 	private long modificadoPor;
@@ -18,11 +19,12 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(long id, long idPerfil, String senha, long criadoPor, long modificadoPor, Date dtCriacao,
+	public Usuario(long id, long idPerfil, String username, String senha, long criadoPor, long modificadoPor, Date dtCriacao,
 			Date dtModificacao) {
 		super();
 		this.id = id;
 		this.idPerfil = idPerfil;
+		this.username = username;
 		this.senha = senha;
 		this.criadoPor = criadoPor;
 		this.modificadoPor = modificadoPor;
@@ -40,6 +42,14 @@ public class Usuario {
 
 	public long getIdPerfil() {
 		return idPerfil;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public void setIdPerfil(long idPerfil) {

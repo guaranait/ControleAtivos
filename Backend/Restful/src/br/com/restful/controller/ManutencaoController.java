@@ -9,6 +9,10 @@ public class ManutencaoController {
 		return ManutencaoDAO.getInstance().cadastrarManutencao(manutencao);
 	}
 	
+	public Boolean concluirManutencao(Manutencao manutencao){
+		return ManutencaoDAO.getInstance().concluirManutencao(manutencao);
+	}
+	
 	public boolean validador(Manutencao manutencao) {
 		boolean valido = true;
 		return valido;

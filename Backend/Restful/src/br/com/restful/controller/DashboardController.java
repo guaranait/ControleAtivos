@@ -11,4 +11,8 @@ public class DashboardController {
 		return DashboardDAO.getInstance().contadorAtivos();
 	}
 	
+	public ArrayList<Double> valorPatrimonio(){
+		return DashboardDAO.getInstance().valorPatrimonio();
+	}
+	
 }
