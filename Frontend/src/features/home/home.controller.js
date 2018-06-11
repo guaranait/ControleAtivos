@@ -5,7 +5,7 @@ class HomeController {
 		this.dataCompra;
 		this.valorCompra;
 		this.valorDepreciado;
-		this.observacao;
+		this.observacao = "Teste Observação heuehueh heuehuhe";
 		this.HomeService = HomeService;
 		//this.ativos = [{id: 2, idStatus: 1, descricao: 'Macbook Pro 13', fabricante: 'Apple', vlCompra: 3000, vlDepreciado: 300}];
 		this.ativos = [];
@@ -70,6 +70,10 @@ class HomeController {
     }
 
     cancelarEdicao() {
+    	this.$state.go('ativos');
+    }
+
+    cancelarCriacao() {
     	this.$state.go('ativos');
     }
 

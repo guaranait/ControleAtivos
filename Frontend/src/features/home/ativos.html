@@ -215,8 +215,8 @@
                 <span> Descrição do Ativo: {{home.objetoModal.descricao}} </span> <br>            
                 <span> ID Status: {{ home.objetoModal.idStatus }} </span> <br>
                 <span> Fabricante: {{ home.objetoModal.fabricante }} </span> <br>
-                <span> Valor Compra: {{ home.objetoModal.vlCompra }} </span> <br>
-                <span> Valor Depreciado: {{ home.objetoModal.vlDepreciado }} </span> <br>
+                <span> Valor Compra: {{ home.objetoModal.vlCompra | currency : "R$" }} </span> <br>
+                <span> Valor Depreciado: {{ home.objetoModal.vlDepreciado | currency : "R$" }} </span> <br>
                 <div class="form-group">
                     <label>Descrição</label>
                     <textarea ng-model="home.observacao" ng-readonly="home.objetoModal.idStatus == 2" rows="5" class="form-control border-input" placeholder="Escreva a Descrição da Manutenção..."></textarea>
