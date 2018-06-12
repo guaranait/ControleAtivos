@@ -52,6 +52,7 @@ public class AtivoDAO {
 				ativo.setModificadoPor(rs.getLong("modificado_por"));
 				ativo.setDtModificacao(rs.getDate("dt_modificacao"));
 				ativo.setObservacao(rs.getString("observacao"));
+				ativo.getCategoria().setId(rs.getLong("id_categoria"));
 				 
 				ativos.add(ativo);
 			}
@@ -120,7 +121,11 @@ public class AtivoDAO {
 			}else if(!ativo.getObservacao().isEmpty()) {
 				sql += " and observacao = ? ";
 				i++;
-				pstm.setString(i, ativo.getObservacao()                                                                                                              );
+				pstm.setString(i, ativo.getObservacao());
+			}else if(ativo.getCategoria().getId() > 0) {
+				sql += " and id_categoria = ? ";
+				i++;
+				pstm.setLong(i, ativo.getCategoria().getId());
 			}
 			
 			rs = pstm.executeQuery();
@@ -141,6 +146,7 @@ public class AtivoDAO {
 				ativo.setModificadoPor(rs.getLong("modificado_por"));
 				ativo.setDtModificacao(rs.getDate("dt_modificacao"));
 				ativo.setObservacao(rs.getString("observacao"));
+				ativo.getCategoria().setId(rs.getLong("id_categoria"));
 				 
 				ativos.add(ati);
 			}
@@ -166,8 +172,8 @@ public class AtivoDAO {
 	}
 
 	public Boolean cadastrarAtivo(Ativo ativo) {
-		String sql = "INSERT INTO lu2cas01.ATIVO(descricao,fabricante,dt_compra,vl_compra,vl_depreciado,id_status,observacao,criado_por,dt_criacao)"//,dt_modificacao)"
-				+ " VALUES(?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO lu2cas01.ATIVO(descricao,fabricante,dt_compra,vl_compra,vl_depreciado,id_status,observacao,id_categoria,criado_por,dt_criacao)"//,dt_modificacao)"
+				+ " VALUES(?,?,?,?,?,?,?,?,?,?)";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -183,9 +189,10 @@ public class AtivoDAO {
 			pstm.setDouble(5, ativo.getVlDepreciado());
 			pstm.setLong(6, ativo.getIdStatus());
 			pstm.setString(7, ativo.getObservacao());
-			pstm.setLong(8, ativo.getCriadoPor());
+			pstm.setLong(8, ativo.getCategoria().getId());
+			pstm.setLong(9, ativo.getCriadoPor());
 			//pstm.setLong(9, ativo.getModificadoPor());
-			pstm.setDate(9, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setDate(10, new java.sql.Date(System.currentTimeMillis()));
 			//pstm.setDate(11, new java.sql.Date(ativo.getDtModificacao().getTime()));
 			
 			// Executa a sql para inser��o dos dados
@@ -211,7 +218,7 @@ public class AtivoDAO {
 	}
 
 	public Boolean alterarAtivo(Ativo ativo) {
-		String sql = "UPDATE lu2cas01.ATIVO SET descricao = ?,fabricante = ?,dt_compra = ?,vl_compra = ?,vl_depreciado = ?,id_status = ?, observacao = ?, modificado_por = ?, dt_modificacao = ? WHERE id = ?";
+		String sql = "UPDATE lu2cas01.ATIVO SET descricao = ?,fabricante = ?,dt_compra = ?,vl_compra = ?,vl_depreciado = ?,id_status = ?, observacao = ?, id_categoria = ?, modificado_por = ?, dt_modificacao = ? WHERE id = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -227,9 +234,10 @@ public class AtivoDAO {
 			pstm.setDouble(5, ativo.getVlDepreciado());
 			pstm.setLong(6, ativo.getIdStatus());
 			pstm.setString(7, ativo.getObservacao());
-			pstm.setLong(8, ativo.getModificadoPor());
-			pstm.setDate(9, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setLong(10, ativo.getId());
+			pstm.setLong(8, ativo.getCategoria().getId());
+			pstm.setLong(9, ativo.getModificadoPor());
+			pstm.setDate(10, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setLong(11, ativo.getId());
 
 			// Executa a sql para inser��o dos dados
 			if(pstm.executeUpdate() > 0){

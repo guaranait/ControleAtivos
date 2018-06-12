@@ -1,5 +1,6 @@
 package br.com.restful.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import br.com.restful.dao.AtivoDAO;
@@ -36,7 +37,7 @@ public class AtivoController {
 	}
 	
 	
-	public boolean validador(Ativo ativo) {
+	public boolean validador(Ativo ativo) throws ParseException {
 		boolean valido = false;
 		if(ativo.getDescricao().isEmpty() ||
 				(ativo.getDtCompra() == null ||ativo.getDtCompra().equals("")) ||

@@ -1,5 +1,7 @@
 package br.com.restful.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import sun.security.util.Password;
@@ -85,7 +87,15 @@ public class Usuario {
 	}
 
 	public void setDtCriacao(Date dtCriacao) {
-		this.dtCriacao = dtCriacao;
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd");
+		Date data = new Date();
+		try {
+			data = formato.parse(dtCriacao.toString());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.dtCriacao = data;
 	}
 
 	public Date getDtModificacao() {
@@ -93,7 +103,15 @@ public class Usuario {
 	}
 
 	public void setDtModificacao(Date dtModificacao) {
-		this.dtModificacao = dtModificacao;
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd");
+		Date data = new Date();
+		try {
+			data = formato.parse(dtModificacao.toString());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.dtModificacao = data;
 	}
 
 	@Override
