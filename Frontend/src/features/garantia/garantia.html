@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" ng-app="AtivosModulo">
+<html lang="en>
 <head>
 	<meta charset="utf-8" />
 	<!--link rel="apple-touch-icon" sizes="76x76" href="assets/img/logo.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/logo.png"-->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>ATIVOS</title>
+	<title>Garantia</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -17,7 +17,7 @@
     <link href="assets/css/themify-icons.css" rel="stylesheet">
 
 </head>
-<body ng-controller="AtivosController">
+<body ng-controller="GarantiaController">
 
 <div class="wrapper">
 	<div class="sidebar" data-background-color="white" data-active-color="danger">
@@ -47,14 +47,14 @@
                         <p>Usuários</p>
                     </a>
                 </li>
-                <li class="active" href="/">
+                <li href="/">
                     <a href="table.html">
                         <i class="ti-view-list-alt"></i>
                         <p>Ativos</p>
                     </a>
                 </li>
-                <li>
-                    <a href="typography.html">
+                <li class="active">
+                    <a href="/garantias">
                         <i class="ti-medall"></i>
                         <p>Garantias</p>
                     </a>
@@ -76,52 +76,6 @@
     </div>
 
     <div class="main-panel">
-		<nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar bar1"></span>
-                        <span class="icon-bar bar2"></span>
-                        <span class="icon-bar bar3"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Ativos</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-panel"></i>
-								<p>Stats</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <p class="notification">5</p>
-									<p>Notifications</p>
-									<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-						<li>
-                            <a href="#">
-								<i class="ti-settings"></i>
-								<p>Settings</p>
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-
 
         <div class="content">
             <div class="container-fluid">
@@ -129,46 +83,36 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 text-right">
-                                <button class="btn-add-ativo btn btn-info btn-fill btn-wd" ng-click="home.adicionarAtivo()"> Adicionar Novo Ativo </button>
+                                <button class="btn-add-ativo btn btn-info btn-fill btn-wd" ng-click="garantia.goAdicionarGarantia()"> Adicionar Nova Garantia </button>
                             </div>
                         </div>
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Ativos</h4>
+                                <h4 class="title">Garantia</h4>
                             </div>
                             <div class="content">
                                
                                <table class="table">
 								  <thead>
 								    <tr>
-								      <th scope="col">ID</th>
-                                      <th scope="col">Manutenção</th>
-								      <th scope="col">Descrição</th>
-								      <th scope="col">Fabricante</th>
-								      <th scope="col">Valor Compra</th>
-								      <th scope="col">Valor Depreciado</th>
-								      <th scope="col"> Editar </th>
-								      <th scope="col"> Remover </th>
-                                      <th scope="col"> Manutenção </th>
+								      <th scope="col">Ativo</th>
+                                      <th scope="col">Fornecedor</th>
+								      <th scope="col">Contato</th>
+								      <th scope="col">Editar</th>
+								      <th scope="col">Remover</th>
 								    </tr>
 								  </thead>
 								  <tbody>
-								    <tr ng-repeat="obj in home.ativos">
-								      <th scope="row"> {{ obj.id }} </th>
-                                      <th scope="row"> {{ home.dicionarioManutencao(obj.idStatus) }} </th>
-								      <td>{{ obj.descricao }}</td>
-								      <td>{{ obj.fabricante }}</td>
-								      <td>{{ obj.vlCompra  | currency : "R$"}}</td>
-								      <td>{{ obj.vlDepreciado  | currency : "R$"}}</td>
+								    <tr ng-repeat="obj in garantia.garantias">
+								      <th scope="row"> {{ obj.ativo }} </th>
+                                      <th scope="row"> {{ obj.fornecedor }} </th>
+								      <td>{{ obj.contato }}</td>
 								      <td>
-								      	<button class="btn btn-info btn-fill btn-sm" ng-click="home.view(obj)">Editar</button>
+								      	<button class="btn btn-info btn-fill btn-sm">Editar</button>
 								      </td>
 								      <td>
-								      	<button class="btn btn-danger btn-fill btn-sm" ng-click="home.viewRemove(obj)" data-toggle="modal" data-target="#modalRemove">Remover</button>
+								      	<button class="btn btn-danger btn-fill btn-sm" data-toggle="modal" data-target="#modalRemove">Remover</button>
 								      </td>
-                                      <td>
-                                        <button class="btn btn-info btn-fill btn-sm" ng-click="home.viewManutencao(obj)" data-toggle="modal" data-target="#modalMAnutencao">Manutenção</button>
-                                      </td>
 								    </tr>
 								  </tbody>
 								</table>

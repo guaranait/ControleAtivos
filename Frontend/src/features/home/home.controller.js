@@ -51,6 +51,7 @@ class HomeController {
 		objetoAtivo.vlDepreciado = this.valorDepreciado;
 		objetoAtivo.criadoPor = 1122;
 		objetoAtivo.idStatus = 1;
+		objetoAtivo.observacao = this.observacao;
 
 		this.HomeService.criarAtivo(objetoAtivo).then( response => {
 			if(response.status == 200) {
@@ -86,7 +87,10 @@ class HomeController {
     }
 
     getAtivos() {
-    	this.HomeService.getAtivos().then( response => this.ativos = response.data).catch( error => console.log(error) );
+    	this.HomeService.getAtivos().then( response => { 
+    		this.ativos = response.data 
+    		console.log(response.data);
+    	}).catch( error => console.log(error) );
     }
 
     limparFormulario() {
@@ -104,7 +108,7 @@ class HomeController {
 
 	cadastrarManutencao() {
 		let obj = {};
-		obj.ativo = {id: this.objetoModal.id}
+		obj.ativo = this.objetoModal;
 		obj.descricao = this.objetoModal.descricao;
 		obj.dtConserto = moment().format("DD-MM-YYYY HH:mm:ss");
 		obj.criadoPor = '1';
@@ -113,6 +117,24 @@ class HomeController {
 		obj.dtModificacao = moment().format("DD-MM-YYYY HH:mm:ss");
 
 		this.HomeService.cadastrarManutencao(obj).then( response => {
+			if(response.status == 200) {
+				this.getAtivos();
+			}
+		}).catch( error => console.log(error) );
+	}
+
+	concluirManutencao() {
+		let obj = {};
+		obj.ativo = {id: this.objetoModal.id}
+		obj.descricao = this.objetoModal.descricao;
+		obj.dtConserto = moment().format("DD-MM-YYYY HH:mm:ss");
+		obj.criadoPor = '1';
+		obj.modificadoPor = '2';
+		obj.dtCriacao = moment().format("DD-MM-YYYY HH:mm:ss");
+		obj.dtModificacao = moment().format("DD-MM-YYYY HH:mm:ss");
+		obj.id = this.objetoModal.idStatus;
+
+		this.HomeService.concluirManutencao(obj).then( response => {
 			if(response.status == 200) {
 				this.getAtivos();
 			}

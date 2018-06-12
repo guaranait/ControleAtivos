@@ -11,8 +11,9 @@ import home from './features/home';
 import dashboard from './features/dashboard';
 import usuarios from './features/usuarios';
 import funcionarios from './features/funcionarios';
+import garantia from './features/garantia';
 import angularmask from 'angular-input-masks/br';
 import angularChartist from 'angular-chartist.js';
 
-angular.module('app', [uirouter, angularChartist, angularmask, home, dashboard, usuarios, funcionarios])
+angular.module('app', [uirouter, angularChartist, angularmask, home, dashboard, usuarios, funcionarios, garantia])
     .config(routing);
