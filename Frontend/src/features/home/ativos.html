@@ -142,7 +142,7 @@
 								  <thead>
 								    <tr>
 								      <th scope="col">ID</th>
-                                      <th scope="col">ID Status</th>
+                                      <th scope="col">Manutenção</th>
 								      <th scope="col">Descrição</th>
 								      <th scope="col">Fabricante</th>
 								      <th scope="col">Valor Compra</th>
@@ -155,7 +155,7 @@
 								  <tbody>
 								    <tr ng-repeat="obj in home.ativos">
 								      <th scope="row"> {{ obj.id }} </th>
-                                      <th scope="row"> {{ obj.idStatus }} </th>
+                                      <th scope="row"> {{ home.dicionarioManutencao(obj.idStatus) }} </th>
 								      <td>{{ obj.descricao }}</td>
 								      <td>{{ obj.fabricante }}</td>
 								      <td>{{ obj.vlCompra  | currency : "R$"}}</td>

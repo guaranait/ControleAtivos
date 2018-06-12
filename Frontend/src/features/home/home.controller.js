@@ -118,6 +118,16 @@ class HomeController {
 			}
 		}).catch( error => console.log(error) );
 	}
+
+	dicionarioManutencao(idStatus) {
+		if (idStatus == 1) {
+			return "Não"
+		} else if (idStatus == 2) {
+			return "Sim"
+		} else {
+			return idStatus
+		}
+	}
 }
 
 HomeController.$inject = ['HomeService', '$state', '$stateParams'];
