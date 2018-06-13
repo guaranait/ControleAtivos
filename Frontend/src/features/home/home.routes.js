@@ -27,7 +27,8 @@ export default function routes($stateProvider) {
                 criadoPor: null,
                 modificadoPor: null,
                 dtCriacao: null,
-                dtModificacao: null
+                dtModificacao: null,
+                observacao: null
               },
       template: require('./edit.html'),
       controller: 'HomeController',
