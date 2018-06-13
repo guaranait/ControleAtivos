@@ -69,7 +69,7 @@ public class GarantiaDAO {
 	
 	public Boolean cadastrarGarantia(Garantia garantia) {
 		String sql = "INSERT INTO lu2cas01.GARANTIA(id_ativo,fornecedor,contato,criado_por,dt_criacao)"
-				+ " VALUES(?,?,?,?,?,?,?)";
+				+ " VALUES(?,?,?,?,?)";
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;

@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Manutencao {
 	private long id;
-	private Ativo ativo;
+	private Ativo ativo = new Ativo();
 	private String descricao;
 	private Date dtConserto;
 	private long criadoPor;

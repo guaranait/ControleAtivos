@@ -5,8 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Emprestimo {
-	private Funcionario funcionario;
-	private Ativo ativo;
+	private Funcionario funcionario = new Funcionario();
+	private Ativo ativo = new Ativo();
 	private Date dtEmprestimo;
 	private Date dtDevolucao;
 	private long criadoPor;

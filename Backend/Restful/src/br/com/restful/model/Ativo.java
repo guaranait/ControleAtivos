@@ -12,7 +12,7 @@ public class Ativo {
 	private double vlDepreciado;
 	private long idStatus;
 	private String observacao;
-	private Categoria categoria;
+	private Categoria categoria = new Categoria();
 	private long criadoPor;
 	private long modificadoPor;
 	private Date dtCriacao;

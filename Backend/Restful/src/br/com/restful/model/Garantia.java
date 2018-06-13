@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Garantia {
 	private long id;
-	private Ativo ativo;
+	private Ativo ativo = new Ativo();
 	private String fornecedor;
 	private String contato;
 	private long criadoPor;
