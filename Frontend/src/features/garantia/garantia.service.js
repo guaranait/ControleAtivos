@@ -12,6 +12,7 @@ class GarantiaService {
 	}
 
 	adicionarGarantia(objetoGarantia) {
+		console.log(objetoGarantia);
 		return this.$http({
 			url:'http://localhost:8080/Restful/garantia/cadastrarGarantia',
 			method: "POST",
