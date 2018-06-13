@@ -38,7 +38,7 @@ public class CategoriaDAO {
 
 				categoria.setId(rs.getLong("id"));
 				categoria.setDescricao(rs.getString("descricao"));
-				categoria.setDtModificacao(rs.getDate("dtDepreciacao"));
+				categoria.setDtModificacao(rs.getDate("dt_depreciacao"));
 				categoria.setCriadoPor(rs.getLong("criado_por"));
 				categoria.setDtCriacao(rs.getDate("dt_criacao"));
 				categoria.setModificadoPor(rs.getLong("modificado_por"));
