@@ -1,8 +1,10 @@
 package br.com.restful.resource;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,12 +14,27 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import br.com.restful.controller.FuncionarioController;
 import br.com.restful.controller.ManutencaoController;
 import br.com.restful.dao.AtivoDAO;
+import br.com.restful.model.Funcionario;
 import br.com.restful.model.Manutencao;
 
 @Path("/manutencao")
 public class ManutencaoResource {
+	
+	@GET
+	@Path("/listarManutencoes")
+	@Produces("application/json")
+	public Response listarManutencoes(){
+		ArrayList<Manutencao> manutencoes = new ArrayList<Manutencao>();
+		ManutencaoController manutencaoController = new ManutencaoController();
+		manutencoes = manutencaoController.listarManutencoes();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonManutencoes = gson.toJson(manutencoes);
+		
+		return Response.status(200).entity(jsonManutencoes).build();
+	}
 	
 	@POST
 	@Path("/cadastrarManutencao")

@@ -30,7 +30,8 @@ public class FuncionarioResource {
 		ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
 		FuncionarioController funcionarioController = new FuncionarioController();
 		funcionarios = funcionarioController.listarFuncionarios();
-		String jsonFuncionarios = new Gson().toJson(funcionarios);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonFuncionarios = gson.toJson(funcionarios);
 		
 		return Response.status(200).entity(jsonFuncionarios).build();
 	}
@@ -42,8 +43,8 @@ public class FuncionarioResource {
 		Funcionario funcionario = null;
 		FuncionarioController funcionarioController = new FuncionarioController();
 		funcionario = funcionarioController.listarFuncionario(id);
-		
-		String jsonFuncionario = new Gson().toJson(funcionario);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonFuncionario = gson.toJson(funcionario);
 		return Response.status(200).entity(jsonFuncionario).build();
 	}
 	
