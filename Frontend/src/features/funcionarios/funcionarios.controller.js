@@ -1,7 +1,8 @@
 class FuncionariosController {
     constructor(FuncionariosService, $state, $stateParams) {
         this.nome;
-        this.cpfCnpj;
+        this.cpf;
+        this.cnpj;
         this.cargo;
         this.FuncionariosService = FuncionariosService;
 
@@ -11,7 +12,8 @@ class FuncionariosController {
         this.objetoEdit = {};
         if ($stateParams.nome) {
             this.objetoEdit.nome = $stateParams.nome;
-            this.objetoEdit.cpfCnpj = $stateParams.cpfCnpj;
+            this.objetoEdit.cpf = $stateParams.cpf;
+            this.objetoEdit.cnpj = $stateParams.cnpj;
             this.objetoEdit.cargo = $stateParams.cargo;
             this.objetoEdit.criadoPor = $stateParams.criadoPor;
             this.objetoEdit.id = $stateParams.id;
@@ -31,7 +33,8 @@ class FuncionariosController {
         let objetoFuncionario = {};
 
         objetoFuncionario.nome = this.nome;
-        objetoFuncionario.cpfCnpj = this.cpfCnpj;
+        objetoFuncionario.cpf = this.cpf;
+        objetoFuncionario.cnpj = this.cnpj;
         objetoFuncionario.cargo = this.cargo;
         objetoFuncionario.criadoPor = 1010;
 
@@ -69,7 +72,8 @@ class FuncionariosController {
 
     limparFormulario() {
         this.nome = '';
-        this.cpfCnpj = '';
+        this.cpf = '';
+        this.cnpj = '';
         this.cargo = '';
     }
 

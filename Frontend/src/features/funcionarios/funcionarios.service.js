@@ -7,7 +7,8 @@ class FuncionariosService {
         console.log(objetoFuncionario);
         var url = "http://localhost:8080/Restful/funcionario/cadastrarFuncionario?nome="
             +objetoFuncionario.nome
-            +"&cpf="+objetoFuncionario.cpfCnpj //@todo verificar se é CPF ou CNPJ
+            +"&cpf="+objetoFuncionario.cpf
+            +"&cnpj="+objetoFuncionario.cnpj
             +"&cargo="+objetoFuncionario.cargo;
 
         return this.$http({
@@ -36,11 +37,14 @@ class FuncionariosService {
     }
 
     excluirFuncionario(objetoFuncionario) {
+        let obj = {};
+        obj.id = objetoFuncionario.id;
         return this.$http({
-            url: 'http://localhost:8080/Restful/funcionario/excluirFuncionario?id=' + objetoFuncionario.id,
-            method: "POST"
+            url: 'http://localhost:8080/Restful/funcionario/excluirFuncionario',
+            method: "POST",
+            data: obj
         })
-        .then(response => response).catch(error => error);
+        .then( response => response ).catch( error => error );
     }
 }
 

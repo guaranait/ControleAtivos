@@ -132,7 +132,8 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Nome</th>
-                                                    <th scope="col">CPF/CNPJ</th>
+                                                    <th scope="col">CPF</th>
+                                                    <th scope="col">CNPJ</th>
                                                     <th scope="col">Cargo</th>
                                                     <th scope="col">Editar</th>
                                                     <th scope="col">Remover</th>
@@ -141,7 +142,8 @@
                                             <tbody>
                                                 <tr ng-repeat="obj in funcionarios.funcionarios">
                                                     <td>{{obj.nome}}</td>
-                                                    <td>{{obj.cpfCnpj}}</td>
+                                                    <td>{{obj.cpf}}</td>
+                                                    <td>{{obj.cnpj}}</td>
                                                     <td>{{obj.cargo}}</td>
                                                     <td>
                                                         <button class="btn btn-info btn-fill btn-sm" ng-click="funcionarios.view(obj)" data-toggle="modal" data-target="#myModal">Editar</button>
