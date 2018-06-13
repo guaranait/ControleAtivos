@@ -109,10 +109,12 @@ class HomeController {
 	cadastrarManutencao() {
 		let obj = {};
 		obj.ativo = this.objetoModal;
+		obj.ativo.dtCompra = moment().format("DD-MM-YYYY HH:mm:ss");
+		obj.ativo.dtCriacao = moment().format("DD-MM-YYYY HH:mm:ss");
 		obj.descricao = this.objetoModal.descricao;
 		obj.dtConserto = moment().format("DD-MM-YYYY HH:mm:ss");
-		obj.criadoPor = '1';
-		obj.modificadoPor = '2';
+		obj.criadoPor = 1111;
+		obj.modificadoPor = 1111;
 		obj.dtCriacao = moment().format("DD-MM-YYYY HH:mm:ss");
 		obj.dtModificacao = moment().format("DD-MM-YYYY HH:mm:ss");
 
