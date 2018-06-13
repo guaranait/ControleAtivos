@@ -6,6 +6,7 @@ public class Categoria {
 	private long id;
 	private String descricao;
 	private Date dtDepreciacao;
+	private double prcntDepre;
 	private long criadoPor;
 	private long modificadoPor;
 	private Date dtCriacao;
@@ -15,12 +16,13 @@ public class Categoria {
 		super();
 	}
 
-	public Categoria(long id, String descricao, Date dtDepreciacao, long criadoPor, long modificadoPor, Date dtCriacao,
+	public Categoria(long id, String descricao, Date dtDepreciacao, double prcntDepre, long criadoPor, long modificadoPor, Date dtCriacao,
 			Date dtModificacao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.dtDepreciacao = dtDepreciacao;
+		this.prcntDepre = prcntDepre;
 		this.criadoPor = criadoPor;
 		this.modificadoPor = modificadoPor;
 		this.dtCriacao = dtCriacao;
@@ -49,6 +51,14 @@ public class Categoria {
 
 	public void setDtDepreciacao(Date dtDepreciacao) {
 		this.dtDepreciacao = dtDepreciacao;
+	}
+	
+	public double getPrcntDepre() {
+		return prcntDepre;
+	}
+
+	public void setPrcntDepre(double prcntDepre) {
+		this.prcntDepre = prcntDepre;
 	}
 
 	public long getCriadoPor() {

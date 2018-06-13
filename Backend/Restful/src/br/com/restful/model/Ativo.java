@@ -151,5 +151,11 @@ public class Ativo {
 				+ ", observacao=" + observacao + ", criadoPor=" + criadoPor + ", modificadoPor=" + modificadoPor
 				+ ", dtCriacao=" + dtCriacao + ", dtModificacao=" + dtModificacao + "]";
 	}
+	
+	private double calculaDepreciacao(Ativo ativo) {
+		double valor = 0;
+		valor = ativo.getVlCompra() - (ativo.getVlCompra() * ativo.getCategoria().getPrcntDepre());
+		return 5;
+	}
 
 }
