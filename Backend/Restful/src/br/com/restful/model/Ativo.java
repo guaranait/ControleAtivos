@@ -12,13 +12,14 @@ public class Ativo {
 	private double vlDepreciado;
 	private long idStatus;
 	private String observacao;
+	private Categoria categoria;
 	private long criadoPor;
 	private long modificadoPor;
 	private Date dtCriacao;
 	private Date dtModificacao;
 
 	public Ativo(long id, String descricao, String fabricante, Date dtCompra, double vlCompra, double vlDepreciado,
-			long idStatus, String observacao, long criadoPor, long modificadoPor, Date dtCriacao, Date dtModificacao) {
+			long idStatus, String observacao, Categoria categoria, long criadoPor, long modificadoPor, Date dtCriacao, Date dtModificacao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -28,6 +29,7 @@ public class Ativo {
 		this.vlDepreciado = vlDepreciado;
 		this.idStatus = idStatus;
 		this.observacao = observacao;
+		this.categoria = categoria;
 		this.criadoPor = criadoPor;
 		this.modificadoPor = modificadoPor;
 		this.dtCriacao = dtCriacao;
@@ -101,6 +103,14 @@ public class Ativo {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 
 	public long getCriadoPor() {
 		return criadoPor;
@@ -138,8 +148,8 @@ public class Ativo {
 	public String toString() {
 		return "Ativo [id=" + id + ", descricao=" + descricao + ", fabricante=" + fabricante + ", dtCompra=" + dtCompra
 				+ ", vlCompra=" + vlCompra + ", vlDepreciado=" + vlDepreciado + ", idStatus=" + idStatus
-				+ ", criadoPor=" + criadoPor + ", modificadoPor=" + modificadoPor + ", dtCriacao=" + dtCriacao
-				+ ", dtModificacao=" + dtModificacao + "]";
+				+ ", observacao=" + observacao + ", criadoPor=" + criadoPor + ", modificadoPor=" + modificadoPor
+				+ ", dtCriacao=" + dtCriacao + ", dtModificacao=" + dtModificacao + "]";
 	}
 
 }

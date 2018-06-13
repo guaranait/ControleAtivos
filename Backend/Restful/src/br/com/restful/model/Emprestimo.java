@@ -1,12 +1,14 @@
 package br.com.restful.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Emprestimo {
 	private Funcionario funcionario;
 	private Ativo ativo;
-	private Date dt_emprestimo;
-	private Date dt_devolucao;
+	private Date dtEmprestimo;
+	private Date dtDevolucao;
 	private long criadoPor;
 	private long modificadoPor;
 	private Date dtCriacao;
@@ -16,13 +18,13 @@ public class Emprestimo {
 		super();
 	}
 
-	public Emprestimo(Funcionario funcionario, Ativo ativo, Date dt_emprestimo, Date dt_devolucao, long criadoPor,
+	public Emprestimo(Funcionario funcionario, Ativo ativo, Date dtEmprestimo, Date dtDevolucao, long criadoPor,
 			long modificadoPor, Date dtCriacao, Date dtModificacao) {
 		super();
 		this.funcionario = funcionario;
 		this.ativo = ativo;
-		this.dt_emprestimo = dt_emprestimo;
-		this.dt_devolucao = dt_devolucao;
+		this.dtEmprestimo = dtEmprestimo;
+		this.dtDevolucao = dtDevolucao;
 		this.criadoPor = criadoPor;
 		this.modificadoPor = modificadoPor;
 		this.dtCriacao = dtCriacao;
@@ -45,20 +47,20 @@ public class Emprestimo {
 		this.ativo = ativo;
 	}
 
-	public Date getDt_emprestimo() {
-		return dt_emprestimo;
+	public Date getDtEmprestimo() {
+		return dtEmprestimo;
 	}
 
-	public void setDt_emprestimo(Date dt_emprestimo) {
-		this.dt_emprestimo = dt_emprestimo;
+	public void setDtEmprestimo(Date dtEmprestimo) {
+		this.dtEmprestimo = dtEmprestimo;
 	}
 
-	public Date getDt_devolucao() {
-		return dt_devolucao;
+	public Date getDtDevolucao() {
+		return dtDevolucao;
 	}
 
-	public void setDt_devolucao(Date dt_devolucao) {
-		this.dt_devolucao = dt_devolucao;
+	public void setDtDevolucao(Date dtdevolucao) {
+		this.dtEmprestimo = dtDevolucao;
 	}
 
 	public long getCriadoPor() {

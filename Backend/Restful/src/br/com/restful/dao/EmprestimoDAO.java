@@ -5,28 +5,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream;
-
-import java.sql.Date;
-
 import br.com.restful.factory.ConnectionFactory;
 import br.com.restful.model.Ativo;
-import br.com.restful.model.Manutencao;
+import br.com.restful.model.Emprestimo;
 
-public class AtivoDAO {
+public class EmprestimoDAO {
 
-	private static AtivoDAO instance;
+	private static EmprestimoDAO instance;
 
-	public static AtivoDAO getInstance() {
+	public static EmprestimoDAO getInstance() {
 		if (instance == null)
-			instance = new AtivoDAO();
+			instance = new EmprestimoDAO();
 		return instance;
 	}
 
-	public ArrayList<Ativo> listarAtivos() {
-		String sql = "SELECT * FROM lu2cas01.ATIVO";
+	public ArrayList<Emprestimo> listarEmprestimos() {
+		String sql = "SELECT * FROM lu2cas01.GARANTIA";
 		 
-		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
+		ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -38,23 +34,18 @@ public class AtivoDAO {
 			rs = pstm.executeQuery();
 		 
 			while(rs.next()){
-				Ativo ativo = new Ativo();
-				 
-				ativo.setId(rs.getLong("id"));
-				ativo.setDescricao(rs.getString("descricao")); 
-				ativo.setDtCompra(rs.getDate("dt_compra"));
-				ativo.setFabricante(rs.getString("fabricante"));
-				ativo.setVlCompra(rs.getDouble("vl_compra"));
-				ativo.setVlDepreciado(rs.getDouble("vl_depreciado"));
-				ativo.setCriadoPor(rs.getLong("criado_por"));
-				ativo.setDtCriacao(rs.getDate("dt_criacao"));
-				ativo.setIdStatus(rs.getLong("id_status"));
-				ativo.setModificadoPor(rs.getLong("modificado_por"));
-				ativo.setDtModificacao(rs.getDate("dt_modificacao"));
-				ativo.setObservacao(rs.getString("observacao"));
-				ativo.getCategoria().setId(rs.getLong("id_categoria"));
-				 
-				ativos.add(ativo);
+				Emprestimo emprestimo = new Emprestimo();
+
+				emprestimo.getFuncionario().setId(rs.getLong("id_funcionario"));
+				emprestimo.getAtivo().setId(rs.getLong("id_ativo"));
+				emprestimo.setDtEmprestimo(rs.getDate("dt_emprestimo"));
+				emprestimo.setDtDevolucao(rs.getDate("dt_devolucao"));
+				emprestimo.setCriadoPor(rs.getLong("criado_por"));
+				emprestimo.setDtCriacao(rs.getDate("dt_criacao"));
+				emprestimo.setModificadoPor(rs.getLong("modificado_por"));
+				emprestimo.setDtModificacao(rs.getDate("dt_modificacao"));
+				
+				emprestimos.add(emprestimo);
 			}
 		 } catch (Exception e) {
 			 e.printStackTrace();
@@ -73,11 +64,11 @@ public class AtivoDAO {
 				 e.printStackTrace();
 			 }
 		 }
-		return ativos;
+		return emprestimos;
 	}
-
-	public ArrayList<Ativo> listarAtivo(Ativo ativo) {
-		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
+	
+	public ArrayList<Emprestimo> listarEmprestimo(Emprestimo emprestimo) {
+		ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		int i = 0;
 		
 		Connection conn = null;
@@ -86,11 +77,11 @@ public class AtivoDAO {
 		
 		
 		try {
-			String sql = "SELECT * FROM lu2cas01.ATIVO WHERE 1=1 ";
+			String sql = "SELECT * FROM lu2cas01.EMPRESTIMO WHERE 1=1 ";
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
 			
-			if(ativo.getId() > 0) {
+			/*if(ativo.getId() > 0) {
 				sql += " and id = ? ";
 				i++;
 				pstm.setLong(i, ativo.getId());
@@ -126,13 +117,13 @@ public class AtivoDAO {
 				sql += " and id_categoria = ? ";
 				i++;
 				pstm.setLong(i, ativo.getCategoria().getId());
-			}
+			}*/
 			
 			rs = pstm.executeQuery();
 		 
 			
 			while(rs.next()){
-				Ativo ati = new Ativo();
+				/*Ativo ati = new Ativo();
 				 
 				ativo.setId(rs.getLong("id"));
 				ativo.setDescricao(rs.getString("descricao")); 
@@ -148,7 +139,7 @@ public class AtivoDAO {
 				ativo.setObservacao(rs.getString("observacao"));
 				ativo.getCategoria().setId(rs.getLong("id_categoria"));
 				 
-				ativos.add(ati);
+				ativos.add(ati);*/
 			}
 		 } catch (Exception e) {
 			 e.printStackTrace();
@@ -168,13 +159,13 @@ public class AtivoDAO {
 			 }
 		 }
 
-		return ativos;
+		return emprestimos;
 	}
-
-	public Boolean cadastrarAtivo(Ativo ativo) {
-		String sql = "INSERT INTO lu2cas01.ATIVO(descricao,fabricante,dt_compra,vl_compra,vl_depreciado,id_status,observacao,id_categoria,criado_por,dt_criacao)"//,dt_modificacao)"
-				+ " VALUES(?,?,?,?,?,?,?,?,?,?)";
-
+	
+	public Boolean cadastrarEmprestimo(Emprestimo emprestimo) {
+		String sql = "INSERT INTO lu2cas01.GARANTIA(id_ativo,id_funcionario,dt_emprestimo,dt_devolucao,criado_por,dt_criacao)"
+				+ " VALUES(?,?,?,?,?,?)";
+		
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		boolean cadastrou = false;
@@ -182,18 +173,12 @@ public class AtivoDAO {
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
 
-			pstm.setString(1, ativo.getDescricao());
-			pstm.setString(2, ativo.getFabricante());
-			pstm.setDate(3, new java.sql.Date(ativo.getDtCompra().getTime()));
-			pstm.setDouble(4, ativo.getVlCompra());
-			pstm.setDouble(5, ativo.getVlDepreciado());
-			pstm.setLong(6, ativo.getIdStatus());
-			pstm.setString(7, ativo.getObservacao());
-			pstm.setLong(8, ativo.getCategoria().getId());
-			pstm.setLong(9, ativo.getCriadoPor());
-			//pstm.setLong(9, ativo.getModificadoPor());
-			pstm.setDate(10, new java.sql.Date(System.currentTimeMillis()));
-			//pstm.setDate(11, new java.sql.Date(ativo.getDtModificacao().getTime()));
+			pstm.setLong(1, emprestimo.getAtivo().getId());
+			pstm.setLong(2, emprestimo.getFuncionario().getId());
+			pstm.setDate(3, new java.sql.Date(emprestimo.getDtEmprestimo().getTime()));
+			pstm.setDate(4, new java.sql.Date(emprestimo.getDtDevolucao().getTime()));
+			pstm.setLong(5, emprestimo.getCriadoPor());
+			pstm.setDate(6, new java.sql.Date(System.currentTimeMillis()));
 			
 			// Executa a sql para inserï¿½ï¿½o dos dados
 			if(pstm.executeUpdate() > 0){
@@ -217,8 +202,8 @@ public class AtivoDAO {
 		return cadastrou;
 	}
 
-	public Boolean alterarAtivo(Ativo ativo) {
-		String sql = "UPDATE lu2cas01.ATIVO SET descricao = ?,fabricante = ?,dt_compra = ?,vl_compra = ?,vl_depreciado = ?,id_status = ?, observacao = ?, id_categoria = ?, modificado_por = ?, dt_modificacao = ? WHERE id = ?";
+	public Boolean alterarEmprestimo(Emprestimo emprestimo) {
+		String sql = "UPDATE lu2cas01.GARANTIA SET dt_emprestimo = ?,dt_devolucao = ?,modificado_por = ?,dt_modificacao = ? WHERE id_ativo = ? AND id_funcionario = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -226,19 +211,14 @@ public class AtivoDAO {
 		try {
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
-
-			pstm.setString(1, ativo.getDescricao());
-			pstm.setString(2, ativo.getFabricante());
-			pstm.setDate(3, new Date(ativo.getDtCompra().getTime()));
-			pstm.setDouble(4, ativo.getVlCompra());
-			pstm.setDouble(5, ativo.getVlDepreciado());
-			pstm.setLong(6, ativo.getIdStatus());
-			pstm.setString(7, ativo.getObservacao());
-			pstm.setLong(8, ativo.getCategoria().getId());
-			pstm.setLong(9, ativo.getModificadoPor());
-			pstm.setDate(10, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setLong(11, ativo.getId());
-
+			
+			pstm.setDate(1, new java.sql.Date(emprestimo.getDtEmprestimo().getTime()));
+			pstm.setDate(2, new java.sql.Date(emprestimo.getDtDevolucao().getTime()));
+			pstm.setLong(3, emprestimo.getModificadoPor());
+			pstm.setDate(4, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setLong(5, emprestimo.getAtivo().getId());
+			pstm.setLong(6, emprestimo.getFuncionario().getId());
+			
 			// Executa a sql para inserï¿½ï¿½o dos dados
 			if(pstm.executeUpdate() > 0){
 				alterou = true;
@@ -261,9 +241,9 @@ public class AtivoDAO {
 		return alterou;
 	}
 
-	public boolean excluirAtivo(long id) {
+	public boolean excluirEmprestimo(Emprestimo emprestimo) {
 		boolean sucesso = false;
-		String sql = "DELETE FROM lu2cas01.ATIVO WHERE id = ?";
+		String sql = "DELETE FROM lu2cas01.GARANTIA WHERE id_ativo = ? AND id_funcionario = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -272,7 +252,8 @@ public class AtivoDAO {
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
 
-			pstm.setLong(1, id);
+			pstm.setLong(1, emprestimo.getAtivo().getId());
+			pstm.setLong(2, emprestimo.getFuncionario().getId());
 
 			// Executa a sql para inserï¿½ï¿½o dos dados
 			if(pstm.executeUpdate() > 0){
@@ -296,40 +277,4 @@ public class AtivoDAO {
 		return sucesso;
 	}
 	
-	public Boolean setManutencao(Manutencao manutencao) {
-		String sql = "UPDATE lu2cas01.ATIVO SET id_status = ?, modificado_por = ?, dt_modificacao = ? WHERE id = ?";
-
-		Connection conn = null;
-		PreparedStatement pstm = null;
-		boolean alterou = false;
-		try {
-			conn = ConnectionFactory.criarConexao();
-			pstm = conn.prepareStatement(sql);
-
-			pstm.setLong(1, manutencao.getAtivo().getIdStatus());
-			pstm.setLong(2, manutencao.getCriadoPor());
-			pstm.setDate(3, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setLong(4, manutencao.getAtivo().getId());
-
-			// Executa o sql para inserção dos dados
-			if(pstm.executeUpdate() > 0){
-				alterou = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			// Fecha a conexão
-			try {
-				if (pstm != null) {
-					pstm.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return alterou;
-	}
 }
