@@ -116,8 +116,8 @@ public class CategoriaDAO {
 	}
 
 	public Boolean cadastrarCategoria(Categoria categoria) {
-		String sql = "INSERT INTO lu2cas01.CATEGORIA(nome,cpf,cnpj,cargo,criado_por,dt_criacao)"
-				+ " VALUES(?,?,?,?,?,?)";
+		String sql = "INSERT INTO lu2cas01.CATEGORIA(descricao,dt_depreciacao,criado_por,dt_criacao)"
+				+ " VALUES(?,?,?,?)";
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -154,7 +154,7 @@ public class CategoriaDAO {
 	}
 
 	public Boolean alterarCategoria(Categoria categoria) {
-		String sql = "UPDATE lu2cas01.CATEGORIA SET nome = ?,cpf = ?,cnpj = ?,cargo = ?,modificado_por = ?,dt_modificacao = ? WHERE id = ?";
+		String sql = "UPDATE lu2cas01.CATEGORIA SET descricao = ?,dt_depreciacao = ?,modificado_por = ?,dt_modificacao = ? WHERE id = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
