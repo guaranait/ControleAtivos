@@ -4,8 +4,8 @@ class HomeController {
 		this.fabricante;
 		this.dataCompra;
 		this.valorCompra;
-		this.valorDepreciado;
-		this.observacao = "Teste Observação heuehueh heuehuhe";
+		this.valorDepreciado = 0;
+		this.observacao = " ";
 		this.HomeService = HomeService;
 		//this.ativos = [{id: 2, idStatus: 1, descricao: 'Macbook Pro 13', fabricante: 'Apple', vlCompra: 3000, vlDepreciado: 300}];
 		this.ativos = [];
@@ -24,7 +24,7 @@ class HomeController {
 			this.objetoEdit.idStatus = $stateParams.idStatus;
 			this.objetoEdit.obs = $stateParams.obs;
 			this.objetoEdit.id = $stateParams.id;
-			this.objetoEdit.obs = 'heuheuheueh OBS';
+			this.objetoEdit.obs = $stateParams.observacao;
 		}
 		this.getAtivos();
 	}
