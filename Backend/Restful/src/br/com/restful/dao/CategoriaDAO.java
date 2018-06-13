@@ -39,6 +39,7 @@ public class CategoriaDAO {
 				categoria.setId(rs.getLong("id"));
 				categoria.setDescricao(rs.getString("descricao"));
 				categoria.setDtModificacao(rs.getDate("dt_depreciacao"));
+				categoria.setPrcntDepre(rs.getDouble("prcnt_depre"));
 				categoria.setCriadoPor(rs.getLong("criado_por"));
 				categoria.setDtCriacao(rs.getDate("dt_criacao"));
 				categoria.setModificadoPor(rs.getLong("modificado_por"));
@@ -88,6 +89,7 @@ public class CategoriaDAO {
 				categoria.setId(rs.getLong("id"));
 				categoria.setDescricao(rs.getString("descricao"));
 				categoria.setDtModificacao(rs.getDate("dtDepreciacao"));
+				categoria.setPrcntDepre(rs.getDouble("prcnt_depre"));
 				categoria.setCriadoPor(rs.getLong("criado_por"));
 				categoria.setDtCriacao(rs.getDate("dt_criacao"));
 				categoria.setModificadoPor(rs.getLong("modificado_por"));
@@ -116,7 +118,7 @@ public class CategoriaDAO {
 	}
 
 	public Boolean cadastrarCategoria(Categoria categoria) {
-		String sql = "INSERT INTO lu2cas01.CATEGORIA(descricao,dt_depreciacao,criado_por,dt_criacao)"
+		String sql = "INSERT INTO lu2cas01.CATEGORIA(descricao,dt_depreciacao,prcnt_depre,criado_por,dt_criacao)"
 				+ " VALUES(?,?,?,?)";
 		
 		Connection conn = null;
@@ -128,8 +130,9 @@ public class CategoriaDAO {
 
 			pstm.setString(1, categoria.getDescricao());
 			pstm.setDate(2, new java.sql.Date(categoria.getDtDepreciacao().getTime()));
-			pstm.setLong(3, categoria.getCriadoPor());
-			pstm.setDate(4, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setDouble(3, categoria.getPrcntDepre());
+			pstm.setLong(4, categoria.getCriadoPor());
+			pstm.setDate(5, new java.sql.Date(System.currentTimeMillis()));
 			
 			// Executa a sql para inser��o dos dados
 			if(pstm.executeUpdate() > 0){
@@ -154,7 +157,7 @@ public class CategoriaDAO {
 	}
 
 	public Boolean alterarCategoria(Categoria categoria) {
-		String sql = "UPDATE lu2cas01.CATEGORIA SET descricao = ?,dt_depreciacao = ?,modificado_por = ?,dt_modificacao = ? WHERE id = ?";
+		String sql = "UPDATE lu2cas01.CATEGORIA SET descricao = ?,dt_depreciacao = ?,prcnt_depre = ?,modificado_por = ?,dt_modificacao = ? WHERE id = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -165,8 +168,9 @@ public class CategoriaDAO {
 			
 			pstm.setString(1, categoria.getDescricao());
 			pstm.setDate(2, new java.sql.Date(categoria.getDtDepreciacao().getTime()));
-			pstm.setLong(3, categoria.getModificadoPor());
-			pstm.setDate(4, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setDouble(3, categoria.getPrcntDepre());
+			pstm.setLong(4, categoria.getModificadoPor());
+			pstm.setDate(5, new java.sql.Date(System.currentTimeMillis()));
 			pstm.setLong(6, categoria.getId());
 
 			// Executa a sql para inser��o dos dados

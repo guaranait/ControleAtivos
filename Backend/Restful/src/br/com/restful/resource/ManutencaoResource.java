@@ -32,6 +32,7 @@ public class ManutencaoResource {
 		if(manutencaoController.validador(manutencao)) {
 			if(manutencaoController.cadastrarManutencao(manutencao)){
 				AtivoDAO ativoDAO = new AtivoDAO();
+				manutencao.getAtivo().setIdStatus(2);
 				if(ativoDAO.setManutencao(manutencao)) {
 					return Response.ok().build();
 				}else {
@@ -59,6 +60,7 @@ public class ManutencaoResource {
 		if(manutencaoController.validador(manutencao)) {
 			if(manutencaoController.concluirManutencao(manutencao)){
 				AtivoDAO ativoDAO = new AtivoDAO();
+				manutencao.getAtivo().setIdStatus(1);
 				if(ativoDAO.setManutencao(manutencao)) {
 					return Response.ok().build();
 				}else {
