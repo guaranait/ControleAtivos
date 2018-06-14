@@ -32,7 +32,8 @@ public class AtivoResource {
 		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
 		AtivoController ativoController = new AtivoController();
 		ativos = ativoController.listarAtivos();
-		String jsonAtivos = new Gson().toJson(ativos);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonAtivos = gson.toJson(ativos);
 		
 		return Response.status(200).entity(jsonAtivos).build();
 	}

@@ -28,7 +28,8 @@ public class CategoriaResource {
 		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
 		CategoriaController categoriaController = new CategoriaController();
 		categorias = categoriaController.listarCategorias();
-		String jsonCategorias = new Gson().toJson(categorias);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonCategorias = gson.toJson(categorias);
 		
 		return Response.status(200).entity(jsonCategorias).build();
 	}
@@ -40,8 +41,8 @@ public class CategoriaResource {
 		Categoria categoria = null;
 		CategoriaController categoriaController = new CategoriaController();
 		categoria = categoriaController.listarCategoria(id);
-		
-		String jsonCategoria = new Gson().toJson(categoria);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonCategoria = gson.toJson(categoria);
 		return Response.status(200).entity(jsonCategoria).build();
 	}
 	

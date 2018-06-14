@@ -29,7 +29,8 @@ public class GarantiaResource {
 		ArrayList<Garantia> garantias = new ArrayList<Garantia>();
 		GarantiaController garantiaController = new GarantiaController();
 		garantias = garantiaController.listarGarantias();
-		String jsonGarantias = new Gson().toJson(garantias);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonGarantias = gson.toJson(garantias);
 		
 		return Response.status(200).entity(jsonGarantias).build();
 	}

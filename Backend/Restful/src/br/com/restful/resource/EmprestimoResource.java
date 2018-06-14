@@ -30,7 +30,8 @@ public class EmprestimoResource {
 		ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		EmprestimoController emprestimoController = new EmprestimoController();
 		emprestimos = emprestimoController.listarEmprestimos();
-		String jsonEmprestimos = new Gson().toJson(emprestimos);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonEmprestimos = gson.toJson(emprestimos);
 		
 		return Response.status(200).entity(jsonEmprestimos).build();
 	}
@@ -48,7 +49,7 @@ public class EmprestimoResource {
 		
 		emprestimos = emprestimoController.listarEmprestimo(emprestimo);
 		
-		String jsonEmprestimo = new Gson().toJson(emprestimo);
+		String jsonEmprestimo = gson.toJson(emprestimo);
 		return Response.status(200).entity(jsonEmprestimo).build();
 	}
 	

@@ -35,7 +35,8 @@ public class UsuarioResource {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		UsuarioController usuarioController = new UsuarioController();
 		usuarios = usuarioController.listarUsuarios();
-		String jsonUsuarios = new Gson().toJson(usuarios);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonUsuarios = gson.toJson(usuarios);
 		
 		return Response.status(200).entity(jsonUsuarios).build();
 	}
@@ -47,8 +48,8 @@ public class UsuarioResource {
 		Usuario usuario = null;
 		UsuarioController usuarioController = new UsuarioController();
 		//usuario = usuarioController.listarUsuario(id);
-		
-		String jsonUsuario = new Gson().toJson(usuario);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonUsuario = gson.toJson(usuario);
 		return Response.status(200).entity(jsonUsuario).build();
 	}
 	
