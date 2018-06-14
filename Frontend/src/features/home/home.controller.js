@@ -111,6 +111,7 @@ class HomeController {
 		obj.ativo = this.objetoModal;
 		obj.ativo.dtCompra = moment().format("DD-MM-YYYY HH:mm:ss");
 		obj.ativo.dtCriacao = moment().format("DD-MM-YYYY HH:mm:ss");
+		obj.ativo.dtModificacao = moment().format("DD-MM-YYYY HH:mm:ss");
 		obj.descricao = this.objetoModal.descricao;
 		obj.dtConserto = moment().format("DD-MM-YYYY HH:mm:ss");
 		obj.criadoPor = 1111;
@@ -130,6 +131,7 @@ class HomeController {
 		obj.ativo = this.objetoModal;
 		obj.ativo.dtCompra = moment().format("DD-MM-YYYY HH:mm:ss");
 		obj.ativo.dtCriacao = moment().format("DD-MM-YYYY HH:mm:ss");
+		obj.ativo.dtModificacao = moment().format("DD-MM-YYYY HH:mm:ss");
 		obj.descricao = this.objetoModal.descricao;
 		obj.dtConserto = moment().format("DD-MM-YYYY HH:mm:ss");
 		obj.criadoPor = 1111;

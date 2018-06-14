@@ -95,23 +95,25 @@
                                <table class="table">
 								  <thead>
 								    <tr>
-								      <th scope="col">Ativo</th>
+								      <th scope="col">Ativo ID</th>
                                       <th scope="col">Fornecedor</th>
 								      <th scope="col">Contato</th>
+                                      <th scope="col"> Data Criação </th>
 								      <th scope="col">Editar</th>
 								      <th scope="col">Remover</th>
 								    </tr>
 								  </thead>
 								  <tbody>
 								    <tr ng-repeat="obj in garantia.garantias">
-								      <th scope="row"> {{ obj.ativo }} </th>
+								      <th scope="row"> {{ obj.ativo.id }} </th>
                                       <th scope="row"> {{ obj.fornecedor }} </th>
 								      <td>{{ obj.contato }}</td>
+                                      <td>{{ obj.dtCriacao}}</td>
 								      <td>
 								      	<button class="btn btn-info btn-fill btn-sm">Editar</button>
 								      </td>
 								      <td>
-								      	<button class="btn btn-danger btn-fill btn-sm" data-toggle="modal" data-target="#modalRemove">Remover</button>
+								      	<button class="btn btn-danger btn-fill btn-sm" data-toggle="modal" ng-click='garantia.excluirGarantia(obj)'>Remover</button>
 								      </td>
 								    </tr>
 								  </tbody>
@@ -131,7 +133,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"> Remover Ativo </h4>
+                <h4 class="modal-title" id="myModalLabel"> Remover Garantia </h4>
               </div>
               <div class="modal-body">
                 <p> Você deseja remover o ativo {{home.objetoModal.descricao}}? </p>

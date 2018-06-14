@@ -59,7 +59,7 @@ class HomeService {
 		.then( response => response ).catch( error => error );
 	}
 
-	concluirManutencao() {
+	concluirManutencao(objetoManutencao) {
 		console.log(objetoManutencao);
 		return this.$http({
 			url: 'http://localhost:8080/Restful/manutencao/concluirManutencao',

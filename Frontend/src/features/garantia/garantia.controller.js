@@ -22,7 +22,11 @@ class GarantiaController {
     }
 
     getGarantias() {
-        this.GarantiaService.getGarantias().then(response => console.log(response.data)).catch(error => console.log(error));
+        this.GarantiaService.getGarantias().then(response => { 
+            this.garantias = response.data;
+            this.garantias[0].dtCriacao = moment().format('DD/MM/YYYY');
+            console.log(response.data);
+        }).catch(error => console.log(error));
     }
 
     cadastrarGarantia() {
@@ -42,6 +46,13 @@ class GarantiaController {
 
         
         this.GarantiaService.adicionarGarantia(objetoGarantia).then(response => console.log(response.data)).catch(error => console.log(error));
+    }
+
+    excluirGarantia(obj) {
+        console.log(obj)
+        let objetoGarantia = obj;
+        
+        this.GarantiaService.excluirGarantia(obj).then(response => console.log(response.data)).catch(error => console.log(error));
     }
 
     goAdicionarGarantia() {
