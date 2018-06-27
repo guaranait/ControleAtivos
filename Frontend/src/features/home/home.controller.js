@@ -17,13 +17,14 @@ class HomeController {
 			this.objetoEdit.descricao = $stateParams.descricao;
 			this.objetoEdit.fabricante = $stateParams.fabricante;
 			//Alterar no Backend
-			this.objetoEdit.dtCompra = moment().format('DD/MM/YYYY');
+			this.objetoEdit.dtCompra = moment($stateParams.dtCompra).format('DD/MM/YYYY');
 			this.objetoEdit.vlCompra = $stateParams.vlCompra;
 			this.objetoEdit.vlDepreciado = $stateParams.vlDepreciado;
 			this.objetoEdit.criadoPor = $stateParams.criadoPor;
 			this.objetoEdit.idStatus = $stateParams.idStatus;
 			this.objetoEdit.obs = $stateParams.obs;
 			this.objetoEdit.id = $stateParams.id;
+			/* OBSERVAÇÃO */
 			this.objetoEdit.obs = $stateParams.observacao;
 		}
 		this.getAtivos();
@@ -62,7 +63,8 @@ class HomeController {
     }
 
     alterarAtivo() {
-    	this.objetoEdit.dtCompra = moment().format("YYYY-MM-DD HH:mm:ss");
+    	/* SALVAR OBSERVAÇÃO */
+    	this.objetoEdit.dtCompra = moment(this.objetoEdit.dtCompra).format("YYYY-MM-DD HH:mm:ss");
     	this.HomeService.alterarAtivo(this.objetoEdit).then( response => {
 			if(response.status == 200) {
 				this.$state.go('ativos');
