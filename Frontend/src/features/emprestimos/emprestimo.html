@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en>
+<html lang="en">
 <head>
 	<meta charset="utf-8" />
 	<!--link rel="apple-touch-icon" sizes="76x76" href="assets/img/logo.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/logo.png"-->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Garantia</title>
+	<title>ATIVOS</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -17,7 +17,7 @@
     <link href="assets/css/themify-icons.css" rel="stylesheet">
 
 </head>
-<body ng-controller="GarantiaController">
+<body>
 
 <div class="wrapper">
 	<div class="sidebar" data-background-color="white" data-active-color="danger">
@@ -53,16 +53,16 @@
                         <p>Ativos</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="/garantias">
                         <i class="ti-medall"></i>
                         <p>Garantias</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="icons.html">
-                        <i class="ti-pencil-alt2"></i>
-                        <p>Menu B</p>
+                        <i class="ti-package"></i>
+                        <p>Empréstimos</p>
                     </a>
                 </li>
                 <li>
@@ -80,68 +80,50 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    
                     <div class="col-lg-12 col-md-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 text-right">
+                                <button class="btn-add-ativo btn btn-info btn-fill btn-wd" ng-click="emprestimo.adicionarVinculo()"> Adicionar Vínculo </button>
+                            </div>
+                        </div>
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Adicionar Garantia</h4>
+                                <h4 class="title">Ativos vínculados</h4>
                             </div>
                             <div class="content">
-                                <form>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label> Ativo ID </label>
-                                                <input ng-model="garantia.id_ativo" type="text" class="form-control border-input" placeholder="123456">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Data Validade</label>
-                                                <input ng-model="garantia.dataGarantia" type="date" class="form-control border-input">
-                                            </div>
-                                        </div>
-                                    </div>
+                               
+                               <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">ID Ativo</th>
+                                      <th scope="col">Descrição</th>
+                                      <th scope="col">Funcionário</th>
+                                      <th scope="col">Data de Empréstimo</th>
+                                      <th scope="col"> Remover </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="obj in emprestimo.emprestimos">
+                                      <th scope="row"> {{ obj.ativo.id }} </th>
+                                      <th scope="row"> {{ obj.ativo.descricao }} </th>
+                                      <td>{{ obj.funcionario.nome }}</td>
+                                      <td>{{ obj.dataEmprestimo }}</td>
+                                     
+                                      <td>
+                                        <button class="btn btn-danger btn-fill btn-sm" ng-click="home.viewRemove(obj)" data-toggle="modal" data-target="#modalRemove">Remover</button>
+                                      </td>
+                                      
+                                    </tr>
+                                  </tbody>
+                                </table>
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Contato</label>
-                                                <input ng-model="garantia.contato" type="text" class="form-control border-input" placeholder="(00) 00000-0000" ui-br-phone-number-mask>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Fornecedor</label>
-                                                <input ng-model="garantia.fornecedor" type="text" class="form-control border-input" placeholder="Loja ABC">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Observação</label>
-                                                <textarea ng-model="home.observacao" rows="5" class="form-control border-input" placeholder="Endereço, vendedor, ponto de referência..."></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <button ng-click="garantia.goGarantias()" class="btn btn-danger btn-fill btn-wd">Cancelar</button>
-                                        <button ng-click="garantia.cadastrarGarantia()" class="btn btn-info btn-fill btn-wd">Criar Garantia</button>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </form>
                             </div>
                         </div>
                     </div>
 
-
                 </div>
             </div>
         </div>
-
-        
 
         <footer class="footer">
             <div class="container-fluid">

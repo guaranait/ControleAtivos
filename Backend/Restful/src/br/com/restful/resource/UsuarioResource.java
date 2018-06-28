@@ -105,4 +105,22 @@ public class UsuarioResource {
 		}
 	}
 	
+	@POST
+	@Path("/login")
+	@Consumes("application/json")
+	public Response loginUsuario(String usuarioJson) throws ParseException{
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		Usuario usuario = gson.fromJson(usuarioJson, Usuario.class);
+		
+		if(usuario.getId() > 0) {
+			if(new UsuarioController().loginUsuario(usuario)){
+				return Response.ok().build();
+			}else{
+				return Response.serverError().build();
+			}
+		}else {
+			return Response.status(400).build();
+		}
+	}
+	
 }

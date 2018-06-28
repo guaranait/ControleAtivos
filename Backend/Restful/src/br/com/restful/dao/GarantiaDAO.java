@@ -39,6 +39,7 @@ public class GarantiaDAO {
 				garantia.getAtivo().setId(rs.getLong("id_ativo"));
 				garantia.setFornecedor(rs.getString("fornecedor"));
 				garantia.setContato(rs.getString("contato"));
+				garantia.setDtValidade(rs.getDate("dt_validade"));
 				garantia.setCriadoPor(rs.getLong("criado_por"));
 				garantia.setDtCriacao(rs.getDate("dt_criacao"));
 				garantia.setModificadoPor(rs.getLong("modificado_por"));
@@ -68,8 +69,8 @@ public class GarantiaDAO {
 	
 	
 	public Boolean cadastrarGarantia(Garantia garantia) {
-		String sql = "INSERT INTO lu2cas01.GARANTIA(id_ativo,fornecedor,contato,criado_por,dt_criacao)"
-				+ " VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO lu2cas01.GARANTIA(id_ativo,fornecedor,contato,dt_validade,criado_por,dt_criacao)"
+				+ " VALUES(?,?,?,?,?,?)";
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -81,8 +82,9 @@ public class GarantiaDAO {
 			pstm.setLong(1, garantia.getAtivo().getId());
 			pstm.setString(2, garantia.getFornecedor());
 			pstm.setString(3, garantia.getContato());
-			pstm.setLong(4, garantia.getCriadoPor());
-			pstm.setDate(5, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setDate(4, new java.sql.Date(garantia.getDtValidade().getTime()));
+			pstm.setLong(5, garantia.getCriadoPor());
+			pstm.setDate(6, new java.sql.Date(System.currentTimeMillis()));
 			
 			// Executa a sql para inser��o dos dados
 			if(pstm.executeUpdate() > 0){
@@ -107,7 +109,7 @@ public class GarantiaDAO {
 	}
 
 	public Boolean alterarGarantia(Garantia garantia) {
-		String sql = "UPDATE lu2cas01.GARANTIA SET id_ativo = ?,fornecedor = ?,contato = ?,criado_por = ?,modificado_por = ?,dt_modificacao = ? WHERE id = ?";
+		String sql = "UPDATE lu2cas01.GARANTIA SET id_ativo = ?,fornecedor = ?,contato = ?,dt_validade = ?,criado_por = ?,modificado_por = ?,dt_modificacao = ? WHERE id = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -119,9 +121,10 @@ public class GarantiaDAO {
 			pstm.setLong(1, garantia.getAtivo().getId());
 			pstm.setString(2, garantia.getFornecedor());
 			pstm.setString(3, garantia.getContato());
-			pstm.setLong(4, garantia.getModificadoPor());
-			pstm.setDate(5, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setLong(6, garantia.getId());
+			pstm.setDate(4, new java.sql.Date(garantia.getDtValidade().getTime()));
+			pstm.setLong(5, garantia.getModificadoPor());
+			pstm.setDate(6, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setLong(7, garantia.getId());
 			
 			// Executa a sql para inser��o dos dados
 			if(pstm.executeUpdate() > 0){

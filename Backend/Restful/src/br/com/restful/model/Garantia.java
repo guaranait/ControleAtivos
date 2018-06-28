@@ -7,6 +7,7 @@ public class Garantia {
 	private Ativo ativo = new Ativo();
 	private String fornecedor;
 	private String contato;
+	private Date dtValidade;
 	private long criadoPor;
 	private long modificadoPor;
 	private Date dtCriacao;
@@ -16,13 +17,14 @@ public class Garantia {
 		super();
 	}
 
-	public Garantia(long id, Ativo ativo, String fornecedor, String contato, long criadoPor, long modificadoPor,
+	public Garantia(long id, Ativo ativo, String fornecedor, String contato, Date dtValidade, long criadoPor, long modificadoPor,
 			Date dtCriacao, Date dtModificacao) {
 		super();
 		this.id = id;
 		this.ativo = ativo;
 		this.fornecedor = fornecedor;
 		this.contato = contato;
+		this.dtValidade = dtValidade;
 		this.criadoPor = criadoPor;
 		this.modificadoPor = modificadoPor;
 		this.dtCriacao = dtCriacao;
@@ -59,6 +61,14 @@ public class Garantia {
 
 	public void setContato(String contato) {
 		this.contato = contato;
+	}
+
+	public Date getDtValidade() {
+		return dtValidade;
+	}
+
+	public void setDtValidade(Date dtValidade) {
+		this.dtValidade = dtValidade;
 	}
 
 	public long getCriadoPor() {

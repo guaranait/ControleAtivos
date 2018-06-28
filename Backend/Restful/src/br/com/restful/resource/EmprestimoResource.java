@@ -89,14 +89,14 @@ public class EmprestimoResource {
 	}
 	
 	@POST
-	@Path("/excluirEmprestimo")
+	@Path("/devolverEmprestimo")
 	@Consumes("application/json")
-	public Response excluirEmprestimo(String emprestimoJson) throws ParseException{
+	public Response devolverEmprestimo(String emprestimoJson) throws ParseException{
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Emprestimo emprestimo = gson.fromJson(emprestimoJson, Emprestimo.class);
 		
 		if(emprestimo.getAtivo().getId() > 0 && emprestimo.getFuncionario().getId() > 0) {
-			if(new EmprestimoController().excluirEmprestimo(emprestimo)){
+			if(new EmprestimoController().devolverEmprestimo(emprestimo)){
 				return Response.ok().build();
 			}else{
 				return Response.serverError().build();

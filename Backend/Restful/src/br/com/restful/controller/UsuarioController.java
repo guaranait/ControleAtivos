@@ -34,4 +34,8 @@ public class UsuarioController {
 		return sucesso;
 	}
 	
+	public boolean loginUsuario(Usuario usuario) {
+		return UsuarioDAO.getInstance().loginUsuario(usuario);
+	}
+	
 }

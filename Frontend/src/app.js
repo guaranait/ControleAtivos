@@ -12,9 +12,10 @@ import dashboard from './features/dashboard';
 import usuarios from './features/usuarios';
 import funcionarios from './features/funcionarios';
 import garantia from './features/garantia';
+import emprestimo from './features/emprestimos';
 import angularmask from 'angular-input-masks/br';
 import angularChartist from 'angular-chartist.js';
 import angularBrFilters from 'angular-br-filters';
 
-angular.module('app', [uirouter, angularChartist, angularmask, angularBrFilters, home, dashboard, usuarios, funcionarios, garantia])
+angular.module('app', [uirouter, angularChartist, angularmask, angularBrFilters, home, dashboard, usuarios, funcionarios, garantia, emprestimo])
     .config(routing);
