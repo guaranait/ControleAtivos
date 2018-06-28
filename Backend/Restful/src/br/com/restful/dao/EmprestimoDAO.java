@@ -20,7 +20,7 @@ public class EmprestimoDAO {
 	}
 
 	public ArrayList<Emprestimo> listarEmprestimos() {
-		String sql =  " SELECT a.id idAtivo, a.descricao descricao, f.nome nomeFuncionario, e.dt_emprestimo dtEmprestimo "
+		String sql =  " SELECT a.id idAtivo, a.descricao descricao, f.id idFuncionario, f.nome nomeFuncionario, e.dt_emprestimo dtEmprestimo "
 					+ " FROM   lu2cas01.EMPRESTIMO e, "
 					+ "		   lu2cas01.FUNCIONARIO f, "
 					+ "		   lu2cas01.ATIVO a "
@@ -44,6 +44,7 @@ public class EmprestimoDAO {
 				emprestimo.getFuncionario().setNome(rs.getString("nomeFuncionario"));
 				emprestimo.getAtivo().setId(rs.getLong("idAtivo"));
 				emprestimo.getAtivo().setDescricao(rs.getString("descricao"));
+				emprestimo.getFuncionario().setId(rs.getLong("idFuncionario"));;
 				emprestimo.setDtEmprestimo(rs.getDate("dtEmprestimo"));
 				
 				emprestimos.add(emprestimo);
