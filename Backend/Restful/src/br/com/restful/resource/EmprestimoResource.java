@@ -90,7 +90,8 @@ public class EmprestimoResource {
 	
 	@POST
 	@Path("/devolverEmprestimo")
-	@Consumes("application/json")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response devolverEmprestimo(String emprestimoJson) throws ParseException{
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Emprestimo emprestimo = gson.fromJson(emprestimoJson, Emprestimo.class);
