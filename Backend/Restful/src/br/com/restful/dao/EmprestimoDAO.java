@@ -244,7 +244,7 @@ public class EmprestimoDAO {
 
 	public boolean devolverEmprestimo(Emprestimo emprestimo) {
 		boolean sucesso = false;
-		String sql = "UPDATE lu2cas01.GARANTIA SET dt_devolucao = ?, modificado_por = ?, dt_modificacao = ? WHERE id_ativo = ? AND id_funcionario = ?";
+		String sql = "UPDATE lu2cas01.EMPRESTIMO SET dt_devolucao = ?, modificado_por = ?, dt_modificacao = ? WHERE id_ativo = ? AND id_funcionario = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
