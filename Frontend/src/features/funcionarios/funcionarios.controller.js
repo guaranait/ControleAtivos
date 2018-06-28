@@ -47,7 +47,7 @@ class FuncionariosController {
     }
 
     alterarFuncionario() {
-        this.FuncioariosService.alterarFuncionario(this.objetoEdit).then(response => {
+        this.FuncionariosService.alterarFuncionario(this.objetoEdit).then(response => {
             if (response.status == 200) {
                 this.$state.go('listarFuncionarios');
             }

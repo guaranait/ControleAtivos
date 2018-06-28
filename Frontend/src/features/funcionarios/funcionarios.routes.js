@@ -19,7 +19,8 @@ export default function routes($stateProvider) {
             params: {
                 id: null,
                 nome: null,
-                cpfCnpj: null,
+                cpf: null,
+                cnpj: null,
                 cargo: null,
                 criadoPor: null,
                 modificadoPor: null,
