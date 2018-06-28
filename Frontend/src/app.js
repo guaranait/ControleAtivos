@@ -14,6 +14,7 @@ import funcionarios from './features/funcionarios';
 import garantia from './features/garantia';
 import angularmask from 'angular-input-masks/br';
 import angularChartist from 'angular-chartist.js';
+import angularBrFilters from 'angular-br-filters';
 
-angular.module('app', [uirouter, angularChartist, angularmask, home, dashboard, usuarios, funcionarios, garantia])
+angular.module('app', [uirouter, angularChartist, angularmask, angularBrFilters, home, dashboard, usuarios, funcionarios, garantia])
     .config(routing);
