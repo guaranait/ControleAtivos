@@ -7,5 +7,11 @@ export default function routes($stateProvider) {
       template: require('./emprestimo.html'),
       controller: 'EmprestimoController',
       controllerAs: 'emprestimo'
+    })
+    .state('adicionar-vinculo', {
+      url: '/adicionar-vinculo',
+      template: require('./adicionar-vinculo.html'),
+      controller: 'EmprestimoController',
+      controllerAs: 'emprestimo'
     });
 }
