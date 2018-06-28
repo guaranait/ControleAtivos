@@ -76,7 +76,7 @@
     </div>
 
     <div class="main-panel">
-
+		
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -84,7 +84,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Adicionar Ativo</h4>
+                                <h4 class="title">Adicionar Vínculo</h4>
                             </div>
                             <div class="content">
                                 <form>
@@ -99,16 +99,18 @@
 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Fabricante</label>
-                                                <input ng-model="home.fabricante" type="text" class="form-control border-input" placeholder="Apple">
-                                            </div>
+                                            <label for="singleSelect"> Ativo: </label><br>
+                                            <select name="singleSelect" ng-model="data.singleSelect">
+                                              <option value="option-1">Option 1</option>
+                                              <option value="option-2">Option 2</option>
+                                            </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Data da Compra</label>
-                                                <input ng-model="home.dataCompra" type="date" class="form-control border-input">
-                                            </div>
+                                            <label for="singleSelect"> Funcionário: </label><br>
+                                            <select name="singleSelect" ng-model="data.singleSelect">
+                                              <option value="option-1">Option 1</option>
+                                              <option value="option-2">Option 2</option>
+                                            </select>
                                         </div>
                                     </div>
 
