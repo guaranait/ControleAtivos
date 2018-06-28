@@ -20,14 +20,19 @@ public class EmprestimoDAO {
 	}
 
 	public ArrayList<Emprestimo> listarEmprestimos() {
-		String sql = "SELECT * FROM lu2cas01.GARANTIA";
+		String sql =  " SELECT a.id idAtivo, a.descricao descricao, f.nome nomeFuncionario, e.dt_emprestimo dtEmprestimo "
+					+ " FROM   lu2cas01.EMPRESTIMO e, "
+					+ "		   lu2cas01.FUNCIONARIO f, "
+					+ "		   lu2cas01.ATIVO a "
+					+ " WHERE  e.id_funcionario = f.id "
+					+ "   AND  e.id_ativo = a.id ";
 		 
 		ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		 
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		 
+		
 		try {
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
@@ -36,19 +41,15 @@ public class EmprestimoDAO {
 			while(rs.next()){
 				Emprestimo emprestimo = new Emprestimo();
 
-				emprestimo.getFuncionario().setId(rs.getLong("id_funcionario"));
-				emprestimo.getAtivo().setId(rs.getLong("id_ativo"));
-				emprestimo.setDtEmprestimo(rs.getDate("dt_emprestimo"));
-				emprestimo.setDtDevolucao(rs.getDate("dt_devolucao"));
-				emprestimo.setCriadoPor(rs.getLong("criado_por"));
-				emprestimo.setDtCriacao(rs.getDate("dt_criacao"));
-				emprestimo.setModificadoPor(rs.getLong("modificado_por"));
-				emprestimo.setDtModificacao(rs.getDate("dt_modificacao"));
+				emprestimo.getFuncionario().setNome(rs.getString("nomeFuncionario"));
+				emprestimo.getAtivo().setId(rs.getLong("idAtivo"));
+				emprestimo.getAtivo().setDescricao(rs.getString("descricao"));
+				emprestimo.setDtEmprestimo(rs.getDate("dtEmprestimo"));
 				
 				emprestimos.add(emprestimo);
 			}
 		 } catch (Exception e) {
-			 e.printStackTrace();
+			e.printStackTrace();
 		 }finally{
 			 try{
 				 if(rs != null){
@@ -74,7 +75,6 @@ public class EmprestimoDAO {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		
 		
 		try {
 			String sql = "SELECT * FROM lu2cas01.EMPRESTIMO WHERE 1=1 ";
@@ -241,9 +241,9 @@ public class EmprestimoDAO {
 		return alterou;
 	}
 
-	public boolean excluirEmprestimo(Emprestimo emprestimo) {
+	public boolean devolverEmprestimo(Emprestimo emprestimo) {
 		boolean sucesso = false;
-		String sql = "DELETE FROM lu2cas01.GARANTIA WHERE id_ativo = ? AND id_funcionario = ?";
+		String sql = "UPDATE lu2cas01.GARANTIA SET dt_devolucao = ?, modificado_por = ?, dt_modificacao = ? WHERE id_ativo = ? AND id_funcionario = ?";
 
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -252,8 +252,11 @@ public class EmprestimoDAO {
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
 
-			pstm.setLong(1, emprestimo.getAtivo().getId());
-			pstm.setLong(2, emprestimo.getFuncionario().getId());
+			pstm.setDate(1, new java.sql.Date(emprestimo.getDtDevolucao().getTime()));
+			pstm.setLong(2, emprestimo.getModificadoPor());
+			pstm.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setLong(4, emprestimo.getAtivo().getId());
+			pstm.setLong(5, emprestimo.getFuncionario().getId());
 
 			// Executa a sql para inser��o dos dados
 			if(pstm.executeUpdate() > 0){

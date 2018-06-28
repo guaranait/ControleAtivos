@@ -26,10 +26,10 @@ public class EmprestimoController {
 		return EmprestimoDAO.getInstance().alterarEmprestimo(emprestimo);
 	}
 	
-	public boolean excluirEmprestimo(Emprestimo emprestimo){
+	public boolean devolverEmprestimo(Emprestimo emprestimo){
 		boolean sucesso = false;
 		EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
-		sucesso = emprestimoDAO.excluirEmprestimo(emprestimo);
+		sucesso = emprestimoDAO.devolverEmprestimo(emprestimo);
 		return sucesso;
 	}
 	
