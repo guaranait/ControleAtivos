@@ -41,7 +41,7 @@ public class UsuarioDAO {
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
 			rs = pstm.executeQuery();
-		 
+			
 			while(rs.next()){
 				Usuario usuario = new Usuario();
 
@@ -192,6 +192,49 @@ public class UsuarioDAO {
 			}
 		}
 		return sucesso;
+	}
+	
+	public boolean loginUsuario(Usuario usuario) {
+		boolean fezLogin = false;
+		
+		String sql = "SELECT count(*) temLogin FROM lu2cas01.USUARIOS_SISTEMA WHERE username = ? AND senha = ? ";
+		 
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		 
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		 
+		try {
+			conn = ConnectionFactory.criarConexao();
+			pstm = conn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+		 
+			int temLogin = 0;
+			if(rs.next()) {
+				temLogin = rs.getInt("temLogin");
+			}
+			if(temLogin > 0) {
+				fezLogin = true;
+			}
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }finally{
+			 try{
+				 if(rs != null){
+					 rs.close();
+				 }
+				 if(pstm != null){
+					 pstm.close();
+				 }
+				 if(conn != null){
+					 conn.close();
+				 }
+			 }catch(Exception e){
+				 e.printStackTrace();
+			 }
+		 }
+		return fezLogin;
 	}
 	
 }

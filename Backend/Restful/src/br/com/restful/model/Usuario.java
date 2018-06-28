@@ -15,8 +15,7 @@ public class Usuario {
 	private long criadoPor;
 	private long modificadoPor;
 	private Date dtCriacao;
-	private Date dtModificacao;
-	
+	private Date dtModificacao;  
 	public Usuario() {
 		super();
 	}
