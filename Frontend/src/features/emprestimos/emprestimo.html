@@ -107,10 +107,10 @@
                                       <th scope="row"> {{ obj.ativo.id }} </th>
                                       <th scope="row"> {{ obj.ativo.descricao }} </th>
                                       <td>{{ obj.funcionario.nome }}</td>
-                                      <td>{{ obj.dataEmprestimo }}</td>
+                                      <td>{{ obj.dtEmprestimo }}</td>
                                      
                                       <td>
-                                        <button class="btn btn-danger btn-fill btn-sm" ng-click="home.viewRemove(obj)" data-toggle="modal" data-target="#modalRemove">Remover</button>
+                                        <button class="btn btn-danger btn-fill btn-sm" ng-click="emprestimo.removerVinculo(obj)" data-toggle="modal" data-target="#modalRemove">Remover</button>
                                       </td>
                                       
                                     </tr>

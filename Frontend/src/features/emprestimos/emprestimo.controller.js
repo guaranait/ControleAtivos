@@ -14,10 +14,21 @@ class EmprestimoController {
 	getEmprestimos() {
     	this.EmprestimoService.getEmprestimos().then( response => { 
     		this.emprestimos = response.data 
-    		console.log(response);
+    		//console.log(response);
     	}).catch( error => console.log(error) );
     }
 
+    removerVinculo(obj) {
+    	let objDevolucao = {};
+    	objDevolucao.dtDevolucao = moment().format("YYYY-MM-DD HH:mm:ss");
+    	objDevolucao.ativo = {id: obj.ativo.id};
+    	objDevolucao.funcionario = {id: obj.funcionario.id};
+    	objDevolucao.modificadoPor = 9999;
+
+    	this.EmprestimoService.devolverEmprestimo(objDevolucao).then( response => { 
+    		console.log(response);
+    	}).catch( error => console.log(error) );
+    }
 
 }
 
