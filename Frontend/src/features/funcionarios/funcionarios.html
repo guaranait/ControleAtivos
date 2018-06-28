@@ -31,27 +31,33 @@
                     </div>
                     <ul class="nav">
                         <li>
-                            <a href="dashboard.html">
+                            <a href="/dashboard">
                                 <i class="ti-panel"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li>
-                            <a href="user.html">
+                            <a href="/usuarios">
                                 <i class="ti-user"></i>
                                 <p>Usuários</p>
                             </a>
                         </li>
                         <li class="active">
+                            <a href="/funcionarios">
+                                <i class="ti-key"></i>
+                                <p>Funcionários</p>
+                            </a>
+                        </li>
+                        <li href="/">
                             <a href="table.html">
                                 <i class="ti-view-list-alt"></i>
                                 <p>Ativos</p>
                             </a>
                         </li>
                         <li>
-                            <a href="typography.html">
-                                <i class="ti-text"></i>
-                                <p>Menu A</p>
+                            <a href="/garantias">
+                                <i class="ti-medall"></i>
+                                <p>Garantias</p>
                             </a>
                         </li>
                         <li>
@@ -70,50 +76,6 @@
                 </div>
             </div>
             <div class="main-panel">
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar bar1"></span>
-                                <span class="icon-bar bar2"></span>
-                                <span class="icon-bar bar3"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">Funcionários</a>
-                        </div>
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="ti-panel"></i>
-                                        <p>Stats</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="ti-bell"></i>
-                                            <p class="notification">5</p>
-                                            <p>Notifications</p>
-                                            <b class="caret"></b>
-                                      </a>
-                                      <ul class="dropdown-menu">
-                                        <li><a href="#">Notification 1</a></li>
-                                        <li><a href="#">Notification 2</a></li>
-                                        <li><a href="#">Notification 3</a></li>
-                                        <li><a href="#">Notification 4</a></li>
-                                        <li><a href="#">Another notification</a></li>
-                                      </ul>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-settings"></i>
-                                        <p>Settings</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
@@ -142,8 +104,8 @@
                                             <tbody>
                                                 <tr ng-repeat="obj in funcionarios.funcionarios">
                                                     <td>{{obj.nome}}</td>
-                                                    <td>{{obj.cpf}}</td>
-                                                    <td>{{obj.cnpj}}</td>
+                                                    <td>{{obj.cpf|brCpf}}</td>
+                                                    <td>{{obj.cnpj|brCnpj}}</td>
                                                     <td>{{obj.cargo}}</td>
                                                     <td>
                                                         <button class="btn btn-info btn-fill btn-sm" ng-click="funcionarios.view(obj)" data-toggle="modal" data-target="#myModal">Editar</button>
