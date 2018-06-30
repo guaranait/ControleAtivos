@@ -4,11 +4,11 @@ class GarantiaController {
         this.fornecedor;
         this.contato;
         this.criado_por = 1122;
-        this.garantias = [{ativo: {descricao: 'Macbook Pro', id: '12'}, fornecedor: 'iPlace', contato: '3242-3454', dtValidade :'2018-06-30 15:46:22'}];
+        this.garantias; //= [{ativo: {descricao: 'Macbook Pro', id: '12'}, fornecedor: 'iPlace', contato: '3242-3454', dtValidade :'2018-06-30 15:46:22'}];
         this.GarantiaService = GarantiaService;
         this.dtValidade;
         this.$state = $state;
-        //this.getGarantias();
+        this.getGarantias();
         this.HomeService = HomeService;
 
         if($stateParams.ativo) {
@@ -32,7 +32,10 @@ class GarantiaController {
         this.GarantiaService.getGarantias().then(response => { 
             //this.garantias = response.data;
             //this.garantias[0].dtCriacao = moment().format('DD/MM/YYYY');
-            console.log(response.data);
+            if(response.status == 200){
+                this.garantias = response.data;
+            }
+            //console.log(response.data);
         }).catch(error => console.log(error));
     }
 
@@ -68,7 +71,11 @@ class GarantiaController {
 
     excluirGarantia(obj) {
         let objetoGarantia = obj;
-        this.GarantiaService.excluirGarantia(obj).then(response => console.log(response.data)).catch(error => console.log(error));
+        this.GarantiaService.excluirGarantia(obj).then(response => { 
+            if(response.status == 200){
+                this.getGarantias();
+            }
+        }).catch(error => console.log(error));
     }
 
     goEditar(obj) {
