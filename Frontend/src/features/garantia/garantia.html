@@ -47,6 +47,12 @@
                         <p>Usuários</p>
                     </a>
                 </li>
+                <li>
+                    <a href="/funcionarios">
+                        <i class="ti-key"></i>
+                        <p>Funcionários</p>
+                    </a>
+                </li>
                 <li href="/">
                     <a href="table.html">
                         <i class="ti-view-list-alt"></i>
@@ -98,7 +104,7 @@
 								      <th scope="col">Ativo ID</th>
                                       <th scope="col">Fornecedor</th>
 								      <th scope="col">Contato</th>
-                                      <th scope="col"> Data Criação </th>
+                                      <th scope="col"> Validade </th>
 								      <th scope="col">Editar</th>
 								      <th scope="col">Remover</th>
 								    </tr>
@@ -108,9 +114,9 @@
 								      <th scope="row"> {{ obj.ativo.id }} </th>
                                       <th scope="row"> {{ obj.fornecedor }} </th>
 								      <td>{{ obj.contato }}</td>
-                                      <td>{{ obj.dtCriacao}}</td>
+                                      <td>{{ obj.dtValidade}}</td>
 								      <td>
-								      	<button class="btn btn-info btn-fill btn-sm">Editar</button>
+								      	<button class="btn btn-info btn-fill btn-sm" ng-click='garantia.goEditar(obj)'>Editar</button>
 								      </td>
 								      <td>
 								      	<button class="btn btn-danger btn-fill btn-sm" data-toggle="modal" ng-click='garantia.excluirGarantia(obj)'>Remover</button>

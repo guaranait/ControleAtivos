@@ -14,5 +14,17 @@ export default function routes($stateProvider) {
       controller: 'GarantiaController',
       controllerAs: 'garantia'
     })
+    .state('editar-garantia', {
+      url: '/editar-garantia',
+      params: {
+                ativo: null,
+                dtValidade: null,
+                contato: null,
+                fornecedor: null,
+              },
+      template: require('./editar.html'),
+      controller: 'GarantiaController',
+      controllerAs: 'garantia'
+    })
     ;
 }

@@ -98,13 +98,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label> Ativo ID </label>
-                                                <input ng-model="garantia.id_ativo" type="text" class="form-control border-input" placeholder="123456">
+                                                <input ng-model="garantia.objetoEdit.ativo.id" type="text" class="form-control border-input" placeholder="123456">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Data Validade</label>
-                                                <input ng-model="garantia.dtValidade" type="date" class="form-control border-input">
+                                                <input ng-model="garantia.objetoEdit.dtValidade" type="date" class="form-control border-input">
                                             </div>
                                         </div>
                                     </div>
@@ -113,19 +113,19 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Contato</label>
-                                                <input ng-model="garantia.contato" type="text" class="form-control border-input" placeholder="(00) 00000-0000" ui-br-phone-number-mask>
+                                                <input ng-model="garantia.objetoEdit.contato" type="text" class="form-control border-input" placeholder="(00) 00000-0000" ui-br-phone-number-mask>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Fornecedor</label>
-                                                <input ng-model="garantia.fornecedor" type="text" class="form-control border-input" placeholder="Loja ABC">
+                                                <input ng-model="garantia.objetoEdit.fornecedor" type="text" class="form-control border-input" placeholder="Loja ABC">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-center">
                                         <button ng-click="garantia.goGarantias()" class="btn btn-danger btn-fill btn-wd">Cancelar</button>
-                                        <button ng-click="garantia.cadastrarGarantia()" class="btn btn-info btn-fill btn-wd">Criar Garantia</button>
+                                        <button ng-click="garantia.alterarGarantia()" class="btn btn-info btn-fill btn-wd">Alterar Garantia</button>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>

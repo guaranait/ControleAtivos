@@ -11,8 +11,7 @@ class GarantiaService {
 		.then( response => response ).catch( error => error );
 	}
 
-	adicionarGarantia(objetoGarantia) {
-		console.log(objetoGarantia);
+	cadastrarGarantia(objetoGarantia) {
 		return this.$http({
 			url:'http://localhost:8080/Restful/garantia/cadastrarGarantia',
 			method: "POST",
@@ -22,9 +21,17 @@ class GarantiaService {
 	}
 
 	excluirGarantia(objetoGarantia) {
-		console.log(objetoGarantia);
 		return this.$http({
 			url:'http://localhost:8080/Restful/garantia/excluirGarantia',
+			method: "POST",
+			data: objetoGarantia
+		})
+		.then( response => response ).catch( error => error );
+	}
+
+	alterarGarantia(objetoGarantia) {
+		return this.$http({
+			url:'http://localhost:8080/Restful/garantia/alterarGarantia',
 			method: "POST",
 			data: objetoGarantia
 		})
