@@ -113,7 +113,7 @@
 								      	<button class="btn btn-info btn-fill btn-sm" ng-click='garantia.goEditar(obj)'>Editar</button>
 								      </td>
 								      <td>
-								      	<button class="btn btn-danger btn-fill btn-sm" data-toggle="modal" ng-click='garantia.excluirGarantia(obj)'>Remover</button>
+								      	<button class="btn btn-danger btn-fill btn-sm" data-toggle="modal" ng-click='garantia.viewRemove(obj)' data-toggle="modal" data-target="#modalRemove">Remover</button>
 								      </td>
 								    </tr>
 								  </tbody>
@@ -136,11 +136,11 @@
                 <h4 class="modal-title" id="myModalLabel"> Remover Garantia </h4>
               </div>
               <div class="modal-body">
-                <p> Você deseja remover o ativo {{home.objetoModal.descricao}}? </p>
+                <p> Você deseja remover a garantia do ativo {{garantia.objetoModal.ativo.id}}? </p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="home.excluirAtivo(home.objetoModal)" >Sim</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="garantia.excluirGarantia(garantia.objetoModal)" >Sim</button>
               </div>
             </div>
           </div>

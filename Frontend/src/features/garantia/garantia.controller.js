@@ -10,9 +10,8 @@ class GarantiaController {
         this.$state = $state;
         this.getGarantias();
         this.HomeService = HomeService;
-
+        this.objetoModal;
         if($stateParams.ativo) {
-            //$stateParams.dtValidade = new Date ($stateParams.dtValidade);
             this.objetoEdit = { ativo: { id: $stateParams.ativo.id }, fornecedor: $stateParams.fornecedor, contato: $stateParams.contato};
             this.objetoEdit.dtValidade = new Date ($stateParams.dtValidade);
         }
@@ -23,38 +22,30 @@ class GarantiaController {
 
     getAtivos() {
         this.HomeService.getAtivos().then( response => { 
-            this.ativos = response.data 
-            //console.log(this.ativos);
+            if(response.status == 200){
+                this.ativos = response.data 
+            }
         }).catch( error => console.log(error) );
     }
 
     getGarantias() {
         this.GarantiaService.getGarantias().then(response => { 
-            //this.garantias = response.data;
-            //this.garantias[0].dtCriacao = moment().format('DD/MM/YYYY');
             if(response.status == 200){
                 this.garantias = response.data;
             }
-            //console.log(response.data);
         }).catch(error => console.log(error));
     }
 
     cadastrarGarantia() {
-        let objetoGarantia = {}
+        let objetoGarantia = {
+            ativo: { id: this.id_ativo,  dtCompra: moment(this.dataCompra).format("YYYY-MM-DD HH:mm:ss")},
+            dtValidade: moment(this.dtValidade).format("YYYY-MM-DD HH:mm:ss"),
+            fornecedor: this.fornecedor,
+            contato: this.contato,
+            criadoPor: 1111,
+            modificadoPor: 1111
+        }
 
-        objetoGarantia.ativo = {id: this.id_ativo};
-
-        objetoGarantia.ativo.dtCompra = moment(this.dataCompra).format("YYYY-MM-DD HH:mm:ss");
-        objetoGarantia.dtValidade = moment(this.dtValidade).format("YYYY-MM-DD HH:mm:ss");
-        objetoGarantia.fornecedor = this.fornecedor;
-        objetoGarantia.contato = this.contato;
-        objetoGarantia.criadoPor = 1111;
-        objetoGarantia.modificadoPor = 1111;
-        //objetoGarantia.dtCriacao = moment(this.dtValidade).format("YYYY-MM-DD HH:mm:ss");
-        //objetoGarantia.dtModificacao = moment(this.dtValidade).format("YYYY-MM-DD HH:mm:ss");;
-
-        console.log(objetoGarantia);
-        
         this.GarantiaService.cadastrarGarantia(objetoGarantia).then(response => {
             if(response.status == 200) {
                 this.goGarantias();
@@ -65,8 +56,16 @@ class GarantiaController {
     alterarGarantia() {
         let objetoGarantia = angular.copy(this.objetoEdit);
         objetoGarantia.dtValidade = moment(this.objetoEdit.dtValidade).format("YYYY-MM-DD HH:mm:ss");
-        console.log(objetoGarantia);
-        this.GarantiaService.alterarGarantia(obj).then(response => console.log(response.data)).catch(error => console.log(error));
+        this.GarantiaService.alterarGarantia(objetoGarantia).then(response => {
+            if(response.status == 200){
+                console.log(response);
+                this.goGarantias();
+            }
+        }).catch(error => console.log(error));
+    }
+
+    viewRemove(obj) {
+        this.objetoModal = obj;
     }
 
     excluirGarantia(obj) {
