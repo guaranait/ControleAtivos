@@ -4,15 +4,8 @@ class FuncionariosService {
     }
 
     criarFuncionario(objetoFuncionario) {
-        console.log(objetoFuncionario);
-        var url = "http://localhost:8080/Restful/funcionario/cadastrarFuncionario?nome="
-            +objetoFuncionario.nome
-            +"&cpf="+objetoFuncionario.cpf
-            +"&cnpj="+objetoFuncionario.cnpj
-            +"&cargo="+objetoFuncionario.cargo;
-
         return this.$http({
-            url: url,
+            url: 'http://localhost:8080/Restful/funcionario/cadastrarFuncionario',
             method: "POST",
             data: objetoFuncionario
         })

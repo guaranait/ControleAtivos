@@ -30,13 +30,16 @@ class FuncionariosController {
     }
 
     criarFuncionario() {
-        let objetoFuncionario = {};
-
-        objetoFuncionario.nome = this.nome;
-        objetoFuncionario.cpf = this.cpf;
-        objetoFuncionario.cnpj = this.cnpj;
-        objetoFuncionario.cargo = this.cargo;
-        objetoFuncionario.criadoPor = 1010;
+        let objetoFuncionario = {
+            nome: this.nome,
+            cpf: this.cpf,
+            cnpj: this.cnpj,
+            cargo: this.cargo,
+            criadoPor: 1010,
+            modificadoPor: 1010,
+            dtCriacao: moment().format("YYYY-MM-DD HH:mm:ss"),
+            dtModificacao: moment().format("YYYY-MM-DD HH:mm:ss")
+        };
 
         this.FuncionariosService.criarFuncionario(objetoFuncionario).then(response => {
             if (response.status == 200) {
