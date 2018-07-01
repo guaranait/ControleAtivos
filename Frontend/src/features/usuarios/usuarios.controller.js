@@ -4,7 +4,6 @@ class UsuariosController {
         this.username;
         this.senha;
         this.UsuariosService = UsuariosService;
-
         this.usuarios = [];
         this.objetoModal;
         this.$state = $state;
@@ -34,6 +33,8 @@ class UsuariosController {
         objetoUsuario.username = this.username;
         objetoUsuario.senha = this.senha;
         objetoUsuario.criadoPor = 1010;
+        objetoUsuario.dtCriacao = moment().format("YYYY-MM-DD HH:mm:ss");
+        objetoUsuario.dtModificacao = moment().format("YYYY-MM-DD HH:mm:ss");
 
         this.UsuariosService.criarUsuario(objetoUsuario).then(response => {
             if (response.status == 200) {
@@ -64,7 +65,11 @@ class UsuariosController {
     }
 
     getUsuarios() {
-        this.UsuariosService.getUsuarios().then(response => this.usuarios = response.data).catch(error => console.log(error));
+        this.UsuariosService.getUsuarios().then(response => {
+            if(response.status == 200) {
+                this.usuarios = response.data
+            }
+        }).catch(error => console.log(error));
     }
 
     limparFormulario() {
