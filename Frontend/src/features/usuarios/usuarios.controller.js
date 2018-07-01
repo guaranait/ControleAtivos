@@ -59,7 +59,7 @@ class UsuariosController {
     excluirUsuario(obj) {
         this.UsuariosService.excluirUsuario(obj).then(response => {
             if (response.status == 200) {
-                console.log(response);
+                this.getUsuarios();
             }
         }).catch(error => console.log(error));
     }

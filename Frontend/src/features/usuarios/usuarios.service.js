@@ -4,8 +4,6 @@ class UsuariosService {
     }
 
     criarUsuario(objetoUsuario) {
-        console.log(objetoUsuario);
-
         return this.$http({
             url: 'http://localhost:8080/Restful/usuario/cadastrarUsuario',
             method: "POST",
