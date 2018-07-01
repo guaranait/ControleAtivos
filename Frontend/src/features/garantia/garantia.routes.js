@@ -16,7 +16,8 @@ export default function routes($stateProvider) {
     })
     .state('editar-garantia', {
       url: '/editar-garantia',
-      params: {
+      params: { 
+                id: null,
                 ativo: null,
                 dtValidade: null,
                 contato: null,

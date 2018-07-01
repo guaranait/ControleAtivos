@@ -12,7 +12,7 @@ class GarantiaController {
         this.HomeService = HomeService;
         this.objetoModal;
         if($stateParams.ativo) {
-            this.objetoEdit = { ativo: { id: $stateParams.ativo.id }, fornecedor: $stateParams.fornecedor, contato: $stateParams.contato};
+            this.objetoEdit = { id: $stateParams.id, ativo: { id: $stateParams.ativo.id }, fornecedor: $stateParams.fornecedor, contato: $stateParams.contato};
             this.objetoEdit.dtValidade = new Date ($stateParams.dtValidade);
         }
         
@@ -56,6 +56,7 @@ class GarantiaController {
     alterarGarantia() {
         let objetoGarantia = angular.copy(this.objetoEdit);
         objetoGarantia.dtValidade = moment(this.objetoEdit.dtValidade).format("YYYY-MM-DD HH:mm:ss");
+        console.log(objetoGarantia);
         this.GarantiaService.alterarGarantia(objetoGarantia).then(response => {
             if(response.status == 200){
                 console.log(response);

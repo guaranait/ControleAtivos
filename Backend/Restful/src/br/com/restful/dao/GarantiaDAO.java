@@ -122,9 +122,10 @@ public class GarantiaDAO {
 			pstm.setString(2, garantia.getFornecedor());
 			pstm.setString(3, garantia.getContato());
 			pstm.setDate(4, new java.sql.Date(garantia.getDtValidade().getTime()));
-			pstm.setLong(5, garantia.getModificadoPor());
-			pstm.setDate(6, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setLong(7, garantia.getId());
+			pstm.setLong(5, garantia.getCriadoPor());
+			pstm.setLong(6, garantia.getModificadoPor());
+			pstm.setDate(7, new java.sql.Date(System.currentTimeMillis()));
+			pstm.setLong(8, garantia.getId());
 			
 			// Executa a sql para inser��o dos dados
 			if(pstm.executeUpdate() > 0){
