@@ -164,7 +164,7 @@ public class EmprestimoDAO {
 	}
 	
 	public Boolean cadastrarEmprestimo(Emprestimo emprestimo) {
-		String sql = "INSERT INTO lu2cas01.GARANTIA(id_ativo,id_funcionario,dt_emprestimo,dt_devolucao,criado_por,dt_criacao)"
+		String sql = "INSERT INTO lu2cas01.EMPRESTIMO(id_ativo,id_funcionario,dt_emprestimo,dt_devolucao,criado_por,dt_criacao)"
 				+ " VALUES(?,?,?,?,?,?)";
 		
 		Connection conn = null;
