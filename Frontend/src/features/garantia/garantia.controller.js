@@ -11,13 +11,13 @@ class GarantiaController {
         this.getGarantias();
         this.HomeService = HomeService;
         this.objetoModal;
+        this.ativoSelecionado;
         if($stateParams.ativo) {
             this.objetoEdit = { id: $stateParams.id, ativo: { id: $stateParams.ativo.id }, fornecedor: $stateParams.fornecedor, contato: $stateParams.contato};
             this.objetoEdit.dtValidade = new Date ($stateParams.dtValidade);
         }
-        
-        //this.getAtivos();
-        //this.ativos = [];
+        this.getAtivos();
+        this.ativos = [];
     }
 
     getAtivos() {
@@ -38,7 +38,7 @@ class GarantiaController {
 
     cadastrarGarantia() {
         let objetoGarantia = {
-            ativo: { id: this.id_ativo,  dtCompra: moment(this.dataCompra).format("YYYY-MM-DD HH:mm:ss")},
+            ativo: this.ativoSelecionado,
             dtValidade: moment(this.dtValidade).format("YYYY-MM-DD HH:mm:ss"),
             fornecedor: this.fornecedor,
             contato: this.contato,
