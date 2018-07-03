@@ -144,7 +144,7 @@ public class ManutencaoDAO {
 	}
 	
 	public Boolean concluirManutencao(Manutencao manutencao) {
-		String sql = "UPDATE lu2cas01.MANUTENCAO set descricao ?, dt_conserto = ?, modificado_por = ?, dt_modificacao = ? WHERE id_ativo = ?)";
+		String sql = "UPDATE lu2cas01.MANUTENCAO SET descricao = ?, dt_conserto = ?, modificado_por = ?, dt_modificacao = ? WHERE id_ativo = ?";
 		
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -157,7 +157,7 @@ public class ManutencaoDAO {
 			pstm.setDate(2, new java.sql.Date(System.currentTimeMillis())); //dtConserto
 			pstm.setLong(3, manutencao.getModificadoPor());
 			pstm.setDate(4, new java.sql.Date(System.currentTimeMillis())); //dtCriacao
-			pstm.setLong(5, manutencao.getId());
+			pstm.setLong(5, manutencao.getAtivo().getId());
 			// Executa a sql para inser��o dos dados
 			if(pstm.executeUpdate() > 0){
 				cadastrou = true;
