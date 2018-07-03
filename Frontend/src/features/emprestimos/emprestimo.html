@@ -83,7 +83,9 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 text-right">
-                                <button class="btn-add-ativo btn btn-info btn-fill btn-wd" ng-click="emprestimo.adicionarVinculo()"> Adicionar Vínculo </button>
+                                <!-- ng-click="emprestimo.goVincular()" -->
+                                <button class="btn-add-ativo btn btn-info btn-fill btn-wd" ng-click="emprestimo.goVincular()"> Adicionar Vínculo </button>
+                                <!--button class="btn-add-ativo btn btn-info btn-fill btn-wd"  data-toggle="modal" data-target="#modalAdicionar"> Adicionar Vínculo </button-->
                             </div>
                         </div>
                         <div class="card">
@@ -99,7 +101,7 @@
                                       <th scope="col">Descrição</th>
                                       <th scope="col">Funcionário</th>
                                       <th scope="col">Data de Empréstimo</th>
-                                      <th scope="col"> Remover </th>
+                                      <th scope="col"> Desvincular </th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -110,7 +112,7 @@
                                       <td>{{ obj.dtEmprestimo }}</td>
                                      
                                       <td>
-                                        <button class="btn btn-danger btn-fill btn-sm" ng-click="emprestimo.removerVinculo(obj)" data-toggle="modal" data-target="#modalRemove">Remover</button>
+                                        <button class="btn btn-danger btn-fill btn-sm" ng-click="emprestimo.viewRemove(obj)" data-toggle="modal" data-target="#modalRemove">Desvincular</button>
                                       </td>
                                       
                                     </tr>
@@ -123,6 +125,25 @@
 
                 </div>
             </div>
+        </div>
+
+        <!-- Modal Remover -->
+        <div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="modalRemove">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"> Desvincular Empréstimo</h4>
+              </div>
+              <div class="modal-body">
+                <p> Você deseja desvincular o(a) {{emprestimo.objetoModal.ativo.descricao}} do(a) {{ emprestimo.objetoModal.funcionario.nome }}? </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="emprestimo.desvincular()">Sim</button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <footer class="footer">

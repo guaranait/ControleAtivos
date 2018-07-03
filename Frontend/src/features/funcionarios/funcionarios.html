@@ -87,6 +87,7 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
+                                                    <th scope="col">ID</th>
                                                     <th scope="col">Nome</th>
                                                     <th scope="col">CPF</th>
                                                     <th scope="col">CNPJ</th>
@@ -97,6 +98,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="obj in funcionarios.funcionarios">
+                                                    <td>{{obj.id}}</td>
                                                     <td>{{obj.nome}}</td>
                                                     <td>{{obj.cpf|brCpf}}</td>
                                                     <td>{{obj.cnpj|brCnpj}}</td>

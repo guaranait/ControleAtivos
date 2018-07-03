@@ -53,7 +53,7 @@
                         <p>Funcionários</p>
                     </a>
                 </li>
-                <li class="active" href="/">
+                <li href="/">
                     <a href="table.html">
                         <i class="ti-view-list-alt"></i>
                         <p>Ativos</p>
@@ -65,16 +65,10 @@
                         <p>Garantias</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="/emprestimo">
-                        <i class="ti-pencil-alt2"></i>
-                        <p>Menu B</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="ti-map"></i>
-                        <p>Menu C</p>
+                        <i class="ti-package"></i>
+                        <p>Empréstimos</p>
                     </a>
                 </li>
             </ul>
@@ -95,57 +89,27 @@
                             <div class="content">
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Descrição</label>
-                                                <input ng-model="home.descricao" type="text" class="form-control border-input" placeholder="Macbook Pro 16">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-md-6">
                                             <label for="singleSelect"> Ativo: </label><br>
-                                            <select name="singleSelect" ng-model="data.singleSelect">
-                                              <option value="option-1">Option 1</option>
-                                              <option value="option-2">Option 2</option>
-                                            </select>
+                                            <select class="form-control" ng-options="ativo as ativo.descricao for ativo in emprestimo.ativos" ng-model="emprestimo.ativoSelecionado"></select>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="singleSelect"> Funcionário: </label><br>
-                                            <select name="singleSelect" ng-model="data.singleSelect">
-                                              <option value="option-1">Option 1</option>
-                                              <option value="option-2">Option 2</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Valor da Compra</label>
-                                                <input ng-model="home.valorCompra" type="text" class="form-control border-input" placeholder="0" ui-money-mask currency-symbol="R$">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Valor Depreciado</label>
-                                                <input ng-model="home.valorDepreciado" type="text" class="form-control border-input" placeholder="0" ui-money-mask currency-symbol="R$">
-                                            </div>
+                                            <select class="form-control" ng-options="funcionario as funcionario.nome for funcionario in emprestimo.funcionarios" ng-model="emprestimo.funcionarioSelecionado"></select>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Observação</label>
-                                                <textarea ng-model="home.observacao" rows="5" class="form-control border-input" placeholder="Observação..."></textarea>
+                                                <label>Data do Empréstimo</label>
+                                                <input ng-model="emprestimo.dtEmprestimo" type="date" class="form-control border-input">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button ng-click="home.cancelarCriacao()" class="btn btn-danger btn-fill btn-wd">Cancelar</button>
-                                        <button ng-click="home.criarAtivo()" class="btn btn-info btn-fill btn-wd" ng-disabled="!(home.descricao && home.fabricante && home.dataCompra && home.valorCompra && home.valorDepreciado && home.observacao)">Criar Ativo</button>
+                                        <button ng-click="emprestimo.cancelar()" class="btn btn-danger btn-fill btn-wd">Cancelar</button>
+                                        <button ng-click="emprestimo.vincular()" class="btn btn-info btn-fill btn-wd">Vincular</button>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
