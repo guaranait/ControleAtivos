@@ -14,6 +14,7 @@ class UsuariosController {
             this.objetoEdit.senha = $stateParams.senha;
             this.objetoEdit.criadoPor = $stateParams.criadoPor;
             this.objetoEdit.id = $stateParams.id;
+            this.objetoEdit.dtCriacao = $stateParams.dtCriacao;
         }
         this.getUsuarios();
     }
