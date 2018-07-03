@@ -59,7 +59,7 @@ public class EmprestimoResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response cadastrarEmprestimo(String emprestimoJson) throws ParseException{
 		
-		Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm:ss").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Emprestimo emprestimo = gson.fromJson(emprestimoJson, Emprestimo.class);
 		
 		EmprestimoController emprestimoController = new EmprestimoController();
