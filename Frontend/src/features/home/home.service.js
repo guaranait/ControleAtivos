@@ -4,15 +4,6 @@ class HomeService {
 	}
 
 	criarAtivo(objetoAtivo) {
-		//var url = "http://localhost:8080/Restful/ativo/cadastrarAtivo?descricao=Mouse&dtCompra=01-01-2018&fabricante=Dell&vlDepreciado=45&vlCompra=50&idStatus=0";
-		var url = "http://localhost:8080/Restful/ativo/cadastrarAtivo?descricao="
-			+objetoAtivo.descricao
-			+"&dtCompra="+objetoAtivo.dtCompra
-			+"&fabricante="+objetoAtivo.fabricante
-			+"&vlDepreciado="+objetoAtivo.vlDepreciado
-			+"&vlCompra="+objetoAtivo.vlCompra
-			+"&idStatus=0";
-
 		return this.$http({
 			url:'http://localhost:8080/Restful/ativo/cadastrarAtivo',
 			method: "POST",

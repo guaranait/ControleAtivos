@@ -4,10 +4,9 @@ class HomeController {
 		this.fabricante;
 		this.dataCompra;
 		this.valorCompra;
-		this.valorDepreciado = 0;
+		this.valorDepreciado = 0.0;
 		this.observacao = " ";
 		this.HomeService = HomeService;
-		//this.ativos = [{id: 2, idStatus: 1, descricao: 'Macbook Pro 13', fabricante: 'Apple', vlCompra: 3000, vlDepreciado: 300}];
 		this.ativos = [];
 		this.objetoModal;
 		this.money;
@@ -16,7 +15,6 @@ class HomeController {
 		if($stateParams.descricao) {
 			this.objetoEdit.descricao = $stateParams.descricao;
 			this.objetoEdit.fabricante = $stateParams.fabricante;
-			//Alterar no Backend
 			this.objetoEdit.dtCompra = moment($stateParams.dtCompra).format('DD/MM/YYYY');
 			this.objetoEdit.vlCompra = $stateParams.vlCompra;
 			this.objetoEdit.vlDepreciado = $stateParams.vlDepreciado;
@@ -24,7 +22,6 @@ class HomeController {
 			this.objetoEdit.idStatus = $stateParams.idStatus;
 			this.objetoEdit.obs = $stateParams.obs;
 			this.objetoEdit.id = $stateParams.id;
-			/* OBSERVAÇÃO */
 			this.objetoEdit.obs = $stateParams.observacao;
 		}
 		this.getAtivos();
@@ -43,17 +40,19 @@ class HomeController {
 	}
 
 	criarAtivo() {
-		let objetoAtivo = {};
-
-		objetoAtivo.descricao = this.descricao;
-		objetoAtivo.fabricante = this.fabricante;
-		objetoAtivo.dtCompra = moment(this.dataCompra).format("YYYY-MM-DD HH:mm:ss");
-		objetoAtivo.vlCompra = this.valorCompra;
-		objetoAtivo.vlDepreciado = this.valorDepreciado;
-		objetoAtivo.criadoPor = 1122;
-		objetoAtivo.idStatus = 1;
-		objetoAtivo.observacao = this.observacao;
-
+		let objetoAtivo = {
+			descricao: this.descricao,
+			fabricante: this.fabricante,
+			dtCompra: moment(this.dataCompra).format("YYYY-MM-DD HH:mm:ss"),
+			vlCompra: this.valorCompra,
+			vlDepreciado: this.valorDepreciado,
+			criadoPor: 1122,
+			idStatus: 1,
+			observacao: this.observacao
+		};
+		if(!this.valorDepreciado) {
+			objetoAtivo.vlDepreciado = 0.01
+		} 
 		this.HomeService.criarAtivo(objetoAtivo).then( response => {
 			if(response.status == 200) {
 				this.limparFormulario();
@@ -63,8 +62,10 @@ class HomeController {
     }
 
     alterarAtivo() {
-    	/* SALVAR OBSERVAÇÃO */
     	this.objetoEdit.dtCompra = moment(this.objetoEdit.dtCompra).format("YYYY-MM-DD HH:mm:ss");
+    	if(!this.objetoEdit.vlDepreciado) {
+			this.objetoEdit.vlDepreciado = 0.01
+		} 
     	this.HomeService.alterarAtivo(this.objetoEdit).then( response => {
 			if(response.status == 200) {
 				this.$state.go('ativos');
@@ -91,7 +92,6 @@ class HomeController {
     getAtivos() {
     	this.HomeService.getAtivos().then( response => { 
     		this.ativos = response.data 
-    		console.log(response.data);
     	}).catch( error => console.log(error) );
     }
 

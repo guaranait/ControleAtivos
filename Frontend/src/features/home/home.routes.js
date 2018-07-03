@@ -4,7 +4,7 @@ export default function routes($stateProvider) {
   $stateProvider
     .state('home', {
       url: '/adicionar-ativo',
-      template: require('./home.html'),
+      template: require('./adicionar.html'),
       controller: 'HomeController',
       controllerAs: 'home'
     })
