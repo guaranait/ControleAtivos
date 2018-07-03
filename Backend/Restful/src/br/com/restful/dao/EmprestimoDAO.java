@@ -25,7 +25,8 @@ public class EmprestimoDAO {
 					+ "		   lu2cas01.FUNCIONARIO f, "
 					+ "		   lu2cas01.ATIVO a "
 					+ " WHERE  e.id_funcionario = f.id "
-					+ "   AND  e.id_ativo = a.id ";
+					+ "   AND  e.id_ativo = a.id "
+					+ "   AND  a.id_status = 3 ";
 		 
 		ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 		 
