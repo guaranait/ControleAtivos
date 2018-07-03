@@ -50,7 +50,8 @@ public class ManutencaoResource {
 			if(manutencaoController.cadastrarManutencao(manutencao)){
 				AtivoDAO ativoDAO = new AtivoDAO();
 				manutencao.getAtivo().setIdStatus(2);
-				if(ativoDAO.setManutencao(manutencao)) {
+				manutencao.getAtivo().setModificadoPor(manutencao.getCriadoPor());
+				if(ativoDAO.setStatus(manutencao.getAtivo())) {
 					return Response.ok().build();
 				}else {
 					return Response.serverError().build();
@@ -78,7 +79,8 @@ public class ManutencaoResource {
 			if(manutencaoController.concluirManutencao(manutencao)){
 				AtivoDAO ativoDAO = new AtivoDAO();
 				manutencao.getAtivo().setIdStatus(1);
-				if(ativoDAO.setManutencao(manutencao)) {
+				manutencao.getAtivo().setModificadoPor(manutencao.getModificadoPor());
+				if(ativoDAO.setStatus(manutencao.getAtivo())) {
 					return Response.ok().build();
 				}else {
 					return Response.serverError().build();

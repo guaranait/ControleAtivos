@@ -75,6 +75,165 @@ public class AtivoDAO {
 		 }
 		return ativos;
 	}
+	
+	public ArrayList<Ativo> listarAtivosDisponiveis() {
+		String sql = "SELECT * FROM lu2cas01.ATIVO WHERE id_status = 1";
+		 
+		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
+		 
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		 
+		try {
+			conn = ConnectionFactory.criarConexao();
+			pstm = conn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+		 
+			while(rs.next()){
+				Ativo ativo = new Ativo();
+				 
+				ativo.setId(rs.getLong("id"));
+				ativo.setDescricao(rs.getString("descricao")); 
+				ativo.setDtCompra(rs.getDate("dt_compra"));
+				ativo.setFabricante(rs.getString("fabricante"));
+				ativo.setVlCompra(rs.getDouble("vl_compra"));
+				ativo.setVlDepreciado(rs.getDouble("vl_depreciado"));
+				ativo.setCriadoPor(rs.getLong("criado_por"));
+				ativo.setDtCriacao(rs.getDate("dt_criacao"));
+				ativo.setIdStatus(rs.getLong("id_status"));
+				ativo.setModificadoPor(rs.getLong("modificado_por"));
+				ativo.setDtModificacao(rs.getDate("dt_modificacao"));
+				ativo.setObservacao(rs.getString("observacao"));
+				ativo.getCategoria().setId(rs.getLong("id_categoria"));
+				 
+				ativos.add(ativo);
+			}
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }finally{
+			 try{
+				 if(rs != null){
+					 rs.close();
+				 }
+				 if(pstm != null){
+					 pstm.close();
+				 }
+				 if(conn != null){
+					 conn.close();
+				 }
+			 }catch(Exception e){
+				 e.printStackTrace();
+			 }
+		 }
+		return ativos;
+	}
+	
+	public ArrayList<Ativo> listarAtivosEmprestados() {
+		String sql = "SELECT * FROM lu2cas01.ATIVO WHERE id_status = 3";
+		 
+		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
+		 
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		 
+		try {
+			conn = ConnectionFactory.criarConexao();
+			pstm = conn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+		 
+			while(rs.next()){
+				Ativo ativo = new Ativo();
+				 
+				ativo.setId(rs.getLong("id"));
+				ativo.setDescricao(rs.getString("descricao")); 
+				ativo.setDtCompra(rs.getDate("dt_compra"));
+				ativo.setFabricante(rs.getString("fabricante"));
+				ativo.setVlCompra(rs.getDouble("vl_compra"));
+				ativo.setVlDepreciado(rs.getDouble("vl_depreciado"));
+				ativo.setCriadoPor(rs.getLong("criado_por"));
+				ativo.setDtCriacao(rs.getDate("dt_criacao"));
+				ativo.setIdStatus(rs.getLong("id_status"));
+				ativo.setModificadoPor(rs.getLong("modificado_por"));
+				ativo.setDtModificacao(rs.getDate("dt_modificacao"));
+				ativo.setObservacao(rs.getString("observacao"));
+				ativo.getCategoria().setId(rs.getLong("id_categoria"));
+				 
+				ativos.add(ativo);
+			}
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }finally{
+			 try{
+				 if(rs != null){
+					 rs.close();
+				 }
+				 if(pstm != null){
+					 pstm.close();
+				 }
+				 if(conn != null){
+					 conn.close();
+				 }
+			 }catch(Exception e){
+				 e.printStackTrace();
+			 }
+		 }
+		return ativos;
+	}
+	
+	public ArrayList<Ativo> listarAtivosManutencao() {
+		String sql = "SELECT * FROM lu2cas01.ATIVO WHERE id_status = 2";
+		 
+		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
+		 
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		 
+		try {
+			conn = ConnectionFactory.criarConexao();
+			pstm = conn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+		 
+			while(rs.next()){
+				Ativo ativo = new Ativo();
+				 
+				ativo.setId(rs.getLong("id"));
+				ativo.setDescricao(rs.getString("descricao")); 
+				ativo.setDtCompra(rs.getDate("dt_compra"));
+				ativo.setFabricante(rs.getString("fabricante"));
+				ativo.setVlCompra(rs.getDouble("vl_compra"));
+				ativo.setVlDepreciado(rs.getDouble("vl_depreciado"));
+				ativo.setCriadoPor(rs.getLong("criado_por"));
+				ativo.setDtCriacao(rs.getDate("dt_criacao"));
+				ativo.setIdStatus(rs.getLong("id_status"));
+				ativo.setModificadoPor(rs.getLong("modificado_por"));
+				ativo.setDtModificacao(rs.getDate("dt_modificacao"));
+				ativo.setObservacao(rs.getString("observacao"));
+				ativo.getCategoria().setId(rs.getLong("id_categoria"));
+				 
+				ativos.add(ativo);
+			}
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }finally{
+			 try{
+				 if(rs != null){
+					 rs.close();
+				 }
+				 if(pstm != null){
+					 pstm.close();
+				 }
+				 if(conn != null){
+					 conn.close();
+				 }
+			 }catch(Exception e){
+				 e.printStackTrace();
+			 }
+		 }
+		return ativos;
+	}
 
 	public ArrayList<Ativo> listarAtivo(Ativo ativo) {
 		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
@@ -296,7 +455,7 @@ public class AtivoDAO {
 		return sucesso;
 	}
 	
-	public Boolean setManutencao(Manutencao manutencao) {
+	public Boolean setStatus(Ativo ativo) {
 		String sql = "UPDATE lu2cas01.ATIVO SET id_status = ?, modificado_por = ?, dt_modificacao = ? WHERE id = ?";
 
 		Connection conn = null;
@@ -306,10 +465,10 @@ public class AtivoDAO {
 			conn = ConnectionFactory.criarConexao();
 			pstm = conn.prepareStatement(sql);
 
-			pstm.setLong(1, manutencao.getAtivo().getIdStatus());
-			pstm.setLong(2, manutencao.getCriadoPor());
+			pstm.setLong(1, ativo.getIdStatus());
+			pstm.setLong(2, ativo.getModificadoPor());
 			pstm.setDate(3, new java.sql.Date(System.currentTimeMillis()));
-			pstm.setLong(4, manutencao.getAtivo().getId());
+			pstm.setLong(4, ativo.getId());
 
 			// Executa o sql para inserção dos dados
 			if(pstm.executeUpdate() > 0){

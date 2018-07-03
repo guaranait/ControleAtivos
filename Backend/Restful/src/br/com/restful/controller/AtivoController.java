@@ -13,6 +13,18 @@ public class AtivoController {
 		return AtivoDAO.getInstance().listarAtivos();
 	}
 	
+	public ArrayList<Ativo> listarAtivosDisponiveis(){
+		return AtivoDAO.getInstance().listarAtivosDisponiveis();
+	}
+	
+	public ArrayList<Ativo> listarAtivosEmprestados(){
+		return AtivoDAO.getInstance().listarAtivosEmprestados();
+	}
+	
+	public ArrayList<Ativo> listarAtivosManutencao(){
+		return AtivoDAO.getInstance().listarAtivosManutencao();
+	}
+	
 	public ArrayList<Ativo> listarAtivo(Ativo ativo){
 		return AtivoDAO.getInstance().listarAtivo(ativo);
 	}
@@ -32,8 +44,8 @@ public class AtivoController {
 		return sucesso;
 	}
 	
-	public boolean setManutencao(Manutencao manutencao) {
-		return AtivoDAO.getInstance().setManutencao(manutencao);
+	public boolean setManutencao(Ativo ativo) {
+		return AtivoDAO.getInstance().setStatus(ativo);
 	}
 	
 	

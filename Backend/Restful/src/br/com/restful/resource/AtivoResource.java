@@ -51,6 +51,45 @@ public class AtivoResource {
 	}*/
 	
 	@GET
+	@Path("/listarAtivosDisponiveis")
+	@Produces("application/json")
+	public Response listarAtivosDisponiveis(){
+		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
+		AtivoController ativoController = new AtivoController();
+		ativos = ativoController.listarAtivosDisponiveis();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonAtivos = gson.toJson(ativos);
+		
+		return Response.status(200).entity(jsonAtivos).build();
+	}
+	
+	@GET
+	@Path("/listarAtivosEmprestados")
+	@Produces("application/json")
+	public Response listarAtivosEmprestados(){
+		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
+		AtivoController ativoController = new AtivoController();
+		ativos = ativoController.listarAtivosEmprestados();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonAtivos = gson.toJson(ativos);
+		
+		return Response.status(200).entity(jsonAtivos).build();
+	}
+	
+	@GET
+	@Path("/listarAtivosManutencao")
+	@Produces("application/json")
+	public Response listarAtivosManutencao(){
+		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
+		AtivoController ativoController = new AtivoController();
+		ativos = ativoController.listarAtivosManutencao();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonAtivos = gson.toJson(ativos);
+		
+		return Response.status(200).entity(jsonAtivos).build();
+	}
+	
+	@GET
 	@Path("/listarAtivo")
 	@Produces("application/json")
 	public Response listarAtivo(String ativoJson){

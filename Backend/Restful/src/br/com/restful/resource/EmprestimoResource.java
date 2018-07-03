@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 
 import br.com.restful.controller.AtivoController;
 import br.com.restful.controller.EmprestimoController;
+import br.com.restful.dao.AtivoDAO;
 import br.com.restful.model.Ativo;
 import br.com.restful.model.Emprestimo;
 
@@ -63,10 +64,21 @@ public class EmprestimoResource {
 		Emprestimo emprestimo = gson.fromJson(emprestimoJson, Emprestimo.class);
 		
 		EmprestimoController emprestimoController = new EmprestimoController();
-		if(emprestimoController.cadastrarEmprestimo(emprestimo)){
-			return Response.ok().build();
-		}else{
-			return Response.serverError().build();
+		if(emprestimoController.validador(emprestimo)) {
+			if(emprestimoController.cadastrarEmprestimo(emprestimo)){
+				AtivoDAO ativoDAO = new AtivoDAO();
+				emprestimo.getAtivo().setIdStatus(3);
+				emprestimo.getAtivo().setModificadoPor(emprestimo.getCriadoPor());
+				if(ativoDAO.setStatus(emprestimo.getAtivo())) {
+					return Response.ok().build();
+				}else {
+					return Response.serverError().build();
+				}
+			}else{
+				return Response.serverError().build();
+			}
+		}else {
+			return Response.status(400).build();
 		}
 		
 	}
@@ -95,10 +107,18 @@ public class EmprestimoResource {
 	public Response devolverEmprestimo(String emprestimoJson) throws ParseException{
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Emprestimo emprestimo = gson.fromJson(emprestimoJson, Emprestimo.class);
+		EmprestimoController emprestimoController = new EmprestimoController();
 		
-		if(emprestimo.getAtivo().getId() > 0 && emprestimo.getFuncionario().getId() > 0) {
-			if(new EmprestimoController().devolverEmprestimo(emprestimo)){
-				return Response.ok().build();
+		if(emprestimoController.validador(emprestimo)) {
+			if(emprestimoController.devolverEmprestimo(emprestimo)){
+				AtivoDAO ativoDAO = new AtivoDAO();
+				emprestimo.getAtivo().setIdStatus(1);
+				emprestimo.getAtivo().setModificadoPor(emprestimo.getModificadoPor());
+				if(ativoDAO.setStatus(emprestimo.getAtivo())) {
+					return Response.ok().build();
+				}else {
+					return Response.serverError().build();
+				}
 			}else{
 				return Response.serverError().build();
 			}
