@@ -1,9 +1,10 @@
 class UsuariosController {
-    constructor(UsuariosService, $state, $stateParams) {
+    constructor(UsuariosService, MessagesService, $state, $stateParams) {
         this.idPerfil;
         this.username;
         this.senha;
         this.UsuariosService = UsuariosService;
+        this.MessagesService = MessagesService;
         this.usuarios = [];
         this.objetoModal;
         this.$state = $state;
@@ -17,6 +18,10 @@ class UsuariosController {
             this.objetoEdit.dtCriacao = $stateParams.dtCriacao;
         }
         this.getUsuarios();
+        this.perfis = [
+            {id: '1', descricao: 'Administrador'},
+            {id: '2', descricao: 'Colaborador'}
+        ];
     }
 
     view(obj) {
@@ -39,6 +44,7 @@ class UsuariosController {
 
         this.UsuariosService.criarUsuario(objetoUsuario).then(response => {
             if (response.status == 200) {
+                this.MessagesService.setMessage('Usuário adicionado com sucesso!', 'success');
                 this.limparFormulario();
                 this.$state.go('listarUsuarios');
             }
@@ -48,6 +54,7 @@ class UsuariosController {
     alterarUsuario() {
         this.UsuariosService.alterarUsuario(this.objetoEdit).then(response => {
             if (response.status == 200) {
+                this.MessagesService.setMessage('Usuário editado com sucesso!', 'success');
                 this.$state.go('listarUsuarios');
             }
         }).catch(error => console.log(error) );
@@ -60,6 +67,7 @@ class UsuariosController {
     excluirUsuario(obj) {
         this.UsuariosService.excluirUsuario(obj).then(response => {
             if (response.status == 200) {
+                this.MessagesService.setMessage('Usuário removido com sucesso!', 'success');
                 this.getUsuarios();
             }
         }).catch(error => console.log(error));
@@ -82,8 +90,23 @@ class UsuariosController {
     adicionarUsuario() {
         this.$state.go('adicionarUsuario');
     }
+
+    getperfis() {
+        return this.perfis;
+    }
+
+    getPerfil(idPerfil) {
+        var descricao = 'Perfil ' + idPerfil;
+        for (var i in this.perfis) {
+            if (this.perfis[i].id == idPerfil) {
+                descricao = this.perfis[i].descricao;
+                break;
+            }
+        }
+        return descricao;
+    }
 }
 
-UsuariosController.$inject = ['UsuariosService', '$state', '$stateParams'];
+UsuariosController.$inject = ['UsuariosService', 'MessagesService', '$state', '$stateParams'];
 
 export default UsuariosController;
