@@ -1,11 +1,11 @@
 class FuncionariosController {
-    constructor(FuncionariosService, $state, $stateParams) {
+    constructor(FuncionariosService, MessagesService, $state, $stateParams) {
         this.nome;
         this.cpf;
         this.cnpj;
         this.cargo;
         this.FuncionariosService = FuncionariosService;
-
+        this.MessagesService = MessagesService;
         this.funcionarios = [];
         this.objetoModal;
         this.$state = $state;
@@ -43,6 +43,7 @@ class FuncionariosController {
 
         this.FuncionariosService.criarFuncionario(objetoFuncionario).then(response => {
             if (response.status == 200) {
+                this.MessagesService.setMessage('Funcionário adicionado com sucesso!', 'success');
                 this.limparFormulario();
                 this.$state.go('listarFuncionarios');
             }
@@ -52,6 +53,7 @@ class FuncionariosController {
     alterarFuncionario() {
         this.FuncionariosService.alterarFuncionario(this.objetoEdit).then(response => {
             if (response.status == 200) {
+                this.MessagesService.setMessage('Funcionario editado com sucesso!', 'success');
                 this.$state.go('listarFuncionarios');
             }
         }).catch(error => console.log(error) );
@@ -64,6 +66,7 @@ class FuncionariosController {
     excluirFuncionario(obj) {
         this.FuncionariosService.excluirFuncionario(obj).then(response => {
             if (response.status == 200) {
+                this.MessagesService.setMessage('Funcionário removido com sucesso!', 'success');
                 this.getFuncionarios();
             }
         }).catch(error => console.log(error));
@@ -85,6 +88,6 @@ class FuncionariosController {
     }
 }
 
-FuncionariosController.$inject = ['FuncionariosService', '$state', '$stateParams'];
+FuncionariosController.$inject = ['FuncionariosService', 'MessagesService', '$state', '$stateParams'];
 
 export default FuncionariosController;

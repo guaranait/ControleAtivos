@@ -89,8 +89,9 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Perfil</label>
-                                                <input ng-model="usuarios.idPerfil" type="text" class="form-control border-input" placeholder="10">
+                                                <select ng-model="usuarios.objetoEdit.idPerfil" class="form-control border-input"
+                                                    ng-options="item.id as item.descricao for item in usuarios.perfis track by item.id">
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
