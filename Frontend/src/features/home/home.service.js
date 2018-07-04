@@ -20,6 +20,14 @@ class HomeService {
 		.then( response => response ).catch( error => error );
 	}
 
+	getAtivosDisponiveis() {
+		return this.$http({
+			url: 'http://localhost:8080/Restful/ativo/listarAtivosDisponiveis',
+			method: "GET"
+		})
+		.then( response => response ).catch( error => error );
+	}
+
 	alterarAtivo(objetoAtivo) {
 		return this.$http({
 			url:'http://localhost:8080/Restful/ativo/alterarAtivo',
