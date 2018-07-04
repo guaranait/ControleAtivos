@@ -20,7 +20,7 @@ class HomeController {
 			this.objetoEdit.vlDepreciado = $stateParams.vlDepreciado;
 			this.objetoEdit.criadoPor = $stateParams.criadoPor;
 			this.objetoEdit.idStatus = $stateParams.idStatus;
-			this.objetoEdit.obs = $stateParams.obs;
+			this.objetoEdit.observacao = $stateParams.observacao;
 			this.objetoEdit.id = $stateParams.id;
 			this.objetoEdit.obs = $stateParams.observacao;
 		}
@@ -65,7 +65,7 @@ class HomeController {
     	this.objetoEdit.dtCompra = moment(this.objetoEdit.dtCompra).format("YYYY-MM-DD HH:mm:ss");
     	if(!this.objetoEdit.vlDepreciado) {
 			this.objetoEdit.vlDepreciado = 0.01
-		} 
+		}
     	this.HomeService.alterarAtivo(this.objetoEdit).then( response => {
 			if(response.status == 200) {
 				this.$state.go('ativos');
