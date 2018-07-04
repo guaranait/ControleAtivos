@@ -56,10 +56,8 @@ class GarantiaController {
     alterarGarantia() {
         let objetoGarantia = angular.copy(this.objetoEdit);
         objetoGarantia.dtValidade = moment(this.objetoEdit.dtValidade).format("YYYY-MM-DD HH:mm:ss");
-        console.log(objetoGarantia);
         this.GarantiaService.alterarGarantia(objetoGarantia).then(response => {
             if(response.status == 200){
-                console.log(response);
                 this.goGarantias();
             }
         }).catch(error => console.log(error));
