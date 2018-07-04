@@ -149,12 +149,10 @@ class HomeController {
 	}
 
 	dicionarioManutencao(idStatus) {
-		if (idStatus == 1) {
-			return "Não"
-		} else if (idStatus == 2) {
+		if (idStatus == 2) {
 			return "Sim"
 		} else {
-			return idStatus
+			return "Não"
 		}
 	}
 }
