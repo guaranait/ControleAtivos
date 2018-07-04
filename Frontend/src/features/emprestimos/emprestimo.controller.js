@@ -14,7 +14,19 @@ class EmprestimoController {
         this.getEmprestimos();
         this.getAtivos();
         this.getFuncionarios();
+
+        if($state.current.name == 'adicionar-vinculo') {
+            this.getAtivosDisponiveis();
+        }
 	}
+
+    getAtivosDisponiveis() {
+        this.HomeService.getAtivosDisponiveis().then( response => { 
+            if(response.status == 200){
+                this.ativosDisponiveis = response.data 
+            }
+        }).catch( error => console.log(error) );
+    }
 
     getAtivos() {
         this.HomeService.getAtivos().then( response => { 
@@ -66,6 +78,9 @@ class EmprestimoController {
     desvincular() {
     	let objDevolucao = angular.copy(this.objetoModal);
     	objDevolucao.dtDevolucao = moment().format("YYYY-MM-DD HH:mm:ss");
+
+        console.log(objDevolucao);
+
     	this.EmprestimoService.devolverEmprestimo(objDevolucao).then( response => { 
             if(response.status == 200) {
                 this.getEmprestimos();
