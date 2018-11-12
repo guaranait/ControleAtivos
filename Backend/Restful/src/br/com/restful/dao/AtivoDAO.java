@@ -376,7 +376,7 @@ public class AtivoDAO {
 		return cadastrou;
 	}
 
-	public Boolean alterarAtivo(Ativo ativo) {
+	public boolean alterarAtivo(Ativo ativo) {
 		String sql = "UPDATE lu2cas01.ATIVO SET descricao = ?,fabricante = ?,dt_compra = ?,vl_compra = ?,vl_depreciado = ?,id_status = ?, observacao = ?, id_categoria = ?, modificado_por = ?, dt_modificacao = ? WHERE id = ?";
 
 		Connection conn = null;

@@ -165,5 +165,38 @@ public class AtivoControllerTest {
 		assertEquals(true, ativoResource.excluirAtivo(ativo));
 	}
 	
+	@Test
+	public void testAlteraAtivoComDaoRetornandoOkSemAtivoPreenchido() throws ParseException  {
+		AtivoResource ativoResource = new AtivoResource();
+		AtivoDAO dao = mock(AtivoDAO.class);
+		
+		ativoResource.setAtivoDAO(dao);
+		
+		Ativo ativo = new Ativo();
+		ativo.setId(1l);
+		ativo.setDescricao("");
+		when(dao.alterarAtivo(ativo)).thenReturn(true);
+		assertEquals(false, ativoResource.alterarAtivo(ativo));
+	}
+	
+	@Test
+	public void testAlteraAtivoComDaoRetornandoOkComAtivoPreenchido() throws ParseException  {
+		AtivoResource ativoResource = new AtivoResource();
+		AtivoDAO dao = mock(AtivoDAO.class);
+		
+		
+		
+		Ativo ativo = new Ativo();
+		ativo.setDescricao("Teste");
+		ativo.setDtCompra(new Date());
+		ativo.setFabricante("Fabricante");
+		ativo.setIdStatus(10);
+		ativo.setVlCompra(10);
+		ativo.setVlDepreciado(10);
+		
+		when(dao.alterarAtivo(ativo)).thenReturn(true);
+		ativoResource.setAtivoDAO(dao);
+		assertEquals(true, ativoResource.alterarAtivo(ativo));
+	}
 }
 

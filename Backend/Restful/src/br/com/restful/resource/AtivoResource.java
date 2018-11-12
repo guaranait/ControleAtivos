@@ -111,24 +111,11 @@ public class AtivoResource {
 		
 	}
 	
-	@POST
-	@Path("/alterarAtivo")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response alterarAtivo(String ativoJson) throws ParseException{
-		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		Ativo ativo = gson.fromJson(ativoJson, Ativo.class);
-		
-		AtivoController ativoController = new AtivoController();
-		if(ativoController.validador(ativo)) {
-			if(ativoController.alterarAtivo(ativo)){
-				return Response.ok().build();
-			}else{
-				return Response.serverError().build();
-			}
-		}else {
-			return Response.status(400).build();
+	public Boolean alterarAtivo(Ativo ativo) throws ParseException{
+		if(validador(ativo) && AtivoDAO.getInstance().alterarAtivo(ativo)){
+			return true;
+		}else{
+			return false;
 		}
 	}
 	
@@ -137,6 +124,21 @@ public class AtivoResource {
 			return false;
 		}else {
 			return true;
+		}
+	}
+	
+	public boolean validador(Ativo ativo) throws ParseException {
+		boolean valido = false;
+		if(ativo.getDescricao().isEmpty() ||
+				(ativo.getDtCompra() == null ||ativo.getDtCompra().equals("")) ||
+				ativo.getFabricante().isEmpty() ||
+				ativo.getIdStatus() <= 0 ||
+				ativo.getVlCompra() <= 0 ||
+				ativo.getVlDepreciado() <= 0) {
+			return valido;
+		}else {
+			valido = true;
+			return valido;
 		}
 	}
 }
