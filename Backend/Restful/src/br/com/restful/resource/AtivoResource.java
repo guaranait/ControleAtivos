@@ -1,54 +1,38 @@
 package br.com.restful.resource;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Observable;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import br.com.restful.controller.AtivoController;
+import br.com.restful.dao.AtivoDAO;
 import br.com.restful.model.Ativo;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 
 @Path("/ativo")
 public class AtivoResource {
-
-	@GET
-	@Path("/listarAtivos")
-	@Produces("application/json")
-	public Response listarAtivos(){
-		ArrayList<Ativo> ativos = new ArrayList<Ativo>();
-		AtivoController ativoController = new AtivoController();
-		ativos = ativoController.listarAtivos();
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		String jsonAtivos = gson.toJson(ativos);
-		
-		return Response.status(200).entity(jsonAtivos).build();
-	}
+	AtivoDAO ativoDAO = new AtivoDAO();
 	
-	/*@GET
-	@Path("/listarAtivo")
-	@Produces("application/json")
-	public Response listarAtivo(@QueryParam("id") long id){
-		Ativo ativo = null;
-		AtivoController ativoController = new AtivoController();
-		ativo = ativoController.listarAtivo(id);
-		
-		String jsonAtivo = new Gson().toJson(ativo);
-		return Response.status(200).entity(jsonAtivo).build();
-	}*/
+	public AtivoDAO getAtivoDAO() {
+		return ativoDAO;
+	}
+
+	public void setAtivoDAO(AtivoDAO ativoDAO) {
+		this.ativoDAO = ativoDAO;
+	}
+
+	public ArrayList<Ativo> listarAtivos(){
+		return AtivoDAO.getInstance().listarAtivos();
+	}
 	
 	@GET
 	@Path("/listarAtivosDisponiveis")
@@ -148,21 +132,11 @@ public class AtivoResource {
 		}
 	}
 	
-	@POST
-	@Path("/excluirAtivo")
-	@Consumes("application/json")
-	public Response excluirAtivo(String ativoJson) throws ParseException{
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		Ativo ativo = gson.fromJson(ativoJson, Ativo.class);
-		
-		if(ativo.getId() > 0) {
-			if(new AtivoController().excluirAtivo(ativo.getId())){
-				return Response.ok().build();
-			}else{
-				return Response.serverError().build();
-			}
+	public boolean excluirAtivo(Ativo ativo) throws ParseException{
+		if(ativo.getId() < 0 || !ativoDAO.excluirAtivo(ativo.getId())) {
+			return false;
 		}else {
-			return Response.status(400).build();
+			return true;
 		}
 	}
 }

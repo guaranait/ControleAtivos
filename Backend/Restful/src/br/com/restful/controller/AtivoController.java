@@ -3,14 +3,31 @@ package br.com.restful.controller;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import br.com.restful.dao.AtivoDAO;
 import br.com.restful.model.Ativo;
-import br.com.restful.model.Manutencao;
+import br.com.restful.resource.AtivoResource;
 
+@Path("/ativo")
 public class AtivoController {
+	private AtivoResource ativoResource;
 	
-	public ArrayList<Ativo> listarAtivos(){
-		return AtivoDAO.getInstance().listarAtivos();
+	@GET
+	@Path("/listarAtivos")
+	@Produces("application/json")
+	public Response listarAtivos(){
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		String jsonAtivos = gson.toJson(ativoResource.listarAtivos());
+		return Response.status(200).entity(jsonAtivos).build();
 	}
 	
 	public ArrayList<Ativo> listarAtivosDisponiveis(){
@@ -35,6 +52,19 @@ public class AtivoController {
 	
 	public Boolean alterarAtivo(Ativo ativo){
 		return AtivoDAO.getInstance().alterarAtivo(ativo);
+	}
+	
+	@POST
+	@Path("/excluirAtivo")
+	@Consumes("application/json")
+	public Response excluirAtivo(String ativoJson) throws ParseException{
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		Ativo ativo = gson.fromJson(ativoJson, Ativo.class);
+		if(ativoResource.excluirAtivo(ativo)){
+			return Response.ok().build();
+		}else{
+			return Response.serverError().build();
+		}
 	}
 	
 	public boolean excluirAtivo(long id){

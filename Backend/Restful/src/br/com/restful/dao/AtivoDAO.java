@@ -419,7 +419,7 @@ public class AtivoDAO {
 		}
 		return alterou;
 	}
-
+	
 	public boolean excluirAtivo(long id) {
 		boolean sucesso = false;
 		String sql = "DELETE FROM lu2cas01.ATIVO WHERE id = ?";
